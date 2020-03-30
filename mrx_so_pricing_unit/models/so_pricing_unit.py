@@ -79,11 +79,10 @@ class SaleOrderLine(models.Model):
     def _prepare_invoice_line(self):
         """
         Prepare the dict of values to create the new invoice line for a sales order line.
-        
         :param qty: float quantity to invoice
         """
         self.ensure_one()
-        res {
+        res = {
             'display_type': self.display_type,
             'sequence': self.sequence,
             'name': self.name,
