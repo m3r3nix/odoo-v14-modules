@@ -61,8 +61,8 @@ class PurchaseOrderLine(models.Model):
             self.mrx_discount = 0.0
             self.mrx_pricing_unit = 1
         else:
-            self.mrx_discount = seller.mrx_supplierinfo_discount
-            self.mrx_pricing_unit = seller.mrx_supplierinfo_pricing_unit
+            self.mrx_discount = seller.mrx_discount
+            self.mrx_pricing_unit = seller.mrx_pricing_unit
 
     ## Inherited function: ../addons/purchase/models/purchase.py line 657
     #  See comment inside...
@@ -150,5 +150,5 @@ class PurchaseOrderLine(models.Model):
                 line.mrx_pricing_unit = 1
             else:                
                 line.price_unit = seller.price
-                line.mrx_discount = seller.mrx_supplierinfo_discount
-                line.mrx_pricing_unit = seller.mrx_supplierinfo_pricing_unit
+                line.mrx_discount = seller.mrx_discount
+                line.mrx_pricing_unit = seller.mrx_pricing_unit

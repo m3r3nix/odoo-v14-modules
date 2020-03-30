@@ -33,8 +33,8 @@ class StockRule(models.Model):
                 price_unit, po.currency_id, po.company_id, po.date_order or fields.Date.today())
 
         # These two lines have been added extra
-        mrx_discount = seller.mrx_supplierinfo_discount
-        mrx_pricing_unit = seller.mrx_supplierinfo_pricing_unit
+        mrx_discount = seller.mrx_discount
+        mrx_pricing_unit = seller.mrx_pricing_unit
 
         product_lang = product_id.with_context(
             lang=partner.lang,
