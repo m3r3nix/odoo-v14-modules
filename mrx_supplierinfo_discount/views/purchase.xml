@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<data>
+        <!-- Inherited PO form view -->
+		<record id="mrx_purchase_order_form" model="ir.ui.view">
+			<field name="inherit_id" ref="purchase.purchase_order_form" />
+			<field name="model">purchase.order</field>
+			<field name="name">mrx.purchase.order.form</field>
+            <field name="priority">512</field>
+			<field name="arch" type="xml">
+                <xpath expr="//notebook/page/field[@name='order_line']/tree/field[@name='price_unit']" position="after">
+                    <field name="mrx_pricing_unit" optional="show"/>
+                    <field name="mrx_discount" optional="show"/>
+                </xpath>
+			</field>
+		</record>
+	</data>
+</odoo>

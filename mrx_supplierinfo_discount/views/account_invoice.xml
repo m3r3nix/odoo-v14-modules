@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<data>
+        <!-- Inherited invoice line tree view -->
+        <record id="mrx_view_invoice_line_tree" model="ir.ui.view">
+            <field name="inherit_id" ref="account.view_invoice_line_tree" />
+            <field name="name">mrx.account.invoice.line.tree</field>
+            <field name="model">account.invoice.line</field>
+            <field name="priority">512</field>
+            <field name="arch" type="xml">
+                <xpath expr="//tree/field[@name='price_unit']" position="after">
+                    <field name="mrx_pricing_unit" />
+                </xpath>
+            </field>
+        </record>
+        <!-- Inherited invoice line form view -->
+        <record id="mrx_view_invoice_line_form" model="ir.ui.view">
+            <field name="inherit_id" ref="account.view_invoice_line_form" />
+            <field name="name">mrx.account.invoice.line.form</field>
+            <field name="model">account.invoice.line</field>
+            <field name="priority">512</field>
+            <field name="arch" type="xml">
+                <xpath expr="//group/field[@name='price_unit']" position="after">
+                    <field name="mrx_pricing_unit" />
+                </xpath>
+            </field>
+        </record>
+        <!-- Inherited vendor bill form view -->
+        <record id="mrx_invoice_supplier_form" model="ir.ui.view">
+            <field name="inherit_id" ref="account.invoice_supplier_form" />
+            <field name="name">mrx.account.invoice.supplier.form</field>
+            <field name="model">account.invoice</field>
+            <field name="priority">512</field>
+            <field name="arch" type="xml">
+                <xpath expr="//notebook/page/field[@name='invoice_line_ids']/tree/field[@name='price_unit']" position="after">
+                    <field name="mrx_pricing_unit" />
+                </xpath>
+			</field>
+		</record>
+        <!-- Inherited bill form view -->
+        <record id="mrx_invoice_form" model="ir.ui.view">
+            <field name="inherit_id" ref="account.invoice_form" />
+            <field name="name">mrx.account.invoice.form</field>
+            <field name="model">account.invoice</field>
+            <field name="priority">512</field>
+            <field name="arch" type="xml">
+                <xpath expr="//notebook/page/field[@name='invoice_line_ids']/tree/field[@name='price_unit']" position="after">
+                    <field name="mrx_pricing_unit" />
+                </xpath>
+            </field>
+        </record>
+	</data>
+</odoo>
