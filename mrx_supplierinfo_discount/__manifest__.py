@@ -12,6 +12,7 @@
         'views/product_category.xml',
         'views/product_supplierinfo.xml',
         'views/purchase.xml',
+        'views/sale__sale_views.xml'
 #        'views/account_invoice.xml',
     ],
     'depends': [
@@ -20,7 +21,6 @@
         'purchase',
         'purchase_stock',
         'sale_management',
-        'mrx_so_pricing_unit',
     ],
     'description': '',  # Leave description empty to display the README file
     'installable': True,

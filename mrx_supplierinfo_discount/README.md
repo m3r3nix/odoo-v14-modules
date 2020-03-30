@@ -7,6 +7,7 @@ The app does not change normal behavior, just adds additional information about 
 
 Main features:
 
+* Add pricing unit and packaging unit fields to the product template and to the SO, as well and calculate the price based on that.
 * Selectable pricing type field (Listprice/Netprice) on product supplier form.
 * Pricing type, Discount % and Purchase Price field on product supplier form view.
 * Pricing type, Discount % and Purchase Price field on product supplier tree view.
