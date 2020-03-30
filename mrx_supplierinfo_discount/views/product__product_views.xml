@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <!-- Inherited sales order form view from ../addons/product/views/product_views.xml -->
+        <record id="mrx_product_template_form_view" model="ir.ui.view">
+            <field name="inherit_id" ref="product.product_template_form_view" />
+            <field name="name">mrx_product.template.common.form</field>
+            <field name="model">product.template</field>
+            <field name="priority">512</field>
+            <field name="arch" type="xml">
+                <xpath expr="//div[@name='pricing']" position="after">
+                    <field name="mrx_pricing_unit"/>
+                    <field name="mrx_packaging_unit"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

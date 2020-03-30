@@ -12,7 +12,8 @@
         'views/product_category.xml',
         'views/product_supplierinfo.xml',
         'views/purchase.xml',
-        'views/sale__sale_views.xml'
+        'views/sale__sale_views.xml',
+        'views/product__product_views.xml',
 #        'views/account_invoice.xml',
     ],
     'depends': [

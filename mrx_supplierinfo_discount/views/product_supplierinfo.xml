@@ -2,8 +2,8 @@
 <odoo>
     <data>
         <!-- Inherited supplierinfo form view -->
-        <record id="mrx_product_discount_form" model="ir.ui.view">
-            <field name="inherit_id" ref="product.product_form_view"/>
+        <record id="mrx_product_supplierinfo_discount_form" model="ir.ui.view">
+            <field name="inherit_id" ref="product.product_supplierinfo_form_view"/>
             <field name="model">product.supplierinfo</field>
             <field name="name">mrx.product.supplierinfo.discount.form</field>
             <field name="priority">512</field>
@@ -44,8 +44,8 @@
             </field>
         </record>
         <!-- Inherited supplierinfo tree view -->
-        <record id="mrx_product_discount_tree" model="ir.ui.view">
-            <field name="inherit_id" ref="product.product_tree_view"/>
+        <record id="mrx_product_supplierinfo_discount_tree" model="ir.ui.view">
+            <field name="inherit_id" ref="product.product_supplierinfo_tree_view"/>
             <field name="model">product.supplierinfo</field>
             <field name="name">mrx.product.supplierinfo.discount.tree</field>
             <field name="priority">512</field>
