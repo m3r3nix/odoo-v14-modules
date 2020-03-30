@@ -25,6 +25,6 @@
 
     # always loaded
     'data': [
-        'views/sale.xml',
+        'views/sale__sale_views.xml',
     ],
 }
