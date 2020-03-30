@@ -6,23 +6,23 @@ from odoo.tools.misc import formatLang
 
 class ProductTemplate(models.Model):
     _inherit = "product.template"
-    
-    mrx_pricing_unit = fields.Integer(string='Pricing Unit', default=1, required=True, stored=True, help="For the above price how many items to get? 1/10/100/1000")
-    mrx_packaging_unit = fields.Integer(string='Packaging Unit', default=1, required=True, stored=True, help="How many pieces in one package?")
+
+    mrx_pricing_unit = fields.Integer(string='Pricing Unit', default=1, required=True, store=True, help="How many items to get for this price? 1/10/100/1000")
+    mrx_packaging_unit = fields.Integer(string='Packaging Unit', default=1, required=True, store=True, help="How many pieces in one package?")
 
 class SaleOrder(models.Model):
     _inherit = "sale.order"
-    
-    ## Inherited function: ../addons/sale/models/sale.py line 293
+
+    ## Inherited function: ../addons/sale/models/sale.py line 314
     #  "total" calculation line has been changed only
     def _compute_amount_undiscounted(self):
         for order in self:
             total = 0.0
             for line in order.order_line:
-                total += line.price_subtotal + (line.price_unit / line.mrx_pricing_unit) * ((line.discount or 0.0) / 100.0) * line.product_uom_qty
+                total += line.price_subtotal + (line.price_unit / line.mrx_pricing_unit) * (1 - (line.discount or 0.0) / 100.0) * line.product_uom_qty
             order.amount_undiscounted = total
-        
-    ## Inherited function: ../addons/sale/models/sale.py line 773
+
+    ## Inherited function: ../addons/sale/models/sale.py line 816
     #  "price_reduce" line has been changed only
     def _amount_by_group(self):
         for order in self:
@@ -45,13 +45,13 @@ class SaleOrder(models.Model):
                 fmt(l[1]['amount']), fmt(l[1]['base']),
                 len(res),
             ) for l in res]
-            
+
 class SaleOrderLine(models.Model):
     _inherit = 'sale.order.line'
-    
-    mrx_pricing_unit = fields.Integer(string='Pricing Unit', default=1, help='How many items to get for this price', store=True)
 
-    ## Inherited function: ../addons/sale/models/sale.py line 993
+    mrx_pricing_unit = fields.Integer(string='Pricing Unit', default=1, required=True, store=True, help="How many items to get for this price? 1/10/100/1000")
+
+    ## Inherited function: ../addons/sale/models/sale.py line 1015
     #  "mrx_pricing_unit" has been added to the api.depends line and "price" calculation line has been changed
     @api.depends('product_uom_qty', 'discount', 'price_unit', 'tax_id', 'mrx_pricing_unit')
     def _compute_amount(self):
@@ -67,14 +67,14 @@ class SaleOrderLine(models.Model):
                 'price_subtotal': taxes['total_excluded'],
             })
 
-    ## Inherited function: ../addons/sale/models/sale.py line 1048
+    ## Inherited function: ../addons/sale/models/sale.py line 1070
     #  "mrx_pricing_unit" has been added to the api.depends line and "price_reduce" line has been changed
     @api.depends('price_unit', 'discount', 'mrx_pricing_unit')
     def _get_price_reduce(self):
         for line in self:
             line.price_reduce = (line.price_unit / line.mrx_pricing_unit) * (1.0 - line.discount / 100.0)
 
-    ## Inherited function: ../addons/sale/models/sale.py line 1374
+    ## Inherited function: ../addons/sale/models/sale.py line 1396
     #  "Only mrx_pricing_unit" has been added to the return array in order to generate proper sales invoice
     def _prepare_invoice_line(self):
         """
@@ -83,7 +83,7 @@ class SaleOrderLine(models.Model):
         :param qty: float quantity to invoice
         """
         self.ensure_one()
-        return {
+        res {
             'display_type': self.display_type,
             'sequence': self.sequence,
             'name': self.name,
@@ -98,8 +98,11 @@ class SaleOrderLine(models.Model):
             'analytic_tag_ids': [(6, 0, self.analytic_tag_ids.ids)],
             'sale_line_ids': [(4, self.id)],
         }
-    
-    ## Inherited function: ../addons/sale/models/sale.py line 1435
+        if self.display_type:
+            res['account_id'] = False
+        return res
+
+    ## Inherited function: ../addons/sale/models/sale.py line 1460
     #  Only "mrx_pricing_unit" line has been added extra
     @api.onchange('product_id')
     def product_id_change(self):
@@ -122,7 +125,7 @@ class SaleOrderLine(models.Model):
             vals['product_uom_qty'] = self.product_uom_qty or 1.0
 
         product = self.product_id.with_context(
-            lang=self.order_id.partner_id.lang,
+            lang=get_lang(self.env, self.order_id.partner_id.lang).code,
             partner=self.order_id.partner_id,
             quantity=vals.get('product_uom_qty') or self.product_uom_qty,
             date=self.order_id.date_order,
@@ -137,7 +140,7 @@ class SaleOrderLine(models.Model):
         if self.order_id.pricelist_id and self.order_id.partner_id:
             vals['price_unit'] = self.env['account.tax']._fix_tax_included_price_company(self._get_display_price(product), product.taxes_id, self.tax_id, self.company_id)
         self.update(vals)
-        
+
         # This line has been added extra
         self.mrx_pricing_unit = product.mrx_pricing_unit
 

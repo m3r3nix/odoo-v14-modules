@@ -3,11 +3,11 @@
     'name': "Sales Order Pricing Unit",
 
     'summary': """
-        Add pricing unit and packaging unit fields to the product template and to the SO as well and calculate the price based on that.
+        Add pricing unit and packaging unit fields to the product template and to the SO, as well and calculate the price based on that.
         """,
 
     'description': """
-        Add pricing unit and packaging unit fields to the product template and to the SO as well and calculate the price based on that.
+        Add pricing unit and packaging unit fields to the product template and to the SO, as well and calculate the price based on that.
         """,
 
     'author': "MERENIX Elektrohandel e.K.",
