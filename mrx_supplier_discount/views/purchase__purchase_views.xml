@@ -8,6 +8,9 @@
 			<field name="name">mrx.purchase.order.form</field>
             <field name="priority">512</field>
 			<field name="arch" type="xml">
+                <xpath expr="//notebook/page/field[@name='order_line']/tree/field[@name='name']" position="replace">
+                    <field name="name"  widget="section_and_note_text" optional="hide"/>
+                </xpath>
                 <xpath expr="//notebook/page/field[@name='order_line']/tree/field[@name='price_unit']" position="after">
                     <field name="mrx_pricing_unit" optional="show"/>
                     <field name="mrx_discount" optional="show"/>
