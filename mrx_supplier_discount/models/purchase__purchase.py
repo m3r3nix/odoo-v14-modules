@@ -21,8 +21,9 @@ class PurchaseOrderLine(models.Model):
     mrx_discount = fields.Float(string='Discount (%)', default=0.0, digits='Discount', help="Discount percentage given by the supplier from the list price", store=True)
     mrx_pricing_unit = fields.Integer(string='Pricing Unit', default=1, help="How many units to get for the given list price", store=True)
 
-    ## Inherited function: ../addons/purchase/models/purchase.py line 478 
-    #  "mrx_pricing_unit" and "mrx_discount" has been added to the api.depends line. Also "price" and "taxes" lines have been changed
+    ## Inherited function: ../addons/purchase/models/purchase.py line 498 
+    #  "mrx_pricing_unit" and "mrx_discount" has been added to the api.depends line
+    #  "price" and "taxes" lines have been changed
     #  Calculate taxes and subtotal properly from price with discount.
     @api.depends('product_qty', 'price_unit', 'taxes_id', 'mrx_discount', 'mrx_pricing_unit')
     def _compute_amount(self):
@@ -35,7 +36,7 @@ class PurchaseOrderLine(models.Model):
                 'price_subtotal': taxes['total_excluded'],
             })
 
-    ## Inherited function: ../addons/purchase/models/purchase.py line 609
+    ## Inherited function: ../addons/purchase/models/purchase.py line 629
     #  See 2. comment inside...
     @api.onchange('product_id')
     def onchange_product_id(self):
@@ -64,7 +65,7 @@ class PurchaseOrderLine(models.Model):
             self.mrx_discount = seller.mrx_discount
             self.mrx_pricing_unit = seller.mrx_pricing_unit
 
-    ## Inherited function: ../addons/purchase/models/purchase.py line 657
+    ## Inherited function: ../addons/purchase/models/purchase.py line 677
     #  See comment inside...
     @api.onchange('product_qty', 'product_uom')
     def _onchange_quantity(self):
@@ -100,7 +101,7 @@ class PurchaseOrderLine(models.Model):
 
         self.price_unit = price_unit
 
-    ## Inherited function: ../addons/purchase/models/purchase.py line 718
+    ## Inherited function: ../addons/purchase/models/purchase.py line 738
     #  "discount" and "mrx_pricing_unit" has been added to the return array
     def _prepare_account_move_line(self, move):
         self.ensure_one()

@@ -14,7 +14,8 @@
         'views/purchase.xml',
         'views/sale__sale_views.xml',
         'views/product__product_views.xml',
-#        'views/account_invoice.xml',
+        # I do not adapt "mrx_pricing_unit" in v13 to the accounting app, (but leave this option open) instead it gets calculated "price_unit"
+        # 'views/account_invoice.xml',
     ],
     'depends': [
         'base',

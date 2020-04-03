@@ -6,7 +6,7 @@ from odoo.tools import DEFAULT_SERVER_DATETIME_FORMAT
 class StockRule(models.Model):
     _inherit = 'stock.rule'
 
-    # Inherited function: ../addons/purchase_stock/models/stock_rule.py line 201
+    # Inherited function: ../addons/purchase_stock/models/stock_rule.py line 202
     #  Override original function in order to set value of discount and pricing unit fields on automatically generated PO.
     #  See last 2 comments inside...
     @api.model
@@ -36,7 +36,7 @@ class StockRule(models.Model):
         mrx_discount = seller.mrx_discount
         mrx_pricing_unit = seller.mrx_pricing_unit
 
-        product_lang = product_id.with_context(
+        product_lang = product_id.with_prefetch().with_context(
             lang=partner.lang,
             partner_id=partner.id,
         )
