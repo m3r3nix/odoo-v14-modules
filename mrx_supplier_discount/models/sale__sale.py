@@ -2,7 +2,7 @@
 
 from functools import partial
 from odoo import api, fields, models, _
-from odoo.tools.misc import formatLang
+from odoo.tools.misc import formatLang, get_lang
 
 class ProductTemplate(models.Model):
     _inherit = "product.template"
