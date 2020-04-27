@@ -3,7 +3,7 @@
     <data>
         <record id="mrx_product_category_vendordiscount_form_view" model="ir.ui.view">
             <field name="name">mrx.product.category.vendordiscount.form</field>
-            <field name="model">product.category.vendordiscount</field>
+            <field name="model">mrx.product.category.vendordiscount</field>
             <field name="arch" type="xml">
                 <form string="Vendor Discount">
                     <sheet>
@@ -21,7 +21,7 @@
         
         <record id="mrx_product_category_vendordiscount_list_view" model="ir.ui.view">
             <field name="name">mrx.product.category.vendordiscount.list</field>
-            <field name="model">product.category.vendordiscount</field>
+            <field name="model">mrx.product.category.vendordiscount</field>
             <field name="arch" type="xml">
                 <tree string="Vendor Discount" editable="bottom" multi_edit="1" duplicate="false">
                     <field name="name" invisible='0'/>
@@ -34,7 +34,7 @@
         <record id="mrx_product_category_vendordiscount_menu_action" model="ir.actions.act_window">
             <field name="name">Vendor Discount</field>
             <field name="type">ir.actions.act_window</field>
-            <field name="res_model">product.category.vendordiscount</field>
+            <field name="res_model">mrx.product.category.vendordiscount</field>
             <field name="view_mode">tree</field>
             <field name="view_id" ref="mrx_product_category_vendordiscount_list_view"/>
         </record>

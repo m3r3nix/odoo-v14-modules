@@ -73,8 +73,8 @@ class SupplierInfo(models.Model):
     def _compute_category_discount(self):
         for line in self:
             if line.name and line.product_tmpl_id:
-                discount_id = self.env['product.category.vendordiscount']._search([('name', '=', line.product_tmpl_id.categ_id.id), ('partner_id', '=', line.name.id)], limit=1)
-                line.mrx_category_discount = self.env['product.category.vendordiscount'].browse(discount_id).discount
+                discount_id = self.env['mrx.product.category.vendordiscount']._search([('name', '=', line.product_tmpl_id.categ_id.id), ('partner_id', '=', line.name.id)], limit=1)
+                line.mrx_category_discount = self.env['mrx.product.category.vendordiscount'].browse(discount_id).discount
             else:
                 line.mrx_category_discount = 0.0
 
