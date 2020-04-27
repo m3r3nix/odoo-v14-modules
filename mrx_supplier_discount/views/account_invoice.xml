@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
 	<data>
+
+        <!-- NEM KELL A DISCOUNT-OT HOZZÁADNI, CSAK A TECHNICAL-BAN A "DISCOUNT ON LINE" ENGEDÉLYEZNI!!! -->
+
+        
         <!-- Inherited invoice line tree view -->
         <record id="mrx_view_invoice_line_tree" model="ir.ui.view">
             <field name="inherit_id" ref="account.view_invoice_line_tree" />
