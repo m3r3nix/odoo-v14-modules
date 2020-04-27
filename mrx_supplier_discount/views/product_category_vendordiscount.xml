@@ -40,6 +40,6 @@
         </record>
 
         <menuitem id="vendor_discount_menu" name="Vendor Discount"
-                  parent="purchase.menu_product_in_config_purchase" action="mrx_product_category_vendordiscount_menu_action" sequence="2"/>
+                  parent="purchase.menu_purchase_config" action="mrx_product_category_vendordiscount_menu_action" sequence="2"/>
     </data>
 </odoo>
