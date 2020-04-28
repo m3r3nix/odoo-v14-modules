@@ -1,0 +1,17 @@
+<odoo>
+    <data>
+
+        <!-- Inherited from ..addons/sale/views/sale_views.xml -->
+        <record id="mrx_view_order_form" model="ir.ui.view">
+            <field name="inherit_id" ref="sale.view_order_form" />
+            <field name="name">mrx.sale.order.form</field>
+            <field name="model">sale.order</field>
+            <field name="priority">513</field>
+            <field name="arch" type="xml">
+                <field name="partner_shipping_id" position="after">
+                    <field name="client_order_ref" position="move" />
+                </field>
+            </field>
+        </record>
+    </data>
+</odoo>
