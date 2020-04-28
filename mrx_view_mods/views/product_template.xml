@@ -1,5 +1,7 @@
 <odoo>
     <data>
+
+        <!-- Inherited from ..addons/product/views/product_views.xml -->
         <record id="mrx_product_template_form_view_mods" model="ir.ui.view">
             <field name="inherit_id" ref="product.product_template_form_view" />
             <field name="name">mrx.product.template.common.form.view.mods</field>
@@ -17,6 +19,7 @@
             </field>
         </record>
 
+        <!-- Inherited from ..addons/product/views/product_template_views.xml -->
         <record id="mrx_product_template_tree_view_mods" model="ir.ui.view">
             <field name="inherit_id" ref="product.product_template_tree_view" />
             <field name="name">mrx.product.template.product.tree.view.mods</field>
@@ -24,7 +27,7 @@
             <field name="priority">513</field>
             <field name="arch" type="xml">
                 <xpath expr="//field[@name='barcode']" position="attributes">
-                    <attribute name="string">Barcode/EAN</attribute>
+                    <attribute name="string">Barcode / EAN</attribute>
                 </xpath>
                 <xpath expr="//field[@name='default_code']" position="attributes">
                     <attribute name="string">Article Number</attribute>
@@ -32,6 +35,7 @@
             </field>
         </record>
 
+        <!-- Inherited from ..addons/product/views/product_template_views.xml -->
         <record id="mrx_product_template_only_form_view" model="ir.ui.view">
             <field name="inherit_id" ref="product.product_template_only_form_view"/>
             <field name="name">mrx.product.template.product.form</field>
@@ -44,9 +48,13 @@
                 <xpath expr="//field[@name='default_code']" position="attributes">
                     <attribute name="string">Article Number</attribute>
                 </xpath>
+                <field name="default_code" position="after">
+                    <field name="categ_id" position="move" />
+                </field>
             </field>
         </record>
 
+        <!-- Inherited from ..addons/product/views/product_views.xml -->
         <record id="mrx_product_normal_form_view" model="ir.ui.view">
             <field name="inherit_id" ref="product.product_normal_form_view"/>
             <field name="name">mrx.product.product.form</field>
@@ -59,6 +67,9 @@
                 <xpath expr="//field[@name='default_code']" position="attributes">
                     <attribute name="string">Article Number</attribute>
                 </xpath>
+                <field name="categ_id" position="after">
+                    <field name="barcode" position="move" />
+                </field>
             </field>
         </record>
     </data>
