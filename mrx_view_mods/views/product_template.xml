@@ -11,6 +11,9 @@
                 <group name="group_general" position="after">
                     <group name="intrastat" position="move" />
                 </group>
+                <field name="intrastat_origin_country_id" position="after">
+                    <field name="intrastat_origin_country_code" />
+                </field>
                 <group name="group_standard_price" position="after">
                     <group name="operations" position="move" />
                     <group name="group_lots_and_weight" position="move" />
