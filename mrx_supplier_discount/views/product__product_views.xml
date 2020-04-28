@@ -11,6 +11,7 @@
                 <xpath expr="//div[@name='pricing']" position="after">
                     <field name="mrx_pricing_unit"/>
                     <field name="mrx_packaging_unit"/>
+                    <field name="mrx_moq"/>
                 </xpath>
             </field>
         </record>
@@ -22,6 +23,7 @@
             <field name="priority">512</field>
             <field name="arch" type="xml">
                 <xpath expr="//field[@name='list_price']" position="before">
+                    <field name="mrx_moq" optional="show"/>
                     <field name="mrx_packaging_unit" optional="show"/>
                     <field name="mrx_pricing_unit" optional="show"/>
                 </xpath>
@@ -51,6 +53,9 @@
             <field name="name">mrx.product.supplierinfo.form.view</field>
             <field name="priority">512</field>
             <field name="arch" type="xml">
+                <label for="min_qty" position="replace">
+                    <label for="min_qty" string="MOQ"/>
+                </label>
                 <label for="price" position="before">
                     <field name="mrx_packaging_unit" class="oe_inline"/>
                     <field name="mrx_pricing_type" widget="radio"/>
@@ -105,7 +110,7 @@
                     <field name="company_id" readonly="1" groups="base.group_multi_company" optional="hide"/>
                 </field>
                 <field name="min_qty" position="replace">
-                    <field name="min_qty" string="Min.Qty." optional="hide"/>
+                    <field name="min_qty" string="MOQ" optional="hide"/>
                 </field>
                 <field name="price" position="before">
                     <field name="mrx_packaging_unit" optional="hide"/>

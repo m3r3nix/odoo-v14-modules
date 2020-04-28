@@ -9,6 +9,8 @@ class ProductTemplate(models.Model):
 
     mrx_pricing_unit = fields.Integer(string='Pricing Unit', default=1, required=True, store=True, help="How many items to get for this price? 1/10/100/1000")
     mrx_packaging_unit = fields.Integer(string='Packaging Unit', default=1, required=True, store=True, help="How many pieces in one package?")
+    mrx_moq = fields.Integer(string='MOQ', default=1, required=True, store=True, help="Minimum order quantity")
+
 
 class SaleOrder(models.Model):
     _inherit = "sale.order"
