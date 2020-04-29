@@ -24,6 +24,9 @@
             <field name="model">purchase.order</field>
             <field name="priority">515</field>
             <field name="arch" type="xml">
+                <page name="purchase_delivery_invoice" position="attributes">
+                    <attribute name="string">Other Info</attribute>
+                </page>
                 <page name="purchase_delivery_invoice" position="after">
                     <page name="mrx_so_po_rel" string="Sales Orders">
                         <field name="mrx_so_ids" nolabel="1" string="Sales Orders"/>
