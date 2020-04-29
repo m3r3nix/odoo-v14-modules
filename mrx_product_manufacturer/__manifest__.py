@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 {
-    'name': "mrx_manufacturer",
+    'name': "mrx_product_manufacturer",
 
-    'summary': "Add Manufacturer of product field",
+    'summary': "Add Manufacturer of product option",
 
-    'description': "Add Manufacturer of product field",
+    'description': "Add Manufacturer of product option",
 
     'author': "MERENIX Elektrohandel e.K.",
     'website': "https://www.merenix.de",
@@ -26,11 +26,9 @@
 
     # always loaded
     'data': [
-#        'security/ir.model.access.csv',
-#        'views/views.xml',
+        'security/ir.model.access.csv',
+        'views/views.xml',
 #        'views/templates.xml',
-        'views/product_template.xml',
-        'views/sale_order.xml',
     ],
     # only loaded in demonstration mode
 #    'demo': [

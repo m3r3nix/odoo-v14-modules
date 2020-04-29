@@ -1,2 +1,0 @@
-id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_mrx_manufacturer_mrx_manufacturer,mrx_manufacturer.mrx_manufacturer,model_mrx_manufacturer_mrx_manufacturer,base.group_user,1,1,1,1
