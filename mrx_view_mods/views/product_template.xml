@@ -11,6 +11,9 @@
                 <group name="group_general" position="after">
                     <group name="intrastat" position="move" />
                 </group>
+                <xpath expr="//field[@name='categ_id']" position="attributes">
+                    <attribute name="options">{'no_create':true}</attribute>
+                </xpath>
                 <field name="intrastat_origin_country_id" position="after">
                     <field name="intrastat_origin_country_code" />
                 </field>
