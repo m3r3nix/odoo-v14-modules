@@ -2,7 +2,7 @@
 
 from odoo import models, fields, api
 
-
+# Creates Country Code field in product template
 class ProductTemplate(models.Model):
     _inherit = 'product.template'
 

@@ -2,7 +2,7 @@
 
 from odoo import models, fields, api
 
-# Creates own table in database to store Manufacturer's name
+# Creates own table in database to store name of Manufacturers
 class ProductManufacturer(models.Model):
     _name = 'mrx.product.manufacturer'
     _description = 'List of Manufacturers'
@@ -11,7 +11,7 @@ class ProductManufacturer(models.Model):
 
     _sql_constraints = [('name_uniq', 'unique(name)', 'Manufacturer already exists!')]
 
-# Create Manufacturer field in product table
+# Creates Manufacturer field in product table
 class ProductTemplate(models.Model):
     _inherit = 'product.template'
     

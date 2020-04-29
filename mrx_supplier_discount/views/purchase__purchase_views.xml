@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
 	<data>
+
         <!-- Inherited PO form view form ../addons/purchase/views/purchase_views.xml -->
 		<record id="mrx_purchase_order_form" model="ir.ui.view">
 			<field name="inherit_id" ref="purchase.purchase_order_form" />
@@ -17,5 +18,6 @@
                 </xpath>
 			</field>
 		</record>
+
 	</data>
 </odoo>

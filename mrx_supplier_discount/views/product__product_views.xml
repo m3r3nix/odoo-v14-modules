@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
     <data>
+
         <!-- Inherited product form view from ../addons/product/views/product_views.xml -->
         <record id="mrx_product_template_form_view" model="ir.ui.view">
             <field name="inherit_id" ref="product.product_template_form_view" />
@@ -15,6 +16,7 @@
                 </xpath>
             </field>
         </record>
+
         <!-- Inherited product tree view from ../addons/product/views/product_template_views.xml -->
         <record id="mrx_product_template_tree_view" model="ir.ui.view">
             <field name="inherit_id" ref="product.product_template_tree_view" />
@@ -29,6 +31,7 @@
                 </xpath>
             </field>
         </record>
+
         <!-- Inherited product category form view from ../addons/product/views/product_views.xml -->
         <record id="mrx_product_category_form_view" model="ir.ui.view">
             <field name="inherit_id" ref="product.product_category_form_view"/>
@@ -46,6 +49,7 @@
                 </field>
             </field>
         </record>
+
         <!-- Inherited supplierinfo form view from ../addons/product/views/product_views.xml -->
         <record id="mrx_product_supplierinfo_form_view" model="ir.ui.view">
             <field name="inherit_id" ref="product.product_supplierinfo_form_view"/>
@@ -91,6 +95,7 @@
                 </field>
             </field>
         </record>
+
         <!-- Inherited supplierinfo tree view from ../addons/product/views/product_views.xml -->
         <record id="mrx_product_supplierinfo_tree_view" model="ir.ui.view">
             <field name="inherit_id" ref="product.product_supplierinfo_tree_view"/>
@@ -124,5 +129,6 @@
                 </field>
             </field>
         </record>
+
     </data>
 </odoo>

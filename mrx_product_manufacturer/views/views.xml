@@ -27,9 +27,9 @@
             </field>
         </record>
 
-        <!-- Create Manufacturers model default tree view -->
-        <record id="mrx_product_manufacturer_list_view" model="ir.ui.view">
-            <field name="name">mrx.product.manufacturer.list</field>
+        <!-- Creates Manufacturers model default tree view -->
+        <record id="mrx_product_manufacturer_tree_view" model="ir.ui.view">
+            <field name="name">mrx.product.manufacturer.tree.view</field>
             <field name="model">mrx.product.manufacturer</field>
             <field name="arch" type="xml">
                 <tree string="Manufacturers" editable="bottom" multi_edit="false" duplicate="false">
@@ -39,13 +39,13 @@
             </field>
         </record>
 
-        <!-- Create menu items and actions for Manufacturers menuitem-->
+        <!-- Creates menu items and actions for Manufacturers menuitem-->
         <record id="mrx_product_manufacturer_menu_action" model="ir.actions.act_window">
             <field name="name">Manufacturers</field>
             <field name="type">ir.actions.act_window</field>
             <field name="res_model">mrx.product.manufacturer</field>
             <field name="view_mode">tree</field>
-            <field name="view_id" ref="mrx_product_manufacturer_list_view"/>
+            <field name="view_id" ref="mrx_product_manufacturer_tree_view"/>
         </record>
 
         <menuitem id="mrx_product_manufacturer_purchase_menuitem" name="Manufacturers"
