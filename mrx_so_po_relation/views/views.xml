@@ -1,6 +1,6 @@
 <odoo>
     <data>
-        
+
         <!-- Inherited from ..addons/sale/views/sale_views.xml -->
         <record id="mrx_view_order_form_so_po" model="ir.ui.view">
             <field name="inherit_id" ref="sale.view_order_form" />
@@ -8,73 +8,30 @@
             <field name="model">sale.order</field>
             <field name="priority">515</field>
             <field name="arch" type="xml">
-                <xpath expr="//page[@name='other_information']" position="after">
+                <page name="other_information" position="after">
                     <page name="mrx_so_po_rel" string="Purchase Orders">
-                        <div style="width: 100%; margin: 0;">
-                            <field name="mrx_po_ids" nolabel="1" string="Purchase Orders"/>
-<!--                             <field name="mrx_po_bill_ids" nolabel="1" string="Vendor Bills"/> -->
-                        </div>
+                        <field name="mrx_po_ids" nolabel="1" string="Purchase Orders"/>
+<!--                        <field name="mrx_po_bill_ids" nolabel="1" string="Vendor Bills"/> -->
                     </page>
-                </xpath>
+                </page>
             </field>
         </record>
 
-      <!-- explicit list view definition -->
-<!--
-    <record model="ir.ui.view" id="mrx_so_po_relation.list">
-      <field name="name">mrx_so_po_relation list</field>
-      <field name="model">mrx_so_po_relation.mrx_so_po_relation</field>
-      <field name="arch" type="xml">
-        <tree>
-          <field name="name"/>
-          <field name="value"/>
-          <field name="value2"/>
-        </tree>
-      </field>
-    </record>
--->
-
-    <!-- actions opening views on models -->
-<!--
-    <record model="ir.actions.act_window" id="mrx_so_po_relation.action_window">
-      <field name="name">mrx_so_po_relation window</field>
-      <field name="res_model">mrx_so_po_relation.mrx_so_po_relation</field>
-      <field name="view_mode">tree,form</field>
-    </record>
--->
-
-    <!-- server action to the one above -->
-<!--
-    <record model="ir.actions.server" id="mrx_so_po_relation.action_server">
-      <field name="name">mrx_so_po_relation server</field>
-      <field name="model_id" ref="model_mrx_so_po_relation_mrx_so_po_relation"/>
-      <field name="state">code</field>
-      <field name="code">
-        action = {
-          "type": "ir.actions.act_window",
-          "view_mode": "tree,form",
-          "res_model": model._name,
-        }
-      </field>
-    </record>
--->
-
-    <!-- Top menu item -->
-<!--
-    <menuitem name="mrx_so_po_relation" id="mrx_so_po_relation.menu_root"/>
--->
-    <!-- menu categories -->
-<!--
-    <menuitem name="Menu 1" id="mrx_so_po_relation.menu_1" parent="mrx_so_po_relation.menu_root"/>
-    <menuitem name="Menu 2" id="mrx_so_po_relation.menu_2" parent="mrx_so_po_relation.menu_root"/>
--->
-    <!-- actions -->
-<!--
-    <menuitem name="List" id="mrx_so_po_relation.menu_1_list" parent="mrx_so_po_relation.menu_1"
-              action="mrx_so_po_relation.action_window"/>
-    <menuitem name="Server to list" id="mrx_so_po_relation" parent="mrx_so_po_relation.menu_2"
-              action="mrx_so_po_relation.action_server"/>
--->
+        <!-- Inherited from ../addons/purchase/views/purchase_views.xml -->
+        <record id="mrx_purchase_order_form_so_po" model="ir.ui.view">
+            <field name="inherit_id" ref="purchase.purchase_order_form" />
+            <field name="name">mrx.purchase.order.form.so.po</field>
+            <field name="model">purchase.order</field>
+            <field name="priority">515</field>
+            <field name="arch" type="xml">
+                <page name="purchase_delivery_invoice" position="after">
+                    <page name="mrx_so_po_rel" string="Sales Orders">
+                        <field name="mrx_so_ids" nolabel="1" string="Sales Orders"/>
+<!--                        <field name="mrx_so_bill_ids" nolabel="1" string="Sales Bills"/> -->
+                    </page>
+                </page>
+            </field>
+        </record>
 
     </data>
 </odoo>
