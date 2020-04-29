@@ -1,6 +1,25 @@
 <odoo>
-  <data>
-    <!-- explicit list view definition -->
+    <data>
+        
+        <!-- Inherited from ..addons/sale/views/sale_views.xml -->
+        <record id="mrx_view_order_form_so_po" model="ir.ui.view">
+            <field name="inherit_id" ref="sale.view_order_form" />
+            <field name="name">mrx.sale.order.form.so.po</field>
+            <field name="model">sale.order</field>
+            <field name="priority">515</field>
+            <field name="arch" type="xml">
+                <xpath expr="//page[@name='other_information']" position="after">
+                    <page name="mrx_so_po_rel" string="Purchase Orders">
+                        <div style="width: 100%; margin: 0;">
+                            <field name="mrx_po_ids" nolabel="1" string="Purchase Orders"/>
+<!--                             <field name="mrx_po_bill_ids" nolabel="1" string="Vendor Bills"/> -->
+                        </div>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+
+      <!-- explicit list view definition -->
 <!--
     <record model="ir.ui.view" id="mrx_so_po_relation.list">
       <field name="name">mrx_so_po_relation list</field>
@@ -56,5 +75,6 @@
     <menuitem name="Server to list" id="mrx_so_po_relation" parent="mrx_so_po_relation.menu_2"
               action="mrx_so_po_relation.action_server"/>
 -->
-  </data>
+
+    </data>
 </odoo>
