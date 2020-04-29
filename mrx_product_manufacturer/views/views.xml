@@ -14,12 +14,25 @@
             </field>
         </record>
 
+        <!-- Inherited from ..addons/product/views/product_template_views.xml -->
+        <record id="mrx_product_template_tree_view_manufacturer" model="ir.ui.view">
+            <field name="inherit_id" ref="product.product_template_tree_view" />
+            <field name="name">mrx.product.template.product.tree.view.manufacturer</field>
+            <field name="model">product.template</field>
+            <field name="priority">514</field>
+            <field name="arch" type="xml">
+                <field name="sequence" position="after">
+                    <field name="mrx_product_manufacturer" optional="hide" />
+                </field>
+            </field>
+        </record>
+
         <!-- Create Manufacturers model default tree view -->
         <record id="mrx_product_manufacturer_list_view" model="ir.ui.view">
             <field name="name">mrx.product.manufacturer.list</field>
             <field name="model">mrx.product.manufacturer</field>
             <field name="arch" type="xml">
-                <tree string="Manufacturers" editable="bottom" multi_edit="1" duplicate="false">
+                <tree string="Manufacturers" editable="bottom" multi_edit="false" duplicate="false">
                     <field name="name"/>
                     <field name="id"/>
                 </tree>
