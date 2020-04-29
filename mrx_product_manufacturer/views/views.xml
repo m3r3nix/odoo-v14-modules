@@ -9,7 +9,7 @@
             <field name="priority">514</field>
             <field name="arch" type="xml">
                 <field name="type" position="after">
-                    <field name="mrx_product_manufacturer" />
+                    <field name="mrx_product_manufacturer" options="{'no_create':true, 'no_open':true}" />
                 </field>
             </field>
         </record>
