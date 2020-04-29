@@ -75,8 +75,10 @@
             <field name="view_id" ref="mrx_product_manufacturer_list_view"/>
         </record>
 
-        <menuitem id="mrx_product_manufacturer_menuitem" name="Manufacturers"
+        <menuitem id="mrx_product_manufacturer_purchase_menuitem" name="Manufacturers"
                   parent="purchase.menu_purchase_config" action="mrx_product_manufacturer_menu_action" sequence="4"/>
-        
+
+        <menuitem id="mrx_product_manufacturer_sale_menuitem" name="Manufacturers"
+                  parent="sale.menu_sale_config" action="mrx_product_manufacturer_menu_action" sequence="4"/>
     </data>
 </odoo>
