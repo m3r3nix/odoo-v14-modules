@@ -56,8 +56,8 @@
             <field name="name">mrx.product.supplierinfo.form.view</field>
             <field name="priority">512</field>
             <field name="arch" type="xml">
-                <label for="min_qty" position="replace">
-                    <label for="min_qty" string="MOQ"/>
+                <label for="min_qty" position="attributes">
+                    <attribute name="string">MOQ</attribute>
                 </label>
                 <label for="price" position="before">
                     <field name="mrx_packaging_unit" class="oe_inline"/>
@@ -88,8 +88,11 @@
                 <field name="company_id" position="after">
                     <field name="product_tmpl_id" position="move"/>
                 </field>
-                <field name="product_tmpl_id" position="replace">
-                    <field name="product_tmpl_id" readonly="1" invisible="0"/>
+                <field name="product_tmpl_id" position="attributes">
+                    <attribute name="readonly">1</attribute>
+                    <attribute name="invisible">0</attribute>
+                </field>
+                <field name="product_tmpl_id" position="after">
                     <field name="mrx_product_category" readonly="1"/>
                 </field>
             </field>
@@ -107,14 +110,16 @@
                     <field name="product_name" optional="hide"/>
                     <field name="delay" string="Delivery Time" optional="show"/>
                 </field>
-                <field name="product_tmpl_id" position="replace">
-                    <field name="product_tmpl_id" readonly="1" optional="hide"/>
+                <field name="product_tmpl_id" position="attributes">
+                    <attribute name="optional">hide</attribute>
+                    <attribute name="invisible">0</attribute>
                 </field>
-                <field name="company_id" position="replace">
-                    <field name="company_id" readonly="1" groups="base.group_multi_company" optional="hide"/>
+                <field name="company_id" position="attributes">
+                    <attribute name="optional">hide</attribute>
                 </field>
-                <field name="min_qty" position="replace">
-                    <field name="min_qty" string="MOQ" optional="hide"/>
+                <field name="min_qty" position="attributes">
+                    <attribute name="string">MOQ</attribute>
+                    <attribute name="optional">hide</attribute>
                 </field>
                 <field name="price" position="before">
                     <field name="mrx_packaging_unit" optional="hide"/>
