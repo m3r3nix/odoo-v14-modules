@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <odoo>
     <data>
 
@@ -10,17 +9,13 @@
             <field name="arch" type="xml">
                 <page name="sales_purchases" position="after">
                     <page name="discount" string="Discount">
-                        <group>
-                            <group name="discount" string="Purchase Discounts">
-                                <field name="mrx_category_ids" nolabel="1" position="inside">
-                                    <tree string="Vendor Discount" editable="bottom">
-                                        <field name="name"/>
-                                        <field name="partner_id" invisible="1"/>
-                                        <field name="discount"/>
-                                    </tree>
-                                </field>
-                            </group>
-                        </group>
+                        <field name="mrx_category_ids" nolabel="1" position="inside">
+                            <tree string="Vendor Discount" editable="bottom">
+                                <field name="name"/>
+                                <field name="partner_id" invisible="1"/>
+                                <field name="discount"/>
+                            </tree>
+                        </field>
                     </page>
                 </page>
             </field>

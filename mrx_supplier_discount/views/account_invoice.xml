@@ -1,8 +1,7 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <odoo>
 	<data>
 
-        <!-- NEM KELL A DISCOUNT-OT HOZZÁADNI, CSAK A TECHNICAL-BAN A "DISCOUNT ON LINE" ENGEDÉLYEZNI!!! -->
+        <!-- NEM KELL A DISCOUNT-OT HOZZÁADNI, CSAK A USER TECHNICAL-BAN A "DISCOUNT ON LINE" ENGEDÉLYEZNI!!! -->
 
         
         <!-- Inherited invoice line tree view -->
