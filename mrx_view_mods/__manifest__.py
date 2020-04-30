@@ -7,7 +7,7 @@
     'description': "Modify default views for MERENIX",
 
     'author': "MERENIX Elektrohandel e.K.",
-    'website': "https://www.merenix.de",
+    'website': "",
 
     # Categories can be used to filter modules in modules listing
     # Check https://github.com/odoo/odoo/blob/13.0/odoo/addons/base/data/ir_module_category_data.xml
@@ -22,6 +22,7 @@
         'purchase',
         'purchase_stock',
         'sale_management',
+        'account_intrastat',
     ],
 
     # always loaded
