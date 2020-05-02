@@ -1,0 +1,18 @@
+<odoo>
+    <data>
+
+        <!-- Inherited from ..addons/sale/views/sale_views.xml -->
+        <record id="mrx_view_order_tree_profit" model="ir.ui.view">
+            <field name="inherit_id" ref="sale.view_order_tree" />
+            <field name="name">mrx.sale.order.tree.profit</field>
+            <field name="model">sale.order</field>
+            <field name="priority">517</field>
+            <field name="arch" type="xml">
+                <field name="amount_total" position="after">
+                    <field name="mrx_so_profit" optional="show" />
+                </field>
+            </field>
+        </record>
+
+    </data>
+</odoo>
