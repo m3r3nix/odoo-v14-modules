@@ -6,7 +6,7 @@ from odoo import models, fields, api
 class SaleOrder(models.Model):
     _inherit = 'sale.order'
 
-    mrx_so_profit = fields.Float(compute='_compute_mrx_so_profit', string="Profit" readonly=True, store=True)
+    mrx_so_profit = fields.Float(compute='_compute_mrx_so_profit', string="Profit", readonly=True, store=True)
 
     @api.depends('amount_untaxed', 'invoice_ids', 'mrx_po_ids', 'mrx_po_ids.state')
     def _compute_mrx_so_profit(self):
