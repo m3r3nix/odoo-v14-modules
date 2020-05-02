@@ -105,6 +105,9 @@
             <field name="name">mrx.product.supplierinfo.tree.view</field>
             <field name="priority">512</field>
             <field name="arch" type="xml">
+                <xpath expr="//tree[1]" position="attributes">
+                    <attribute name="editable">bottom</attribute>
+                </xpath>
                 <field name="name" position="after">
                     <field name="product_code" optional="hide"/>
                     <field name="product_name" optional="hide"/>
