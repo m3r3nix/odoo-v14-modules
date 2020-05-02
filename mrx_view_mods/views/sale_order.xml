@@ -14,6 +14,19 @@
             </field>
         </record>
 
+        <!-- Inherited from ..addons/sale/views/sale_views.xml -->
+        <record id="mrx_view_order_tree" model="ir.ui.view">
+            <field name="inherit_id" ref="sale.view_order_tree" />
+            <field name="name">mrx.sale.order.tree</field>
+            <field name="model">sale.order</field>
+            <field name="priority">513</field>
+            <field name="arch" type="xml">
+                <field name="partner_id" position="after">
+                    <field name="client_order_ref" optional="show" />
+                </field>
+            </field>
+        </record>
+
         <!-- Adds Product Category menu item to Sales settings menu -->
         <menuitem id="mrx_product_category_sale_menuitem" name="Product Categories"
                 parent="sale.menu_sale_config" action="product.product_category_action_form" sequence="4" />
