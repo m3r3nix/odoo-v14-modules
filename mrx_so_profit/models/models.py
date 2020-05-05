@@ -7,7 +7,7 @@ from odoo import models, fields, api
 class SaleOrder(models.Model):
     _inherit = 'sale.order'
 
-    mrx_so_profit = fields.Float(compute='_compute_mrx_so_profit', string="Profit", readonly=True, store=True)
+    mrx_so_profit = fields.Float(compute='_compute_mrx_so_profit', string='Profit', readonly=True, store=True)
 
     @api.depends('state', 'amount_untaxed', 'invoice_ids.state', 'mrx_po_ids.amount_untaxed', 'mrx_po_ids.state', 'mrx_po_ids.invoice_count', 'mrx_po_bill_ids.state')
     def _compute_mrx_so_profit(self):
@@ -24,7 +24,7 @@ class SaleOrder(models.Model):
 #                _logger.warning("SUM SO Invoices: %s:", sum_so_bills)
                 if record.mrx_po_ids:
                     for po in record.mrx_po_ids:
-                        if po.state == "purchase" or po.state == "done":
+                        if po.state == 'purchase' or po.state == 'done':
                             posted_invoices = po.invoice_ids.filtered(lambda move: move.state == 'posted')
 #                            _logger.warning("Vendor Bills are posted: %s:", posted_invoices)
                             if posted_invoices:
