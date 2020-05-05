@@ -8,7 +8,7 @@ class SaleOrder(models.Model):
 
     mrx_so_profit = fields.Float(compute='_compute_mrx_so_profit', string="Profit", readonly=True, store=True)
 
-    @api.depends('amount_untaxed', 'invoice_ids', 'invoice_ids.state', 'mrx_po_ids', 'mrx_po_ids.state', 'mrx_po_ids.invoice_count')
+    @api.depends('amount_untaxed', 'invoice_ids', 'invoice_ids.state', 'mrx_po_ids', 'mrx_po_ids.state', 'mrx_po_ids.invoice_count', 'mrx_po_bill_ids', 'mrx_po_bill_ids.state')
     def _compute_mrx_so_profit(self):
         for record in self:
             sum_so_bills = sum_po_bills = 0.0
@@ -31,8 +31,6 @@ class SaleOrder(models.Model):
                             sum_po_bills += po.amount_untaxed
             record.mrx_so_profit = sum_so_bills - sum_po_bills
 
-# PO invoice_count-ot dependencinek?
-# Csak a Posted invoice-okat számolja a draft-ot és a Canceld-et ne!
 # Hozzá kell adni a po_bill_ids-t az SO-hoz, hogy a po_bill-ek state-jére is tudjam triggerelni a számolást
 # po_bill_ids talán új tab-ra, ha nem mutat jól...
 #
