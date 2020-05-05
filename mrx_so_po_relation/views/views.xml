@@ -12,7 +12,9 @@
                     <page name="mrx_so_po_rel" string="Purchase Orders">
                         <field name="mrx_po_ids"/>
                         <br/>
-                        <field name="mrx_po_bill_ids"/>
+                        <group string="Vendor Bills" invisible="True">
+                            <field name="mrx_po_bill_ids" nolabel="1"/>
+                        </group>
                     </page>
                 </page>
             </field>
@@ -32,7 +34,9 @@
                     <page name="mrx_so_po_rel" string="Sales Orders">
                         <field name="mrx_so_ids"/>
                         <br/>
-                        <field name="mrx_so_bill_ids"/>
+                        <group string="Sales Bills" invisible="True">
+                            <field name="mrx_so_bill_ids" nolabel="1"/>
+                        </group>
                     </page>
                 </page>
             </field>
