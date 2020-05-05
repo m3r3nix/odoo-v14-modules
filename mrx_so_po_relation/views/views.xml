@@ -10,8 +10,9 @@
             <field name="arch" type="xml">
                 <page name="other_information" position="after">
                     <page name="mrx_so_po_rel" string="Purchase Orders">
-                        <field name="mrx_po_ids" nolabel="1" string="Purchase Orders"/>
-<!--                        <field name="mrx_po_bill_ids" nolabel="1" string="Vendor Bills"/> -->
+                        <field name="mrx_po_ids"/>
+                        <br/>
+                        <field name="mrx_po_bill_ids"/>
                     </page>
                 </page>
             </field>
