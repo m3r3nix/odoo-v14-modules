@@ -17,7 +17,7 @@ class SaleOrder(models.Model):
             if record.mrx_po_ids:
                 for line in record.mrx_po_ids:
                     xyz.append(line.name)
-                result = self.env['account.move'].search([('invoice_origin','=',xyz)])
+                result = self.env['account.move'].search([('invoice_origin','in',xyz)])
                 record.mrx_po_bill_ids = result
 
 
@@ -32,7 +32,7 @@ class PurchaseOrder(models.Model):
     def _compute_so_po_ids(self):
         for line in self:
             if line.origin:
-                line.mrx_so_ids = self.env['sale.order'].search([('name','=',line.origin.split(', '))])
+                line.mrx_so_ids = self.env['sale.order'].search([('name','in',line.origin.split(', '))])
 
     # Search for so bills based on the origin field on invoice
     @api.depends('mrx_so_ids.invoice_count')
@@ -42,5 +42,5 @@ class PurchaseOrder(models.Model):
             if record.mrx_so_ids:
                 for line in record.mrx_so_ids:
                     xyz.append(line.name)
-                result = self.env['account.move'].search([('invoice_origin','=',xyz)])
+                result = self.env['account.move'].search([('invoice_origin','in',xyz)])
                 record.mrx_so_bill_ids = result
