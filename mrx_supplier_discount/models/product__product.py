@@ -6,7 +6,14 @@ from odoo.tools import float_compare
 
 class ProductProduct(models.Model):
     _inherit = "product.product"
-    
+
+    # Inherited from ../addons/product/models/product.py
+    # Only content of last bracket has been modified
+    def _prepare_sellers(self, params):
+        return self.seller_ids.filtered(lambda s: s.name.active).sorted(lambda s: (-s.min_qty, s.mrx_computed_purchase_price))
+
+    # Inherited from ../addons/product/models/product.py
+    # Only last line has been modified
     def _select_seller(self, partner_id=False, quantity=0.0, date=None, uom_id=False, params=False):
         self.ensure_one()
         if date is None:

@@ -105,9 +105,12 @@
             <field name="name">mrx.product.supplierinfo.tree.view</field>
             <field name="priority">512</field>
             <field name="arch" type="xml">
-                <xpath expr="//tree[1]" position="attributes">
-                    <attribute name="editable">bottom</attribute>
-                </xpath>
+<!--                 <xpath expr="//tree[1]" position="attributes"> -->
+<!--                     <attribute name="editable">bottom</attribute> -->
+<!--                 </xpath> -->
+                <field name="name" position="attributes">
+                    <attribute name="readonly">0</attribute>
+                </field>
                 <field name="name" position="after">
                     <field name="product_code" optional="hide"/>
                     <field name="product_name" optional="hide"/>
@@ -116,6 +119,7 @@
                 <field name="product_tmpl_id" position="attributes">
                     <attribute name="optional">hide</attribute>
                     <attribute name="invisible">0</attribute>
+                    <attribute name="readonly">0</attribute>
                 </field>
                 <field name="company_id" position="attributes">
                     <attribute name="optional">hide</attribute>
@@ -131,7 +135,7 @@
                 <field name="price" position="after">
                     <field name="mrx_pricing_unit" optional="show"/>
                     <field name="mrx_unique_discount_boolean" string="Unique Disc." class="text-center" optional="show"/>
-                    <field name="mrx_discount" attrs="{'readonly': True}" optional="show"/>
+                    <field name="mrx_discount" attrs="{'readonly':[('mrx_unique_discount_boolean', '!=', True)]}" optional="show"/>
                     <field name="mrx_computed_purchase_price" attrs="{'readonly': True}" optional="show"/>
                 </field>
             </field>
