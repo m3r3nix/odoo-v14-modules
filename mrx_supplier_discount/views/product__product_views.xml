@@ -36,6 +36,7 @@
             <field name="inherit_id" ref="product.product_category_form_view"/>
             <field name="name">mrx.product.category.form</field>
             <field name="model">product.category</field>
+            <field name="priority">512</field>
             <field name="arch" type="xml">
                 <field name="parent_id" position="after">
                     <field name="mrx_seller_ids" position="inside">
@@ -105,9 +106,9 @@
             <field name="name">mrx.product.supplierinfo.tree.view</field>
             <field name="priority">512</field>
             <field name="arch" type="xml">
-<!--                 <xpath expr="//tree[1]" position="attributes"> -->
-<!--                     <attribute name="editable">bottom</attribute> -->
-<!--                 </xpath> -->
+                <xpath expr="//tree[1]" position="attributes">
+                    <attribute name="editable">bottom</attribute>
+                </xpath>
                 <field name="name" position="attributes">
                     <attribute name="readonly">0</attribute>
                 </field>
