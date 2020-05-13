@@ -103,6 +103,7 @@ class SupplierInfo(models.Model):
             self.mrx_packaging_unit = self.product_tmpl_id.mrx_packaging_unit
             self.price = self.product_tmpl_id.list_price
             self.mrx_pricing_unit = self.product_tmpl_id.mrx_pricing_unit
+            self.min_qty = self.product_tmpl_id.mrx_moq
 
     #  Set product discount and calculate purchase price live on the form
     @api.onchange('mrx_pricing_type', 'price', 'mrx_pricing_unit', 'mrx_unique_discount_boolean', 'mrx_unique_discount')
