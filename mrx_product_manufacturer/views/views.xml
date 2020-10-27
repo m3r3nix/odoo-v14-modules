@@ -27,7 +27,7 @@
             </field>
         </record>
 
-        <!-- Inherited from ..addons/product/views/product_template_views.xml -->
+        <!-- Inherited from ..addons/product/views/product_views.xml -->
         <record id="mrx_product_template_search_view_manufacturer" model="ir.ui.view">
             <field name="inherit_id" ref="product.product_template_search_view" />
             <field name="name">mrx.product.template.search.view.manufacturer</field>
