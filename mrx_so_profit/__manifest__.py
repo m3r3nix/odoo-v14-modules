@@ -18,6 +18,7 @@
     # any module necessary for this one to work correctly
     'depends': ['base',
                 'sale_management',
+                'sale_purchase_stock',
                 'purchase',
                 'account',
                 'mrx_so_po_relation',
