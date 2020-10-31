@@ -10,10 +10,10 @@
         # I do not adapt "mrx_pricing_unit" in v13 to the accounting app, (but leave this option open) instead it gets calculated "price_unit"
         # 'views/account_invoice.xml',
         'views/base__res_partner.xml',
-        'views/product__product_views.xml',
-        'views/product_category_vendordiscount.xml',
-        'views/purchase__purchase_views.xml',
-        'views/sale__sale_views.xml',
+        # 'views/product__product_views.xml',
+        'views/vendordiscount.xml',
+        # 'views/purchase__purchase_views.xml',
+        # 'views/sale__sale_views.xml',
     ],
     'depends': [
         'base',
@@ -21,6 +21,7 @@
         'purchase',
         'purchase_stock',
         'sale_management',
+        'mrx_product_manufacturer',
     ],
     'description': '',  # Leave description empty to display the README file
     'installable': True,
