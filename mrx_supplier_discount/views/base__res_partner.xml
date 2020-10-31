@@ -1,23 +1,23 @@
 <odoo>
     <data>
 
-        <!-- Inherited partner form view from ../addons/base/views/res_partner_views.xml -->
-        <record id="mrx_view_partner_form" model="ir.ui.view">
-            <field name="inherit_id" ref="base.view_partner_form"/>
-            <field name="name">mrx.res.partner.form.vendordiscount</field>
+        <record id="mrx_vendordiscount_button_action" model="ir.actions.act_window">
+            <field name="name">Vendor Discount</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">mrx.vendordiscount</field>
+            <field name="view_mode">tree</field>
+            <field name="domain">[('partner_id', '=', active_id)]</field>
+            <field name="context">{'default_partner_id': active_id}</field>
+        </record>
+
+        <record id="mrx_partner_view_buttons_vendordiscount" model="ir.ui.view">
+            <field name="name">mrx.partner.view.buttons.vendordiscount</field>
             <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form" />
             <field name="arch" type="xml">
-                <page name="sales_purchases" position="after">
-                    <page name="discount" string="Discount">
-                        <field name="mrx_category_ids" nolabel="1" position="inside">
-                            <tree string="Vendor Discount" editable="bottom">
-                                <field name="name"/>
-                                <field name="partner_id" invisible="1"/>
-                                <field name="discount"/>
-                            </tree>
-                        </field>
-                    </page>
-                </page>
+                <div name="button_box" position="inside">
+                    <button string="Discounts" icon="fa-percent" type="action" name="%(mrx_vendordiscount_button_action)d"/>
+                </div>
             </field>
         </record>
 
