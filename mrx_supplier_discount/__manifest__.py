@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # App manifest
 {
-    'name': 'Product Supplier Discount',  # Name comes first, others listed in alphabetical order
+    'name': 'Product Vendor Discount',  # Name comes first, others listed in alphabetical order
     'author': 'MERENIX Elektrohandel e.K',
     'auto_install': False,
     'category': 'Product',
@@ -25,7 +25,7 @@
     ],
     'description': '',  # Leave description empty to display the README file
     'installable': True,
-    'summary': 'Supplier discount information for products. Implemented into Products, Purchase and Accounting apps',
+    'summary': 'Vendor discount information for products. Implemented into Partner, Products, Purchase and Accounting apps',
     'version': '14.0.1.0',
     'website': '',
 }
