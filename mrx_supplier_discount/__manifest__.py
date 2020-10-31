@@ -25,6 +25,6 @@
     'description': '',  # Leave description empty to display the README file
     'installable': True,
     'summary': 'Supplier discount information for products. Implemented into Products, Purchase and Accounting apps',
-    'version': '13.0.1.1',
+    'version': '14.0.1.0',
     'website': '',
 }
