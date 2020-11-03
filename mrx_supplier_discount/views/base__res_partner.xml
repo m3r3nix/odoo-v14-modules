@@ -16,7 +16,8 @@
             <field name="inherit_id" ref="base.view_partner_form" />
             <field name="arch" type="xml">
                 <div name="button_box" position="inside">
-                    <button string="Discounts" icon="fa-percent" type="action" name="%(mrx_vendordiscount_button_action)d"/>
+                    <button string="Discounts" icon="fa-percent" type="action" name="%(mrx_vendordiscount_button_action)d"
+                        groups="purchase.group_purchase_user,purchase.group_purchase_manager" />
                 </div>
             </field>
         </record>
