@@ -1,4 +1,4 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_vendordiscount_admin,Product category discount admin,model_mrx_vendordiscount,base.group_system,1,1,1,1
-access_vendordiscount_user,Product category discount user,model_mrx_vendordiscount,purchase.group_purchase_user,1,0,0,0
-access_vendordiscount_manager,Product category discount manager,model_mrx_vendordiscount,purchase.group_purchase_manager,1,1,0,0
+access_vendordiscount_admin,product.price.group.discount.by.vendor.admin,model_mrx_vendordiscount,base.group_system,1,1,1,1
+access_vendordiscount_user,product.price.group.discount.by.vendor.user,model_mrx_vendordiscount,purchase.group_purchase_user,1,0,0,0
+access_vendordiscount_manager,product.price.group.discount.by.vendor.manager,model_mrx_vendordiscount,purchase.group_purchase_manager,1,1,0,0
