@@ -29,7 +29,7 @@
             <field name="model">mrx.vendordiscount</field>
             <field name="arch" type="xml">
                 <tree string="Vendor Discount" editable="bottom" multi_edit="true" duplicate="false">
-                    <field name="partner_id"/>
+                    <field name="partner_id" invisible="context.get('default_partner_id')" />
                     <field name="manufacturer"/>
                     <field name="name"/>
                     <field name="discount"/>
