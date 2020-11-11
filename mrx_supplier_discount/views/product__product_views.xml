@@ -2,7 +2,7 @@
     <data>
 
         <!-- Inherited product form view from ../addons/product/views/product_views.xml -->
-        <record id="mrx_product_template_form_view" model="ir.ui.view">
+        <!-- <record id="mrx_product_template_form_view" model="ir.ui.view">
             <field name="inherit_id" ref="product.product_template_form_view" />
             <field name="name">mrx_product.template.common.form</field>
             <field name="model">product.template</field>
@@ -14,10 +14,10 @@
                     <field name="mrx_moq"/>
                 </div>
             </field>
-        </record>
+        </record> -->
 
         <!-- Inherited product tree view from ../addons/product/views/product_template_views.xml -->
-        <record id="mrx_product_template_tree_view" model="ir.ui.view">
+        <!-- <record id="mrx_product_template_tree_view" model="ir.ui.view">
             <field name="inherit_id" ref="product.product_template_tree_view" />
             <field name="name">mrx_product.product.tree</field>
             <field name="model">product.template</field>
@@ -29,10 +29,10 @@
                     <field name="mrx_pricing_unit" optional="show"/>
                 </field>
             </field>
-        </record>
+        </record> -->
 
         <!-- Inherited product category form view from ../addons/product/views/product_views.xml -->
-        <record id="mrx_product_category_form_view" model="ir.ui.view">
+        <!-- <record id="mrx_product_category_form_view" model="ir.ui.view">
             <field name="inherit_id" ref="product.product_category_form_view"/>
             <field name="name">mrx.product.category.form</field>
             <field name="model">product.category</field>
@@ -48,10 +48,10 @@
                     </field>
                 </field>
             </field>
-        </record>
+        </record> -->
 
         <!-- Inherited supplierinfo form view from ../addons/product/views/product_views.xml -->
-        <record id="mrx_product_supplierinfo_form_view" model="ir.ui.view">
+        <!-- <record id="mrx_product_supplierinfo_form_view" model="ir.ui.view">
             <field name="inherit_id" ref="product.product_supplierinfo_form_view"/>
             <field name="model">product.supplierinfo</field>
             <field name="name">mrx.product.supplierinfo.form.view</field>
@@ -97,47 +97,52 @@
                     <field name="mrx_product_category" readonly="1"/>
                 </field>
             </field>
-        </record>
+        </record> -->
 
         <!-- Inherited supplierinfo tree view from ../addons/product/views/product_views.xml -->
         <record id="mrx_product_supplierinfo_tree_view" model="ir.ui.view">
             <field name="inherit_id" ref="product.product_supplierinfo_tree_view"/>
             <field name="model">product.supplierinfo</field>
             <field name="name">mrx.product.supplierinfo.tree.view</field>
-            <field name="priority">512</field>
+            <field name="priority" eval="512"/>
             <field name="arch" type="xml">
-                <xpath expr="//tree[1]" position="attributes">
+                <xpath expr="//tree" position="attributes">
                     <attribute name="editable">bottom</attribute>
                 </xpath>
                 <field name="name" position="attributes">
                     <attribute name="readonly">0</attribute>
                 </field>
-                <field name="name" position="after">
-                    <field name="product_code" optional="hide"/>
-                    <field name="product_name" optional="hide"/>
-                    <field name="delay" string="Delivery Time" optional="show"/>
-                </field>
                 <field name="product_tmpl_id" position="attributes">
-                    <attribute name="optional">hide</attribute>
-                    <attribute name="invisible">0</attribute>
                     <attribute name="readonly">0</attribute>
+                    <attribute name="optional">show</attribute>
                 </field>
                 <field name="company_id" position="attributes">
                     <attribute name="optional">hide</attribute>
                 </field>
-                <field name="min_qty" position="attributes">
-                    <attribute name="string">MOQ</attribute>
-                    <attribute name="optional">hide</attribute>
+                <field name="min_qty" position="replace">
+                    <field name="min_qty" string="MOQ" optional="show"/>
                 </field>
-                <field name="price" position="before">
-                    <field name="mrx_packaging_unit" optional="hide"/>
-                    <field name="mrx_pricing_type" optional="show"/>
+                <field name="product_tmpl_id" position="after">
+                    <field name="mrx_product_manufacturer" optional="show"/>
+                    <field name="mrx_price_group" optional="show" domain="[('partner_id', '=', name), ('manufacturer_id', '=', mrx_product_manufacturer)]"/>
+                    <field name="mrx_discount_type" optional="show"/>
+                    <field name="mrx_price_type" optional="show"/>
+                    <field name="mrx_packaging_unit" optional="show"/>
                 </field>
                 <field name="price" position="after">
                     <field name="mrx_pricing_unit" optional="show"/>
-                    <field name="mrx_unique_discount_boolean" string="Unique Disc." class="text-center" optional="show"/>
-                    <field name="mrx_discount" attrs="{'readonly':[('mrx_unique_discount_boolean', '!=', True)]}" optional="show"/>
+                    <!-- <field name="mrx_discount" attrs="{'readonly':[('mrx_discount_type', '=', price_group)]}" optional="show"/> -->
                     <field name="mrx_computed_purchase_price" attrs="{'readonly': True}" optional="show"/>
+                </field>
+                <field name="delay" position="after">
+                    <field name="date_start" position="move"/>
+                    <field name="date_end" position="move"/>
+                </field>
+                <field name="date_start" position="attributes">
+                    <attribute name="optional">show</attribute>
+                </field>
+                <field name="date_end" position="attributes">
+                    <attribute name="optional">show</attribute>
                 </field>
             </field>
         </record>
