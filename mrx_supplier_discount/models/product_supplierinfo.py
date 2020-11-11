@@ -31,13 +31,13 @@ class SupplierInfo(models.Model):
         help="Product price group discount given by this vendor",
         readonly=True,
     )
-    # mrx_unique_discount = fields.Float(
-    #     default=0.0,
-    #     digits='Discount',
-    #     help="Have to be filled only if vendor gives a unique discount for this product. In this case category discount will be not applied!",
-    #     string='Unique Discount',
-    #     store=True,
-    # )
+    mrx_unique_discount = fields.Float(
+        default=0.0,
+        digits='Discount',
+        help="Have to be filled only if vendor gives a unique discount for this product. In this case category discount will be not applied!",
+        string='Discount %',
+        store=True,
+    )
     # mrx_unique_discount_boolean = fields.Boolean(
     #     default=False,
     #     string="Unique?",
@@ -87,7 +87,7 @@ class SupplierInfo(models.Model):
     def _compute_price_group_discount(self):
         for line in self:
             if line.name and line.mrx_product_manufacturer and line.mrx_price_group:
-                discount_id = self.env['mrx.product.vendordiscount']._search([('partner_id', '=', line.name), ('manufacturer_id', '=', line.mrx_product_manufacturer), ('name', '=', line.mrx_price_group)], limit=1)
+                discount_id = self.env['mrx.product.vendordiscount']._search([('partner_id', '=', line.name.id), ('manufacturer_id', '=', line.mrx_product_manufacturer.id), ('name', '=', line.mrx_price_group.name)], limit=1)
                 line.mrx_price_group_discount = self.env['mrx.product.vendordiscount'].browse(discount_id).discount
             else:
                 line.mrx_price_group_discount = 0.0
