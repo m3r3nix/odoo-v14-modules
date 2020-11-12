@@ -9,6 +9,10 @@ class SupplierInfo(models.Model):
     _inherit = 'product.supplierinfo'
 
     # Fields declaration
+    mrx_product_manufacturer = fields.Many2one(
+        related='product_tmpl_id.mrx_product_manufacturer',
+        readonly=True,
+    )
     mrx_price_type = fields.Selection(
         selection=[('net_price','Net Price'),('discount','List Price')],
         default='discount',
@@ -25,9 +29,14 @@ class SupplierInfo(models.Model):
         store=True,
         required=True,
     )
+    mrx_price_group = fields.Many2one(
+        related='mrx.product.vendordiscount',
+        string='Price Group',
+        store=True,
+        )
     mrx_price_group_discount = fields.Float(
         compute='_compute_price_group_discount',
-        string='PG Disc. %',
+        string='Price Group %',
         help="Product price group discount given by this vendor",
         readonly=True,
     )
@@ -35,17 +44,11 @@ class SupplierInfo(models.Model):
         default=0.0,
         digits='Discount',
         help="Have to be filled only if vendor gives a unique discount for this product. In this case category discount will be not applied!",
-        string='Discount %',
+        string='Product %',
         store=True,
     )
-    # mrx_unique_discount_boolean = fields.Boolean(
-    #     default=False,
-    #     string="Unique?",
-    #     help="If it's checked, then category discount will be ignored!",
-    #     store=True,
-    # )
     mrx_discount = fields.Float(
-        compute='_compute_discount1',
+        compute='_compute_discount',
         digits='Discount',
         help='Discount percentage given by the supplier. The value of this field is handed over to other modules.',
         string='Discount',
@@ -75,15 +78,10 @@ class SupplierInfo(models.Model):
     #     ondelete='cascade',
     #     readonly=True,
     # )
-    mrx_product_manufacturer = fields.Many2one(
-        related='product_tmpl_id.mrx_product_manufacturer',
-        readonly=True,
-    )
-    mrx_price_group = fields.Many2one('mrx.product.vendordiscount', string='Price Group', store=True)
 
     # Compute and search fields, in the same order of fields declaration
     # # Get and set vendor discount for the given product group
-    @api.depends('name', 'product_tmpl_id', 'mrx_product_manufacturer', 'mrx_discount_type')
+    @api.depends('name', 'product_tmpl_id', 'mrx_product_manufacturer', 'mrx_price_group', 'mrx_discount_type')
     def _compute_price_group_discount(self):
         for line in self:
             if line.name and line.mrx_product_manufacturer and line.mrx_price_group:
@@ -93,12 +91,16 @@ class SupplierInfo(models.Model):
                 line.mrx_price_group_discount = 0.0
 
     # # Decide how to compute product discount. Net Price / List Price / Unique Discount / Category Discount
-    @api.depends('mrx_price_type', 'mrx_price_group')
-    def _compute_discount1(self):
+    @api.depends('mrx_price_type', 'mrx_discount_type', 'mrx_price_group_discount', 'mrx_unique_discount')
+    def _compute_discount(self):
         for line in self:
-            if line.mrx_price_type != 'net_price':
-                line.mrx_discount = 20.0
-                # line.mrx_discount = line.mrx_category_discount
+            if line.mrx_price_type == 'discount':
+                if line.mrx_discount_type == 'product_only':
+                    line.mrx_discount = line.mrx_unique_discount
+                else:
+                    line.mrx_discount = line.mrx_price_group_discount
+            else:
+                line.mrx_discount = 0.0
 
     # Compute purchase price based on the above specified criteria
     @api.depends('price', 'mrx_discount', 'mrx_pricing_unit')
