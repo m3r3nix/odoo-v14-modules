@@ -33,6 +33,7 @@
                     <field name="manufacturer_id" options="{'no_create':true, 'no_open':true}"/>
                     <field name="name"/>
                     <field name="discount"/>
+                    <field name="id" optional="hide"/>
                 </tree>
             </field>
         </record>
