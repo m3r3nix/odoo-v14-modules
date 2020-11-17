@@ -6,6 +6,7 @@ from odoo import fields, models  # alphabetically ordered
 class VendorDiscount(models.Model):
     _name = 'mrx.product.vendordiscount'
     _description = 'Price groups & Discounts by Vendor'
+    _order = 'partner_id, manufacturer_id, name'
     
     partner_id = fields.Many2one('res.partner', string='Vendor', domain=[('supplier_rank', '>', 0)], ondelete='cascade', required=True)
     manufacturer_id = fields.Many2one('mrx.product.manufacturer', string='Manufacturer', required=True)
