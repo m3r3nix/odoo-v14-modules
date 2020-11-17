@@ -30,7 +30,7 @@ class SupplierInfo(models.Model):
         required=True,
     )
     mrx_price_group = fields.Many2one(
-        related='mrx.product.vendordiscount',
+        'mrx.product.vendordiscount',
         string='Price Group',
         store=True,
         )
