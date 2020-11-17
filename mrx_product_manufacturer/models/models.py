@@ -7,6 +7,7 @@ from odoo import models, fields, api
 class ProductManufacturer(models.Model):
     _name = 'mrx.product.manufacturer'
     _description = 'List of Manufacturers'
+    _order = 'name'
 
     name = fields.Char(required=True, store=True, copy=True)
 
