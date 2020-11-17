@@ -2,7 +2,7 @@
 {
     'name': "Product manufacturer",
 
-    'summary': "Add manufacturer filed to product",
+    'summary': "Add manufacturer field to product",
 
     'description': "Add manufacturer field to product",
 
