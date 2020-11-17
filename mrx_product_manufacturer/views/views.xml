@@ -2,11 +2,11 @@
     <data>
 
         <!-- Inherited from ..addons/product/views/product_views.xml -->
-        <record id="mrx_product_template_form_view_manufacturer" model="ir.ui.view">
+        <record id="mrx_product_template_common_form_view_manufacturer" model="ir.ui.view">
             <field name="inherit_id" ref="product.product_template_form_view"/>
             <field name="name">mrx.product.template.common.form.view.manufacturer</field>
             <field name="model">product.template</field>
-            <field name="priority">514</field>
+            <field name="priority" eval="512"/>
             <field name="arch" type="xml">
                 <field name="type" position="after">
                     <field name="mrx_product_manufacturer" options="{'no_create':true, 'no_open':true}"/>
@@ -19,10 +19,10 @@
             <field name="inherit_id" ref="product.product_template_tree_view"/>
             <field name="name">mrx.product.template.product.tree.view.manufacturer</field>
             <field name="model">product.template</field>
-            <field name="priority">514</field>
+            <field name="priority" eval="512"/>
             <field name="arch" type="xml">
                 <field name="sequence" position="after">
-                    <field name="mrx_product_manufacturer" optional="hide"/>
+                    <field name="mrx_product_manufacturer" optional="show"/>
                 </field>
             </field>
         </record>
@@ -32,7 +32,7 @@
             <field name="inherit_id" ref="product.product_template_search_view"/>
             <field name="name">mrx.product.template.search.view.manufacturer</field>
             <field name="model">product.template</field>
-            <field name="priority">514</field>
+            <field name="priority" eval="512"/>
             <field name="arch" type="xml">
                 <field name="categ_id" position="after">
                     <field name="mrx_product_manufacturer"/>
@@ -40,7 +40,7 @@
             </field>
         </record>
 
-        <!-- Creates Manufacturers model default tree view -->
+        <!-- Create Manufacturer model default tree view -->
         <record id="mrx_product_manufacturer_tree_view" model="ir.ui.view">
             <field name="name">mrx.product.manufacturer.tree.view</field>
             <field name="model">mrx.product.manufacturer</field>
@@ -52,7 +52,7 @@
             </field>
         </record>
 
-        <!-- Creates menu items and actions for Manufacturers menuitem-->
+        <!-- Create menu items and actions for Manufacturers menuitem-->
         <record id="mrx_product_manufacturer_menu_action" model="ir.actions.act_window">
             <field name="name">Manufacturers</field>
             <field name="type">ir.actions.act_window</field>
