@@ -3,33 +3,33 @@
 
         <!-- Inherited from ..addons/product/views/product_views.xml -->
         <record id="mrx_product_template_form_view_manufacturer" model="ir.ui.view">
-            <field name="inherit_id" ref="product.product_template_form_view" />
+            <field name="inherit_id" ref="product.product_template_form_view"/>
             <field name="name">mrx.product.template.common.form.view.manufacturer</field>
             <field name="model">product.template</field>
             <field name="priority">514</field>
             <field name="arch" type="xml">
                 <field name="type" position="after">
-                    <field name="mrx_product_manufacturer" options="{'no_create':true, 'no_open':true}" />
+                    <field name="mrx_product_manufacturer" options="{'no_create':true, 'no_open':true}"/>
                 </field>
             </field>
         </record>
 
         <!-- Inherited from ..addons/product/views/product_template_views.xml -->
         <record id="mrx_product_template_tree_view_manufacturer" model="ir.ui.view">
-            <field name="inherit_id" ref="product.product_template_tree_view" />
+            <field name="inherit_id" ref="product.product_template_tree_view"/>
             <field name="name">mrx.product.template.product.tree.view.manufacturer</field>
             <field name="model">product.template</field>
             <field name="priority">514</field>
             <field name="arch" type="xml">
                 <field name="sequence" position="after">
-                    <field name="mrx_product_manufacturer" optional="hide" />
+                    <field name="mrx_product_manufacturer" optional="hide"/>
                 </field>
             </field>
         </record>
 
         <!-- Inherited from ..addons/product/views/product_views.xml -->
         <record id="mrx_product_template_search_view_manufacturer" model="ir.ui.view">
-            <field name="inherit_id" ref="product.product_template_search_view" />
+            <field name="inherit_id" ref="product.product_template_search_view"/>
             <field name="name">mrx.product.template.search.view.manufacturer</field>
             <field name="model">product.template</field>
             <field name="priority">514</field>
@@ -47,7 +47,7 @@
             <field name="arch" type="xml">
                 <tree string="Manufacturers" editable="bottom" multi_edit="false" duplicate="false">
                     <field name="name"/>
-                    <field name="id"/>
+                    <field name="id" optional="hide"/>
                 </tree>
             </field>
         </record>
