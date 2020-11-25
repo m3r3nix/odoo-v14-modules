@@ -53,6 +53,7 @@ class SupplierInfo(models.Model):
         help='Discount percentage given by the supplier. The value of this field is handed over to other modules.',
         string='Discount',
         readonly=True,
+        store=True,
     )
     mrx_computed_purchase_price = fields.Float(
         compute='_compute_purchase_price',
@@ -84,7 +85,7 @@ class SupplierInfo(models.Model):
     @api.depends('name', 'product_tmpl_id', 'mrx_product_manufacturer', 'mrx_price_group', 'mrx_discount_type')
     def _compute_price_group_discount(self):
         for line in self:
-            if line.name and line.mrx_product_manufacturer and line.mrx_price_group:
+            if line.name and line.mrx_product_manufacturer and line.mrx_price_group and line.mrx_discount_type != 'product_only':
                 discount_id = self.env['mrx.product.vendordiscount']._search([('partner_id', '=', line.name.id), ('manufacturer_id', '=', line.mrx_product_manufacturer.id), ('name', '=', line.mrx_price_group.name)], limit=1)
                 line.mrx_price_group_discount = self.env['mrx.product.vendordiscount'].browse(discount_id).discount
             else:
@@ -96,10 +97,14 @@ class SupplierInfo(models.Model):
         for line in self:
             if line.mrx_price_type == 'discount':
                 if line.mrx_discount_type == 'product_only':
+                    line.mrx_price_group_discount = 0.0
                     line.mrx_discount = line.mrx_unique_discount
                 else:
+                    line.mrx_unique_discount = 0.0
                     line.mrx_discount = line.mrx_price_group_discount
             else:
+                line.mrx_unique_discount = 0.0
+                line.mrx_price_group_discount = 0.0
                 line.mrx_discount = 0.0
 
     # Compute purchase price based on the above specified criteria

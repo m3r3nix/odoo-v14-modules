@@ -129,7 +129,7 @@
                         domain="[('partner_id', '=', name), ('manufacturer_id', '=', mrx_product_manufacturer)]"
                         options="{'no_create':true, 'no_open':true}"/>
                     <field name="mrx_price_type" optional="show"/>
-                    <field name="mrx_discount_type" optional="show"/>
+                    <field name="mrx_discount_type" attrs="{'readonly': [('mrx_price_type', '=', 'net_price')]}" optional="show"/>
                     <field name="mrx_packaging_unit" optional="show"/>
                 </field>
                 <field name="price" position="after">
