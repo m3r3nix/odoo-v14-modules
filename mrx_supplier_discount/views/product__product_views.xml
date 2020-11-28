@@ -31,25 +31,6 @@
             </field>
         </record> -->
 
-        <!-- Inherited product category form view from ../addons/product/views/product_views.xml -->
-        <!-- <record id="mrx_product_category_form_view" model="ir.ui.view">
-            <field name="inherit_id" ref="product.product_category_form_view"/>
-            <field name="name">mrx.product.category.form</field>
-            <field name="model">product.category</field>
-            <field name="priority">512</field>
-            <field name="arch" type="xml">
-                <field name="parent_id" position="after">
-                    <field name="mrx_seller_ids" position="inside">
-                        <tree string="Vendor Discount" editable="bottom">
-                            <field name="name" invisible="1"/>
-                            <field name="partner_id"/>
-                            <field name="discount"/>
-                        </tree>
-                    </field>
-                </field>
-            </field>
-        </record> -->
-
         <!-- Inherited supplierinfo form view from ../addons/product/views/product_views.xml -->
         <record id="mrx_product_supplierinfo_form_view" model="ir.ui.view">
             <field name="inherit_id" ref="product.product_supplierinfo_form_view"/>
