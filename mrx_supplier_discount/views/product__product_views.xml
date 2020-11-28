@@ -128,15 +128,12 @@
                         optional="show"
                         domain="[('partner_id', '=', name), ('manufacturer_id', '=', mrx_product_manufacturer)]"
                         options="{'no_create':true, 'no_open':true}"/>
-                    <field name="mrx_price_type" optional="show"/>
-                    <field name="mrx_discount_type" attrs="{'readonly': [('mrx_price_type', '=', 'net_price')]}" optional="show"/>
+                    <field name="mrx_discount_type" optional="show"/>
                     <field name="mrx_packaging_unit" optional="show"/>
                 </field>
                 <field name="price" position="after">
                     <field name="mrx_pricing_unit" optional="show"/>
-                    <field name="mrx_unique_discount" attrs="{'readonly': [('mrx_discount_type', '=', 'price_group')]}" optional="show"/>
-                    <field name="mrx_price_group_discount" optional="show"/>
-                    <field name="mrx_discount" optional="hide"/>
+                    <field name="mrx_discount" attrs="{'readonly': [('mrx_discount_type', '!=', 'product_only')]}" optional="show"/>
                     <field name="mrx_computed_purchase_price" attrs="{'readonly': True}" optional="show"/>
                 </field>
                 <field name="delay" position="after">

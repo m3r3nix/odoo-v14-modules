@@ -10,7 +10,7 @@
         # I do not adapt "mrx_pricing_unit" in v13 to the accounting app, (but leave this option open) instead it gets calculated "price_unit"
         # 'views/account_invoice.xml',
         'views/base__res_partner.xml',
-        # 'views/product__product_views.xml',
+        'views/product__product_views.xml',
         'views/vendordiscount.xml',
         # 'views/purchase__purchase_views.xml',
         # 'views/sale__sale_views.xml',
