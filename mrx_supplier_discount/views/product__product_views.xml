@@ -51,53 +51,41 @@
         </record> -->
 
         <!-- Inherited supplierinfo form view from ../addons/product/views/product_views.xml -->
-        <!-- <record id="mrx_product_supplierinfo_form_view" model="ir.ui.view">
+        <record id="mrx_product_supplierinfo_form_view" model="ir.ui.view">
             <field name="inherit_id" ref="product.product_supplierinfo_form_view"/>
             <field name="model">product.supplierinfo</field>
             <field name="name">mrx.product.supplierinfo.form.view</field>
-            <field name="priority">512</field>
+            <field name="priority" eval="512"/>
             <field name="arch" type="xml">
-                <label for="min_qty" position="attributes">
-                    <attribute name="string">MOQ</attribute>
-                </label>
-                <label for="price" position="before">
-                    <field name="mrx_packaging_unit" class="oe_inline"/>
-                    <field name="mrx_pricing_type" widget="radio"/>
-                </label>
-                <label for="date_start" position="before">
-                    <field name="mrx_pricing_unit" class="oe_inline"/>
-                    <label for="mrx_unique_discount"/>
-                    <div>
-                        <span>
-                            <field name="mrx_unique_discount_boolean" nolabel="1" class="oe_inline"/>
-                        </span>
-                        <span attrs="{'invisible':[('mrx_unique_discount_boolean', '!=', True)]}"> 
-                            <field name="mrx_unique_discount" class="oe_inline" attrs="{'readonly':[('mrx_unique_discount_boolean', '!=', True)]}"/> %
-                        </span>
-                    </div>
-                    <label for="mrx_category_discount" attrs="{'invisible':['|', ('mrx_unique_discount_boolean', '!=', False), ('mrx_pricing_type', '!=', 'discount')]}"/>
-                    <div attrs="{'invisible':['|', ('mrx_unique_discount_boolean', '!=', False), ('mrx_pricing_type', '!=', 'discount')]}"> 
-                        <field name="mrx_category_discount" class="oe_inline" attrs="{'readonly': True}"/> %
-                    </div>
-                    <label for="mrx_discount" attrs="{'invisible': True}"/>
-                    <div attrs="{'invisible': True}"> 
-                        <field name="mrx_discount" class="oe_inline" attrs="{'readonly': True, 'invisible': True}"/> %
-                    </div>
-                    <field name="mrx_computed_purchase_price" class="oe_inline" attrs="{'readonly': True}"/>
-                    <field name="currency_id" class="oe_inline" groups="base.group_multi_currency"/>
-                </label>
-                <field name="company_id" position="after">
+                <field name="product_id" position="before">
                     <field name="product_tmpl_id" position="move"/>
                 </field>
                 <field name="product_tmpl_id" position="attributes">
                     <attribute name="readonly">1</attribute>
                     <attribute name="invisible">0</attribute>
                 </field>
-                <field name="product_tmpl_id" position="after">
-                    <field name="mrx_product_category" readonly="1"/>
+                <field name="product_id" position="after">
+                    <field name="mrx_product_manufacturer" readonly="1"/>
+                    <field name="mrx_price_group"/>
                 </field>
+                <label for="min_qty" position="attributes">
+                    <attribute name="string">MOQ</attribute>
+                </label>
+                <label for="price" position="before">
+                    <field name="mrx_packaging_unit" class="oe_inline"/>
+                </label>
+                <label for="date_start" position="before">
+                    <field name="mrx_pricing_unit" class="oe_inline"/>
+                    <field name="mrx_discount_type"/>
+                    <label for="mrx_discount"/>
+                    <div> 
+                        <field name="mrx_discount" class="oe_inline" attrs="{'readonly': [('mrx_discount_type', '!=', 'product_only')]}"/> %
+                    </div>
+                    <field name="mrx_computed_purchase_price" class="oe_inline" attrs="{'readonly': True}"/>
+                    <field name="currency_id" class="oe_inline" groups="base.group_multi_currency"/>
+                </label>
             </field>
-        </record> -->
+        </record>
 
         <!-- Inherited supplierinfo tree view from ../addons/product/views/product_views.xml -->
         <record id="mrx_product_supplierinfo_tree_view" model="ir.ui.view">
