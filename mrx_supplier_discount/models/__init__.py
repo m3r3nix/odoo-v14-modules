@@ -6,5 +6,5 @@ from . import product__product
 from . import product_supplierinfo
 # from . import purchase__purchase
 # from . import purchase_stock__stock_rule
-# from . import sale__sale
+from . import sale__sale
 from . import vendordiscount
