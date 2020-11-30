@@ -17,19 +17,21 @@
         </record> -->
 
         <!-- Inherited product tree view from ../addons/product/views/product_template_views.xml -->
-        <!-- <record id="mrx_product_template_tree_view" model="ir.ui.view">
-            <field name="inherit_id" ref="product.product_template_tree_view" />
+        <record id="mrx_product_template_tree_view" model="ir.ui.view">
+            <field name="inherit_id" ref="product.product_template_tree_view"/>
             <field name="name">mrx_product.product.tree</field>
             <field name="model">product.template</field>
-            <field name="priority">512</field>
+            <field name="priority" eval="512"/>
             <field name="arch" type="xml">
                 <field name="list_price" position="before">
                     <field name="mrx_moq" optional="show"/>
                     <field name="mrx_packaging_unit" optional="show"/>
+                </field>
+                <field name="list_price" position="after">
                     <field name="mrx_pricing_unit" optional="show"/>
                 </field>
             </field>
-        </record> -->
+        </record>
 
         <!-- Inherited supplierinfo form view from ../addons/product/views/product_views.xml -->
         <record id="mrx_product_supplierinfo_form_view" model="ir.ui.view">
