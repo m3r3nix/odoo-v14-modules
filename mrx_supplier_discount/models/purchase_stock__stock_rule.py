@@ -1,29 +1,28 @@
 # -*- coding: utf-8 -*-
 
-from odoo import api, fields, models, _
-from odoo.tools import DEFAULT_SERVER_DATETIME_FORMAT
+from odoo import api, fields, models
 
-class StockRule(models.Model):
-    _inherit = 'stock.rule'
+class PurchaseOrderLine(models.Model):
+    _inherit = 'purchase.order.line'
 
-    # Inherited function: ../addons/purchase_stock/models/stock_rule.py line 202
+    # Inherited function: ../addons/purchase/models/purchase.py
     #  Override original function in order to set value of discount and pricing unit fields on automatically generated PO.
-    #  See last 2 comments inside...
+    #  Last 2 lines have been added to the returned dictionary...
     @api.model
-    def _prepare_purchase_order_line(self, product_id, product_qty, product_uom, company_id, values, po):
-        partner = values['supplier'].name
-        procurement_uom_po_qty = product_uom._compute_quantity(product_qty, product_id.uom_po_id)
+    def _prepare_purchase_order_line(self, product_id, product_qty, product_uom, company_id, supplier, po):
+        partner = supplier.name
+        uom_po_qty = product_uom._compute_quantity(product_qty, product_id.uom_po_id)
         # _select_seller is used if the supplier have different price depending
         # the quantities ordered.
-        seller = product_id.with_context(force_company=company_id.id)._select_seller(
+        seller = product_id.with_company(company_id)._select_seller(
             partner_id=partner,
-            quantity=procurement_uom_po_qty,
+            quantity=uom_po_qty,
             date=po.date_order and po.date_order.date(),
             uom_id=product_id.uom_po_id)
 
         taxes = product_id.supplier_taxes_id
         fpos = po.fiscal_position_id
-        taxes_id = fpos.map_tax(taxes, product_id, seller.name) if fpos else taxes
+        taxes_id = fpos.map_tax(taxes, product_id, seller.name)
         if taxes_id:
             taxes_id = taxes_id.filtered(lambda x: x.company_id.id == company_id.id)
 
@@ -31,10 +30,6 @@ class StockRule(models.Model):
         if price_unit and seller and po.currency_id and seller.currency_id != po.currency_id:
             price_unit = seller.currency_id._convert(
                 price_unit, po.currency_id, po.company_id, po.date_order or fields.Date.today())
-
-        # These two lines have been added extra
-        mrx_discount = seller.mrx_discount
-        mrx_pricing_unit = seller.mrx_pricing_unit
 
         product_lang = product_id.with_prefetch().with_context(
             lang=partner.lang,
@@ -44,23 +39,17 @@ class StockRule(models.Model):
         if product_lang.description_purchase:
             name += '\n' + product_lang.description_purchase
 
-        date_planned = self.env['purchase.order.line']._get_date_planned(seller, po=po)
+        date_planned = self.order_id.date_planned or self._get_date_planned(seller, po=po)
 
-        # "mrx_discount" and "mrx_pricing_unit" lines have been added extra
         return {
             'name': name,
-            'product_qty': procurement_uom_po_qty,
+            'product_qty': uom_po_qty,
             'product_id': product_id.id,
             'product_uom': product_id.uom_po_id.id,
             'price_unit': price_unit,
-            'mrx_pricing_unit': mrx_pricing_unit,
-            'mrx_discount': mrx_discount,
-            'propagate_cancel': values.get('propagate_cancel'),
             'date_planned': date_planned,
-            'propagate_date': values['propagate_date'],
-            'propagate_date_minimum_delta': values['propagate_date_minimum_delta'],
-            'orderpoint_id': values.get('orderpoint_id', False) and values.get('orderpoint_id').id,
             'taxes_id': [(6, 0, taxes_id.ids)],
             'order_id': po.id,
-            'move_dest_ids': [(4, x.id) for x in values.get('move_dest_ids', [])],
+            'mrx_pricing_unit': seller.mrx_pricing_unit,
+            'mrx_discount': seller.mrx_discount,
         }
