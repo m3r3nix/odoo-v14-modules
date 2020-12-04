@@ -1,9 +1,7 @@
 # -*- coding: utf-8 -*-
 
-from odoo import api, fields, models, SUPERUSER_ID, _
-from datetime import datetime
+from odoo import api, fields, models
 from odoo.tools import DEFAULT_SERVER_DATETIME_FORMAT
-from odoo.tools.float_utils import float_compare
 
 class PurchaseOrder(models.Model):
     _inherit = "purchase.order"
@@ -21,52 +19,27 @@ class PurchaseOrderLine(models.Model):
     mrx_discount = fields.Float(string='Discount (%)', default=0.0, digits='Discount', help="Discount percentage given by the supplier from the list price", store=True)
     mrx_pricing_unit = fields.Integer(string='Pricing Unit', default=1, help="How many units to get for the given list price", store=True)
 
-    ## Inherited function: ../addons/purchase/models/purchase.py line 498 
+    ## Inherited function: ../addons/purchase/models/purchase.py
     #  "mrx_pricing_unit" and "mrx_discount" has been added to the api.depends line
-    #  "price" and "taxes" lines have been changed
-    #  Calculate taxes and subtotal properly from price with discount.
     @api.depends('product_qty', 'price_unit', 'taxes_id', 'mrx_discount', 'mrx_pricing_unit')
     def _compute_amount(self):
-        for line in self:
-            price = (line.price_unit / line.mrx_pricing_unit) * (1 - (line.mrx_discount or 0.0) / 100.0)
-            taxes = line.taxes_id.compute_all(price, line.order_id.currency_id, line.product_qty, product=line.product_id, partner=line.order_id.partner_id)
-            line.update({
-                'price_tax': sum(t.get('amount', 0.0) for t in taxes.get('taxes', [])),
-                'price_total': taxes['total_included'],
-                'price_subtotal': taxes['total_excluded'],
-            })
+        super()._compute_amount()
 
-    ## Inherited function: ../addons/purchase/models/purchase.py line 629
-    #  See 2. comment inside...
+    def _prepare_compute_all_values(self):
+        self.ensure_one()
+        res = super()._prepare_compute_all_values()
+        res['price_unit'] = (self.price_unit / self.mrx_pricing_unit) * (1.0 - (self.mrx_discount or 0.0) / 100.0)
+        return res
+
+    ## Inherited function: ../addons/purchase/models/purchase.py
+    # Set mrx_discount and mrx_pricing unit from supplierinfo when product_id changes
     @api.onchange('product_id')
     def onchange_product_id(self):
-        if not self.product_id:
-            return
+        super().onchange_product_id()
+        self._compute_discount_by_seller()
 
-        # Reset date, price and quantity since _onchange_quantity will provide default values
-        self.date_planned = datetime.today().strftime(DEFAULT_SERVER_DATETIME_FORMAT)
-        self.price_unit = self.product_qty = 0.0
-
-        self._product_id_change()
-
-        self._suggest_quantity()
-        self._onchange_quantity()
-
-        # Following code section has been added extra. Set discount and pricing unit from supplierinfo only when product_id changes
-        seller = self.product_id._select_seller(
-            partner_id=self.partner_id,
-            quantity=self.product_qty,
-            date=self.order_id.date_order and self.order_id.date_order.date(),
-            uom_id=self.product_uom)
-        if not seller:
-            self.mrx_discount = 0.0
-            self.mrx_pricing_unit = 1
-        else:
-            self.mrx_discount = seller.mrx_discount
-            self.mrx_pricing_unit = seller.mrx_pricing_unit
-
-    ## Inherited function: ../addons/purchase/models/purchase.py line 677
-    #  See comment inside...
+    ## Inherited function: ../addons/purchase/models/purchase.py
+    #  See 2nd comment inside...
     @api.onchange('product_qty', 'product_uom')
     def _onchange_quantity(self):
         if not self.product_id:
@@ -82,9 +55,22 @@ class PurchaseOrderLine(models.Model):
         if seller or not self.date_planned:
             self.date_planned = self._get_date_planned(seller).strftime(DEFAULT_SERVER_DATETIME_FORMAT)
 
+        # If not seller, use the standard price. It needs a proper currency conversion.
         if not seller:
-            if self.product_id.seller_ids.filtered(lambda s: s.name.id == self.partner_id.id):
-                self.price_unit = 0.0
+            price_unit = self.env['account.tax']._fix_tax_included_price_company(
+                self.product_id.standard_price,
+                self.product_id.supplier_taxes_id,
+                self.taxes_id,
+                self.company_id,
+            )
+            if price_unit and self.order_id.currency_id and self.order_id.company_id.currency_id != self.order_id.currency_id:
+                price_unit = self.order_id.company_id.currency_id._convert(
+                    price_unit,
+                    self.order_id.currency_id,
+                    self.order_id.company_id,
+                    self.date_order or fields.Date.today(),
+                )
+            self.price_unit = price_unit
             return
 
         # Following 3 lines have been added extra. Import list price from supplierinfo only when product_id changes
@@ -101,41 +87,15 @@ class PurchaseOrderLine(models.Model):
 
         self.price_unit = price_unit
 
-    ## Inherited function: ../addons/purchase/models/purchase.py line 738
+    ## Inherited function: ../addons/purchase/models/purchase.py line
     #  "discount" and "mrx_pricing_unit" has been added to the return array
-    def _prepare_account_move_line(self, move):
-        self.ensure_one()
-        if self.product_id.purchase_method == 'purchase':
-            qty = self.product_qty - self.qty_invoiced
-        else:
-            qty = self.qty_received - self.qty_invoiced
-        if float_compare(qty, 0.0, precision_rounding=self.product_uom.rounding) <= 0:
-            qty = 0.0
-
-        if self.currency_id == move.company_id.currency_id:
-            currency = False
-        else:
-            currency = move.currency_id
-
-        return {
-            'name': '%s: %s' % (self.order_id.name, self.name),
-            'move_id': move.id,
-            'currency_id': currency and currency.id or False,
-            'purchase_line_id': self.id,
-            'date_maturity': move.invoice_date_due,
-            'product_uom_id': self.product_uom.id,
-            'product_id': self.product_id.id,
-            'price_unit': self.price_unit / self.mrx_pricing_unit,
+    def _prepare_account_move_line(self, move=False):
+        res = super()._prepare_account_move_line(move=False)
+        res.update({
             'discount': self.mrx_discount,
-#            Ha nem implementálom az invoice-ba akkor nem kell.
-#            'mrx_pricing_unit': self.mrx_pricing_unit,
-            'quantity': qty,
-            'partner_id': move.partner_id.id,
-            'analytic_account_id': self.account_analytic_id.id,
-            'analytic_tag_ids': [(6, 0, self.analytic_tag_ids.ids)],
-            'tax_ids': [(6, 0, self.taxes_id.ids)],
-            'display_type': self.display_type,
-        }
+            'mrx_pricing_unit': self.mrx_pricing_unit,
+        })
+        return res
 
     # Own function. Get value of "mrx_discount" and "mrx_pricing_unit" from supplierinfo if vendor is set.
     def _compute_discount_by_seller(self):

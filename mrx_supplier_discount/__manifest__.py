@@ -12,7 +12,7 @@
         'views/base__res_partner.xml',
         'views/product__product_views.xml',
         'views/vendordiscount.xml',
-        # 'views/purchase__purchase_views.xml',
+        'views/purchase__purchase_views.xml',
         'views/sale__sale_views.xml',
     ],
     'depends': [
