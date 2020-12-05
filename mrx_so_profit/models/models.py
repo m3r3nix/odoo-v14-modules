@@ -1,12 +1,15 @@
 # -*- coding: utf-8 -*-
 
-from odoo import models, fields, api
+from odoo import api, fields, models
+
 #import logging
 #_logger = logging.getLogger(__name__)
+
 
 class SaleOrder(models.Model):
     _inherit = 'sale.order'
 
+    # Add extra field to the model
     mrx_so_profit = fields.Float(compute='_compute_mrx_so_profit', string='Profit', readonly=True, store=True)
 
     @api.depends('state', 'amount_untaxed', 'invoice_ids.state', 'mrx_po_ids.amount_untaxed', 'mrx_po_ids.state', 'mrx_po_ids.invoice_count', 'mrx_po_bill_ids.state')
