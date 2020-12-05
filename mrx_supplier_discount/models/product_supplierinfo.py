@@ -2,13 +2,13 @@
 # 1 : imports of python lib
 
 # 2 : imports of odoo
-from odoo import api, fields, models  # alphabetically ordered
+from odoo import api, fields, models
 
-# Model
+
 class SupplierInfo(models.Model):
     _inherit = 'product.supplierinfo'
 
-    # Field declaration
+    # Add some extra fields to the model
     mrx_product_manufacturer = fields.Many2one(
         related='product_tmpl_id.mrx_product_manufacturer',
         readonly=True,
@@ -53,11 +53,11 @@ class SupplierInfo(models.Model):
         store=True,
     )
 
-
+    # If "net_price" is used, then set discount to 0.0
     def get_net_price_discount(self, line):
         return 0.0
 
-    # # Get and set vendor discount for the given product group
+    # Set vendor discount for the given price group
     def get_price_group_discount(self, line):
         if line.name and line.mrx_product_manufacturer and line.mrx_price_group and line.mrx_discount_type == 'price_group':
             discount_id = self.env['mrx.product.vendordiscount']._search([('partner_id', '=', line.name.id), ('manufacturer_id', '=', line.mrx_product_manufacturer.id), ('name', '=', line.mrx_price_group.name)], limit=1)
@@ -65,11 +65,11 @@ class SupplierInfo(models.Model):
         else:
             return 0.0
 
+    # If "product_only" is used, then set discount to the typed amount by the user
     def get_product_only_discount(self, line):
         return line.mrx_discount
 
-    # Compute and search fields, in the same order of fields declaration
-    # # Decide how to compute product discount: Net Price / Price Group / Product Only
+    # Decide how to compute product discount: Net Price / Price Group / Product Only
     @api.depends('mrx_discount_type', 'mrx_price_group')
     def _compute_discount(self):
         for line in self:

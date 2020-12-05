@@ -3,10 +3,11 @@
 from odoo import api, fields, models
 from odoo.tools import DEFAULT_SERVER_DATETIME_FORMAT
 
+
 class PurchaseOrder(models.Model):
     _inherit = "purchase.order"
 
-    # Own function. Triggers the recompute of "price_unit", "mrx_discount" and "mrx_pricing_unit" fields if the vendor changed on the PO.
+    # Own function. Triggers the recompute of "price_unit", "mrx_discount" and "mrx_pricing_unit" fields if the vendor has been changed on the PO.
     @api.onchange('partner_id')
     def _compute_discount_by_seller(self):
         for order in self:
@@ -16,30 +17,32 @@ class PurchaseOrder(models.Model):
 class PurchaseOrderLine(models.Model):
     _inherit = 'purchase.order.line'
 
+    # Add some extra fields to the model
     mrx_discount = fields.Float(string='Discount (%)', default=0.0, digits='Discount', help="Discount percentage given by the supplier from the list price", store=True)
     mrx_pricing_unit = fields.Integer(string='Pricing Unit', default=1, help="How many units to get for the given list price", store=True)
 
-    ## Inherited function: ../addons/purchase/models/purchase.py
-    #  "mrx_pricing_unit" and "mrx_discount" has been added to the api.depends line
+    # Override function from: ../addons/purchase/models/purchase.py
+    # "mrx_pricing_unit" and "mrx_discount" has been added to the api.depends line
     @api.depends('product_qty', 'price_unit', 'taxes_id', 'mrx_discount', 'mrx_pricing_unit')
     def _compute_amount(self):
         super()._compute_amount()
 
+    # Override function from: ../addons/purchase/models/purchase.py
+    # Update "price_unit" value in the returned dictionary
     def _prepare_compute_all_values(self):
-        self.ensure_one()
         res = super()._prepare_compute_all_values()
-        res['price_unit'] = (self.price_unit / self.mrx_pricing_unit) * (1.0 - (self.mrx_discount or 0.0) / 100.0)
+        res['price_unit'] = (self.price_unit / self.mrx_pricing_unit) * (1 - (self.mrx_discount or 0.0) / 100.0)
         return res
 
-    ## Inherited function: ../addons/purchase/models/purchase.py
-    # Set mrx_discount and mrx_pricing unit from supplierinfo when product_id changes
+    # Override function from: ../addons/purchase/models/purchase.py
+    # Set "mrx_discount" and "mrx_pricing_unit" from supplierinfo when "product_id" changes
     @api.onchange('product_id')
     def onchange_product_id(self):
         super().onchange_product_id()
         self._compute_discount_by_seller()
 
-    ## Inherited function: ../addons/purchase/models/purchase.py
-    #  See 2nd comment inside...
+    # Override function from: ../addons/purchase/models/purchase.py
+    # See 2nd comment inside...
     @api.onchange('product_qty', 'product_uom')
     def _onchange_quantity(self):
         if not self.product_id:
@@ -87,8 +90,8 @@ class PurchaseOrderLine(models.Model):
 
         self.price_unit = price_unit
 
-    ## Inherited function: ../addons/purchase/models/purchase.py line
-    #  "discount" and "mrx_pricing_unit" has been added to the return array
+    # Override function from: ../addons/purchase/models/purchase.py
+    # "price_unit" has been updated and "discount" has been added to the returned dictionary
     def _prepare_account_move_line(self, move=False):
         res = super()._prepare_account_move_line(move=False)
         res.update({
@@ -97,9 +100,9 @@ class PurchaseOrderLine(models.Model):
         })
         return res
 
-    ## Inherited function: ../addons/purchase/models/purchase.py
-    #  Override original function in order to set value of discount and pricing unit fields on automatically generated PO.
-    #  "mrx_discount" and "mrx_pricing_unit" has been added to the return array
+    # Override function from: ../addons/purchase/models/purchase.py
+    # Override original function in order to set value of discount and pricing unit fields on automatically generated PO.
+    # "mrx_discount" and "mrx_pricing_unit" has been added to the returned dictionary
     @api.model
     def _prepare_purchase_order_line(self, product_id, product_qty, product_uom, company_id, supplier, po):
         res = super()._prepare_purchase_order_line(product_id, product_qty, product_uom, company_id, supplier, po)

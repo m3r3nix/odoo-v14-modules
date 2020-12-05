@@ -2,7 +2,8 @@
 
 from odoo import api, fields, models
 
-# Due to the complexity of accounting, mrx_pricing_unit is not implemented into this module yet.
+
+# Due to the complexity of accounting, "mrx_pricing_unit" is not implemented into this module yet.
 # As a workaround this module will get the calculated price_unit value from other modules.
 """
 class AccountMoveLine(models.Model):
@@ -10,8 +11,8 @@ class AccountMoveLine(models.Model):
 
     mrx_pricing_unit = fields.Integer(string='Pricing Unit', default=1, help="How many units to get for the given list price", store=True)
 
-    # v14 Account module ../addons/account/models/account_move.py
-    # Implementation of mrx_pricing_unit should be started in this function
+    # v14 Override function from ../addons/account/models/account_move.py
+    # Implementation of "mrx_pricing_unit" should be started in this function
     @api.model
     def _get_price_total_and_subtotal_model(self, price_unit, quantity, discount, currency, product, partner, taxes, move_type):
         ''' This method is used to compute 'price_total' & 'price_subtotal'.

@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
-from odoo import fields, models  # alphabetically ordered
+from odoo import fields, models
+
 
 # Create own table in database to store vendor discounts by product category
 class VendorDiscount(models.Model):

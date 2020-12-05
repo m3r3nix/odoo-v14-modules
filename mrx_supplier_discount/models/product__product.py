@@ -3,26 +3,29 @@
 from odoo import api, fields, models
 from odoo.tools import float_compare
 
+
 class ProductTemplate(models.Model):
     _inherit = "product.template"
 
+    # Add some extra fields to the model
     mrx_pricing_unit = fields.Integer(string='Pricing Unit', default=1, required=True, store=True, help="How many items to get for this price? 1/10/100/1000")
     mrx_packaging_unit = fields.Integer(string='Packaging Unit', default=1, required=True, store=True, help="How many pieces in one package?")
     mrx_moq = fields.Integer(string='MOQ', default=1, required=True, store=True, help="Minimum order quantity")
 
+
 class ProductProduct(models.Model):
     _inherit = "product.product"
 
-    # # Select vendor by cheapest purchase price in MTO
-    # Inherited from ../addons/product/models/product.py
-    # Only content of last bracket has been modified
+    ### Select vendor by cheapest purchase price in MTO
+    # Override function from: ../addons/product/models/product.py
+    # Only content of last bracket has been modified. Recordset sorted by "min_qty" and "mrx_computed_purchase_price"
     def _prepare_sellers(self, params=False):
         # This search is made to avoid retrieving seller_ids from the cache.
         return self.env['product.supplierinfo'].search([('product_tmpl_id', '=', self.product_tmpl_id.id),
                                                         ('name.active', '=', True)]).sorted(lambda s: (-s.min_qty, s.mrx_computed_purchase_price))
 
-    # Inherited from ../addons/product/models/product.py
-    # Only last line has been modified
+    # Override function from: ../addons/product/models/product.py
+    # Only last line has been modified. Returned recordset sorted by "mrx_computed_purchase_price" instead of "price"
     def _select_seller(self, partner_id=False, quantity=0.0, date=None, uom_id=False, params=False):
         self.ensure_one()
         if date is None:
