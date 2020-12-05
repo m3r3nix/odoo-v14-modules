@@ -92,8 +92,8 @@ class PurchaseOrderLine(models.Model):
     def _prepare_account_move_line(self, move=False):
         res = super()._prepare_account_move_line(move=False)
         res.update({
+            'price_unit': self.price_unit / self.mrx_pricing_unit,
             'discount': self.mrx_discount,
-            'mrx_pricing_unit': self.mrx_pricing_unit,
         })
         return res
 

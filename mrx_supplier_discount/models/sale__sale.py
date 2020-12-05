@@ -71,10 +71,10 @@ class SaleOrderLine(models.Model):
             line.price_reduce = (line.price_unit / line.mrx_pricing_unit) * (1.0 - line.discount / 100.0)
 
     ## Inherited function: ../addons/sale/models/sale.py
-    #  "Only mrx_pricing_unit" has been added to the return array in order to generate proper sales invoice
-    def _prepare_invoice_line(self):
-        res = super()._prepare_invoice_line()
-        res['mrx_pricing_unit'] = self.mrx_pricing_unit,
+    #  "Only "price_unit" has been updated in the returned array in order to generate proper sales invoice with pricing_unit
+    def _prepare_invoice_line(self, **optional_values):
+        res = super()._prepare_invoice_line(**optional_values)
+        res['price_unit'] = self.price_unit / self.mrx_pricing_unit
         return res
 
     ## Inherited function: ../addons/sale/models/sale.py
