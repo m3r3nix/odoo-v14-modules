@@ -1,7 +1,7 @@
 <odoo>
     <data>
 
-        <!-- Inherited from ..addons/product/views/product_views.xml -->
+        <!-- Inherited from ../addons/product/views/product_views.xml -->
         <record id="mrx_product_template_form_view_mods" model="ir.ui.view">
             <field name="inherit_id" ref="product.product_template_form_view" />
             <field name="name">mrx.product.template.common.form.view.mods</field>
@@ -25,7 +25,7 @@
             </field>
         </record>
 
-        <!-- Inherited from ..addons/product/views/product_template_views.xml -->
+        <!-- Inherited from ../addons/product/views/product_template_views.xml -->
         <record id="mrx_product_template_tree_view_mods" model="ir.ui.view">
             <field name="inherit_id" ref="product.product_template_tree_view" />
             <field name="name">mrx.product.template.product.tree.view.mods</field>
@@ -44,7 +44,7 @@
             </field>
         </record>
 
-        <!-- Inherited from ..addons/product/views/product_template_views.xml -->
+        <!-- Inherited from ../addons/product/views/product_template_views.xml -->
         <record id="mrx_product_template_only_form_view" model="ir.ui.view">
             <field name="inherit_id" ref="product.product_template_only_form_view"/>
             <field name="name">mrx.product.template.product.form.view.mods</field>
@@ -63,7 +63,7 @@
             </field>
         </record>
 
-        <!-- Inherited from ..addons/product/views/product_views.xml -->
+        <!-- Inherited from ../addons/product/views/product_views.xml -->
         <record id="mrx_product_normal_form_view" model="ir.ui.view">
             <field name="inherit_id" ref="product.product_normal_form_view"/>
             <field name="name">mrx.product.product.normal.form.view.mods</field>
@@ -80,6 +80,16 @@
                     <field name="barcode" position="move" />
                 </field>
             </field>
+        </record>
+
+        <!-- Override default view type from ../addons/sale/views/sale_views.xml -->
+        <record id="sale.product_template_action" model="ir.actions.act_window">
+            <field name="view_mode">tree,kanban,form,activity</field>
+        </record>
+
+        <!-- Override default view type from ../addons/purchase/views/purchase_views.xml -->
+        <record id="purchase.product_normal_action_puchased" model="ir.actions.act_window">
+            <field name="view_mode">tree,kanban,form,activity</field>
         </record>
 
     </data>

@@ -1,7 +1,7 @@
 <odoo>
     <data>
 
-        <!-- Inherited from ..addons/sale/views/sale_views.xml -->
+        <!-- Inherited from ../addons/sale/views/sale_views.xml -->
         <record id="mrx_sale_view_order_form" model="ir.ui.view">
             <field name="inherit_id" ref="sale.view_order_form" />
             <field name="name">mrx.sale.order.form</field>
@@ -14,7 +14,7 @@
             </field>
         </record>
 
-        <!-- Inherited from ..addons/sale/views/sale_views.xml -->
+        <!-- Inherited from ../addons/sale/views/sale_views.xml -->
         <record id="mrx_sale_view_order_tree" model="ir.ui.view">
             <field name="inherit_id" ref="sale.view_order_tree" />
             <field name="name">mrx.sale.order.tree</field>
