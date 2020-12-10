@@ -3,9 +3,22 @@
 
         <!-- Inherited from ../addons/sale/views/sale_views.xml -->
         <record id="mrx_view_order_form_pos_number" model="ir.ui.view">
-            <field name="inherit_id" ref="sale.view_order_form" />
+            <field name="inherit_id" ref="sale.view_order_form"/>
             <field name="name">mrx.sale.order.form.pos.number</field>
             <field name="model">sale.order</field>
+            <field name="priority" eval="516"/>
+            <field name="arch" type="xml">
+                <xpath expr="//notebook/page/field[@name='order_line']/tree/field[@name='sequence']" position="after">
+                    <field name="mrx_pos_number" optional="show"/>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- Inherited from ../addons/purchase/views/purchase_views.xml -->
+        <record id="mrx_purchase_order_form_pos_number" model="ir.ui.view">
+            <field name="inherit_id" ref="purchase.purchase_order_form"/>
+            <field name="name">mrx.purchase.order.form.pos.number</field>
+            <field name="model">purchase.order</field>
             <field name="priority" eval="516"/>
             <field name="arch" type="xml">
                 <xpath expr="//notebook/page/field[@name='order_line']/tree/field[@name='sequence']" position="after">
