@@ -35,7 +35,8 @@
             <field name="priority" eval="516"/>
             <field name="arch" type="xml">
                 <xpath expr="//field[@name='move_ids_without_package']/tree/field[@name='product_id']" position="before">
-                    <field name="mrx_pos_number_receipt" optional="show"/>
+                    <field name="mrx_pos_number_delivery" attrs="{'column_invisible': [('parent.picking_type_code', '!=', 'outgoing')]}" optional="show"/>
+                    <field name="mrx_pos_number_receipt" attrs="{'column_invisible': [('parent.picking_type_code', '!=', 'incoming')]}" optional="show"/>
                 </xpath>
             </field>
         </record>
