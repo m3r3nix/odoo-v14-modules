@@ -85,6 +85,7 @@
         <!-- Override default view type from ../addons/sale/views/sale_views.xml -->
         <record id="sale.product_template_action" model="ir.actions.act_window">
             <field name="view_mode">tree,kanban,form,activity</field>
+            <field name="view_id" ref="product.product_template_tree_view"/>
         </record>
 
         <!-- Override default view type from ../addons/purchase/views/purchase_views.xml -->
