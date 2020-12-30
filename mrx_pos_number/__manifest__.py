@@ -26,6 +26,7 @@
     # always loaded
     'data': [
         'views/views.xml',
+        'report/deliverynote_document.xml',
         'report/saleorder_document.xml',
         'report/purchaseorder_document.xml',
     ],
