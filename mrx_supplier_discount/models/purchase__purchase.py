@@ -39,6 +39,8 @@ class PurchaseOrderLine(models.Model):
     @api.onchange('product_id')
     def onchange_product_id(self):
         super().onchange_product_id()
+        if not self.product_id:
+            return
         self._compute_discount_by_seller()
 
     # Override function from: ../addons/purchase/models/purchase.py
