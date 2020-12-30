@@ -21,6 +21,7 @@
         'product',
         'purchase',
         'sale_management',
+        'stock',
     ],
 
     # always loaded
