@@ -17,6 +17,7 @@
 
     # any module necessary for this one to work correctly
     'depends': [
+        'account',
         'base',
         'product',
         'purchase',
@@ -28,6 +29,7 @@
     'data': [
         'views/views.xml',
         'report/deliverynote_document.xml',
+        'report/invoice_document.xml',
         'report/saleorder_document.xml',
         'report/purchaseorder_document.xml',
     ],
