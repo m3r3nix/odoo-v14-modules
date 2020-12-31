@@ -9,7 +9,9 @@
 
         <xpath expr="//td[@name='account_invoice_line_name']" position="before">
             <td>
-                <span t-field="line.mrx_pos_number"/><span>.</span>
+                <t t-if="line.mrx_pos_number != 0">
+                    <span t-field="line.mrx_pos_number"/><span>.</span>
+                </t>
             </td>
         </xpath>
 

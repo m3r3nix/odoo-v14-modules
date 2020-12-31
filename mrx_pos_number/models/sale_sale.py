@@ -15,4 +15,6 @@ class SaleOrderLine(models.Model):
             counter += 1
 
     def _prepare_invoice_line(self, **optional_values):
-        super()._prepare_invoice_line(mrx_pos_number=self.mrx_pos_number)
+        res = super()._prepare_invoice_line(**optional_values)
+        res['mrx_pos_number'] = self.mrx_pos_number
+        return res
