@@ -9,7 +9,7 @@
                         </div>
                         <div class="col-6 text-right mb4">
                             <h4 class="mt0" t-field="company.report_header"/> <!-- Settings -> Configure Document Layout -> Company Tagline -->
-                            <div name="company_address" class="float-right mb4">
+                            <div name="company_address" class="float-right mb4" style="font-size: 10pt">
                                 <strong t-field="company.partner_id.name"/>
                                 <span class="company_address" t-field="company.partner_id" t-options='{"widget": "contact", "fields": ["address"], "no_marker": true}'/>
                                 <ul class="list-inline" style="padding-bottom: 0px; margin-bottom: 0px">
@@ -29,7 +29,7 @@
             </div>
 
             <div t-attf-class="o_company_#{company.id}_layout footer o_background_footer">
-                <div class="text-center">
+                <div class="text-center" style="font-size: 10pt">
                     <ul class="list-inline" style="border-bottom: none; padding-bottom: 0px">
                         <li t-if="company.bank_journal_ids.bank_id.name" class="list-inline-item"><i class="fa fa-university" role="img" aria-label="Bank" title="Bank"/> <span t-field="company.bank_journal_ids.bank_id.name"/></li>
                         <li t-if="company.bank_journal_ids.bank_account_id.acc_number" class="list-inline-item"><t t-esc="'IBAN'"/>: <span t-field="company.bank_journal_ids.bank_account_id.acc_number"/></li>
