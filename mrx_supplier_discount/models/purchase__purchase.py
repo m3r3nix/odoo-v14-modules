@@ -31,7 +31,7 @@ class PurchaseOrderLine(models.Model):
     # Update "price_unit" value in the returned dictionary
     def _prepare_compute_all_values(self):
         res = super()._prepare_compute_all_values()
-        res['price_unit'] = (self.price_unit / self.mrx_pricing_unit) * (1 - (self.mrx_discount or 0.0) / 100.0)
+        res['price_unit'] = (self.price_unit / (self.mrx_pricing_unit or 1)) * (1 - (self.mrx_discount or 0.0) / 100.0)
         return res
 
     # Override function from: ../addons/purchase/models/purchase.py
