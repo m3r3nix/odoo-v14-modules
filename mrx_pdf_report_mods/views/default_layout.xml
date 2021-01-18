@@ -1,47 +1,6 @@
 <odoo>
     <data>
         <template id="mrx_external_layout_mixed">
-            <!-- <div class="header">
-                <div class="o_boxed_header" style="border-bottom: none">
-                <div class="row mb8">
-                    <div class="col-6">
-                        <img t-if="company.logo" t-att-src="image_data_uri(company.logo)" alt="Logo"/>
-                    </div>
-                    <div class="col-6 text-right mb4">
-                        <div name="company_address" class="mb4" style="font-size: 15px">
-                            <div>
-                            <strong t-field="company.partner_id.name"/>
-                            </div>
-                            <span class="company_address" t-field="company.partner_id" t-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;address&quot;], &quot;no_marker&quot;: false}"/>
-                            <ul class="list-inline">
-                                <li t-if="company.company_registry" class="company_address"><span t-field="company.company_registry"/></li>
-                                <li t-if="company.mrx_local_tax_id" class="company_address">Tax ID.: <span t-field="company.mrx_local_tax_id"/></li>
-                                <li t-if="company.vat" class="company_address">VAT ID.: <span t-field="company.vat"/></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                </div>
-            </div>
-
-            # Backgound
-            <div t-attf-class="o_company_#{company.id}_layout header" t-att-style="report_header_style">
-                <div class="o_background_header">
-                    <div class="float-right">
-                        <h3 class="mt0 text-right" t-field="company.report_header"/>
-                    </div>
-                    <img t-if="company.logo" t-att-src="image_data_uri(company.logo)" class="float-left" alt="Logo"/>
-                    <div class="float-left company_address">
-                        <div>
-                            <strong t-field="company.partner_id.name"/>
-                        </div>
-                        <span t-field="company.partner_id" t-options='{"widget": "contact", "fields": ["address"], "no_marker": true}'/>
-                    </div>
-                    <div class="clearfix mb8"/>
-                </div>
-            </div>
-
-            # Boxed -->
             <div t-attf-class="header o_company_#{company.id}_layout" t-att-style="report_header_style">
                 <div class="o_boxed_header">
                     <div class="row mb8">
@@ -49,13 +8,13 @@
                             <img t-if="company.logo" t-att-src="image_data_uri(company.logo)" alt="Logo"/>
                         </div>
                         <div class="col-6 text-right mb4">
-                            <h4 class="mt0" t-field="company.report_header"/> # Settings -> Configure Document Layout -> Company Tagline
+                            <h4 class="mt0" t-field="company.report_header"/> <!-- Settings -> Configure Document Layout -> Company Tagline -->
                             <div name="company_address" class="float-right mb4">
                                 <strong t-field="company.partner_id.name"/>
                                 <span class="company_address" t-field="company.partner_id" t-options='{"widget": "contact", "fields": ["address"], "no_marker": true}'/>
                                 <ul class="list-inline" style="padding-bottom: 0px; margin-bottom: 0px">
                                     <li t-if="company.company_registry" class="company_address"><span t-field="company.company_registry"/></li>
-                                    <li t-if="company.mrx_local_tax_id" class="company_address">Tax ID.: <span t-field="company.mrx_local_tax_id"/></li>
+                                    <li t-if="company.mrx_local_tax_id" class="company_address">Tax ID: <span t-field="company.mrx_local_tax_id"/></li>
                                     <li t-if="company.vat" class="company_address"><t t-esc="company.country_id.vat_label or 'VAT ID'"/>: <span t-field="company.vat"/></li>
                                 </ul>
                             </div>
