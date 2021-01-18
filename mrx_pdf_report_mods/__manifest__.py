@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 {
-    'name': "PDF report custom mods",
+    'name': "PDF Report custom mods",
 
     'summary': """
         This module contains my custom modifications for PDF reports""",
@@ -27,7 +27,7 @@
 
     # always loaded
     'data': [
-        # 'views/views.xml',
-        'views/templates.xml',
+        'views/res_company_views.xml',
+        'views/default_layout.xml',
     ],
 }
