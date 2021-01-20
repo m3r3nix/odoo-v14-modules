@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <odoo>
-    <template id="mrx_report_saleorder_document" inherit_id="sale.report_saleorder_document">
+    <template id="mrx_report_saleorder_document_pos_number" inherit_id="sale.report_saleorder_document">
         <xpath expr="//th[@name='th_description']" position="before">
             <th name="th_pos"><strong>Pos.</strong></th>
         </xpath>
