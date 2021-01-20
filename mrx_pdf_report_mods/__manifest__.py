@@ -28,6 +28,6 @@
     # always loaded
     'data': [
         'views/res_company_views.xml',
-        'views/default_layout.xml',
+        'report/default_layout.xml',
     ],
 }
