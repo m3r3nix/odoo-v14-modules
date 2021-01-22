@@ -29,5 +29,6 @@
     'data': [
         'views/res_company_views.xml',
         'report/default_layout.xml',
+        'report/invoice_mods.xml',
     ],
 }

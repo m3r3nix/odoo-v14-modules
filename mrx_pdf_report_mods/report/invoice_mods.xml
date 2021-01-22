@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+    <data>
+        <template id="mrx_report_invoice_document_pdf_mods" inherit_id="account.report_invoice_document">
+
+            <!-- Remove t-set 'address' attribute in order to move invoice address to the left side -->
+            <xpath expr="/t/t/t[2]" position="attributes">
+                <attribute name="t-set"/>
+            </xpath>
+
+            <!-- Move address and VAT number by 35px right -->
+            <xpath expr="//address" position="attributes">
+                <attribute name="style" separator=";" add="margin-left: 36px"/>
+            </xpath>
+            <!-- <xpath expr="//t[@id='inv_tax_id_label']" position="attributes">
+                <attribute name="style" separator=";" add="margin-left: 100px"/>
+            </xpath> -->
+
+            <!-- Move document name to the right side -->
+            <xpath expr="/t/t/div/h2" position="attributes">
+                <attribute name="class">text-right</attribute>
+                <attribute name="style" separator=";" add="margin-top: -40px"/>
+            </xpath>
+
+            <!-- Add delivery address line if differs from invoicing address -->
+            <xpath expr="/t/t/div/h2" position="after">
+                <div t-if="o.partner_shipping_id and (o.partner_shipping_id != o.partner_id)" class="text-left">
+                    <ul class="list-inline">
+                        <li class="list-inline-item">
+                            <strong>Delivery address:</strong>
+                        </li>
+                        <li class="list-inline-item">
+                            <span t-field="o.partner_shipping_id.contact_address"/>
+                        </li>
+                    </ul>
+                </div>
+            </xpath>
+
+            <!-- Change 'page' section's content font size globaly to 10pt -->
+            <xpath expr="/t/t/div" position="attributes">
+                <attribute name="style" separator=";" add="font-size: 10pt"/>
+            </xpath>
+
+            <!-- Reformat document information row -->
+            <xpath expr="//div[@id='informations']" position="attributes">
+                <attribute name="class">row mt32 mb16</attribute>
+            </xpath>
+
+            <!-- Remove Tax column -->
+            <xpath expr="//th[6]" position="replace"/>
+            <xpath expr="//td[6]" position="replace"/>
+
+            <!-- <xpath expr="//th[@name='th_description']" position="before">
+                <th name="th_sml_pos">Pos.</th>
+            </xpath>
+
+            <xpath expr="//td[@name='account_invoice_line_name']" position="before">
+                <td>
+                    <t t-if="line.mrx_pos_number != 0">
+                        <span t-field="line.mrx_pos_number"/><span>.</span>
+                    </t>
+                </td>
+            </xpath> -->
+
+        </template>
+
+        <record id="account_intrastat.report_invoice_document_intrastat_2019" model="ir.ui.view">
+            <field name="active" eval="False"/>
+        </record>
+
+    </data>
+</odoo>
