@@ -22,6 +22,7 @@
     'depends': [
         'base',
         'account',
+        'account_intrastat',
         'stock',
     ],
 
