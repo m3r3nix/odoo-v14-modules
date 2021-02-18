@@ -4,27 +4,40 @@
     <data>
         <template id="mrx_report_invoice_document_pdf_mods" inherit_id="account.report_invoice_document">
 
-            <!-- Remove t-set 'address' attribute in order to move invoice address to the left side -->
-            <xpath expr="/t/t/t[2]" position="attributes">
-                <attribute name="t-set"/>
-            </xpath>
-
             <!-- Move address and VAT number by 35px right -->
-            <xpath expr="//address" position="attributes">
-                <attribute name="style" separator=";" add="margin-left: 36px"/>
+             <xpath expr="/t/t/t[2]" position="replace">
+                <div id="addresses" class="row justify-content-start" style="font-size: 10pt">
+                    <div id="partner_address" class="col-4">
+                        <strong>Invoice To:</strong>
+                        <div style="margin-left: 36px">
+                            <!-- Remove t-set 'address' attribute in order to move invoice address to the left side -->
+                            <t>
+                                <address t-field="o.partner_id" t-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;address&quot;, &quot;name&quot;], &quot;no_marker&quot;: False}"/>
+                                <div t-if="o.partner_id.vat" class="mt16">
+                                    <t t-if="o.company_id.country_id.vat_label" t-esc="o.company_id.country_id.vat_label" id="inv_tax_id_label"/>
+                                    <t t-else="">Tax ID</t>: <span t-field="o.partner_id.vat"/></div>
+                            </t>
+                        </div>
+                    </div>
+                    <t t-if="o.partner_shipping_id and (o.partner_shipping_id != o.partner_id)">
+                        <div id="delivery_address" class="col-4 border-left">
+                            <strong>Delivery Address:</strong>
+                            <div style="margin-left: 36px">
+                                <address t-field="o.partner_shipping_id" t-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;address&quot;, &quot;name&quot;], &quot;no_marker&quot;: False}"/>
+                            </div>
+                        </div>
+                    </t>
+                </div>
             </xpath>
-            <!-- <xpath expr="//t[@id='inv_tax_id_label']" position="attributes">
-                <attribute name="style" separator=";" add="margin-left: 100px"/>
-            </xpath> -->
 
-            <!-- Move document name to the right side -->
-            <xpath expr="/t/t/div/h2" position="attributes">
+            <!-- Move document name to the right -->
+            <xpath expr="//h2" position="attributes">
                 <attribute name="class">text-right</attribute>
-                <attribute name="style" separator=";" add="margin-top: -40px"/>
+                <attribute name="style" separator=";" add="margin-top: -30px"/>
             </xpath>
 
             <!-- Add delivery address line if differs from invoicing address -->
-            <xpath expr="/t/t/div/h2" position="after">
+            <!-- <xpath expr="/t/t/div/h2" position="after">
                 <div t-if="o.partner_shipping_id and (o.partner_shipping_id != o.partner_id)" class="text-left">
                     <ul class="list-inline">
                         <li class="list-inline-item">
@@ -35,10 +48,10 @@
                         </li>
                     </ul>
                 </div>
-            </xpath>
+            </xpath> -->
 
             <!-- Change 'page' section's content font size globaly to 10pt -->
-            <xpath expr="/t/t/div" position="attributes">
+            <xpath expr="/t/t/div[2]" position="attributes">
                 <attribute name="style" separator=";" add="font-size: 10pt"/>
             </xpath>
 
@@ -47,9 +60,23 @@
                 <attribute name="class">row mt32 mb16</attribute>
             </xpath>
 
+            <!-- Remove ugly spacing before total/tax section -->
+            <xpath expr="//table[@name='invoice_line_table']" position="attributes">
+                <attribute name="style" separator=";" add="margin-bottom: 0px"/>
+            </xpath>
+
+            <!-- Lower table body font size -->
+            <xpath expr="//tbody" position="attributes">
+                <attribute name="style" separator=";" add="font-size: 8pt"/>
+            </xpath>
+
             <!-- Remove Tax column -->
             <xpath expr="//th[6]" position="replace"/>
             <xpath expr="//td[6]" position="replace"/>
+
+            <!-- <xpath expr="/t/t/div[2]/div[2]" position="attributes">
+                <attribute name="style" separator=";" add="margin-top: 0px"/>
+            </xpath> -->
 
             <!-- <xpath expr="//th[@name='th_description']" position="before">
                 <th name="th_sml_pos">Pos.</th>
@@ -66,6 +93,10 @@
         </template>
 
         <record id="account_intrastat.report_invoice_document_intrastat_2019" model="ir.ui.view">
+            <field name="active" eval="False"/>
+        </record>
+
+        <record id="sale.report_invoice_document_inherit_sale" model="ir.ui.view">
             <field name="active" eval="False"/>
         </record>
 

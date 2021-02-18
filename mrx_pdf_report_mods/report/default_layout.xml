@@ -11,7 +11,7 @@
                             <h4 class="mt0" t-field="company.report_header"/> <!-- Settings -> Configure Document Layout -> Company Tagline -->
                             <div name="company_address" class="float-right mb4" style="font-size: 10pt">
                                 <strong t-field="company.partner_id.name"/>
-                                <span class="company_address" t-field="company.partner_id" t-options='{"widget": "contact", "fields": ["address"], "no_marker": true}'/>
+                                <span class="company_address" t-field="company.partner_id" t-options='{"widget": "contact", "fields": ["address"], "no_marker": True}'/>
                                 <ul class="list-inline" style="padding-bottom: 0px; margin-bottom: 0px">
                                     <li t-if="company.company_registry" class="company_address"><span t-field="company.company_registry"/></li>
                                     <li t-if="company.mrx_local_tax_id" class="company_address">Tax ID: <span t-field="company.mrx_local_tax_id"/></li>
