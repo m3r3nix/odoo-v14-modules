@@ -8,7 +8,7 @@
              <xpath expr="/t/t/t[2]" position="replace">
                 <div id="addresses" class="row justify-content-start" style="font-size: 10pt">
                     <div id="partner_address" class="col-4">
-                        <strong>Invoice To:</strong>
+                        <i class="fa fa-address-card" role="img" aria-label="Address Card" title="Address Card"/><strong class="pl-1">Invoice To:</strong>
                         <div style="margin-left: 36px">
                             <!-- Remove t-set 'address' attribute in order to move invoice address to the left side -->
                             <t>
@@ -21,7 +21,7 @@
                     </div>
                     <t t-if="o.partner_shipping_id and (o.partner_shipping_id != o.partner_id)">
                         <div id="delivery_address" class="col-4 border-left">
-                            <strong>Delivery Address:</strong>
+                            <i class="fa fa-address-card " role="img" aria-label="Address Card" title="Address Card"/><strong class="pl-1">Delivery To:</strong>
                             <div style="margin-left: 36px">
                                 <address t-field="o.partner_shipping_id" t-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;address&quot;, &quot;name&quot;], &quot;no_marker&quot;: False}"/>
                             </div>
@@ -35,20 +35,6 @@
                 <attribute name="class">text-right</attribute>
                 <attribute name="style" separator=";" add="margin-top: -30px"/>
             </xpath>
-
-            <!-- Add delivery address line if differs from invoicing address -->
-            <!-- <xpath expr="/t/t/div/h2" position="after">
-                <div t-if="o.partner_shipping_id and (o.partner_shipping_id != o.partner_id)" class="text-left">
-                    <ul class="list-inline">
-                        <li class="list-inline-item">
-                            <strong>Delivery address:</strong>
-                        </li>
-                        <li class="list-inline-item">
-                            <span t-field="o.partner_shipping_id.contact_address"/>
-                        </li>
-                    </ul>
-                </div>
-            </xpath> -->
 
             <!-- Change 'page' section's content font size globaly to 10pt -->
             <xpath expr="/t/t/div[2]" position="attributes">
@@ -73,22 +59,6 @@
             <!-- Remove Tax column -->
             <xpath expr="//th[6]" position="replace"/>
             <xpath expr="//td[6]" position="replace"/>
-
-            <!-- <xpath expr="/t/t/div[2]/div[2]" position="attributes">
-                <attribute name="style" separator=";" add="margin-top: 0px"/>
-            </xpath> -->
-
-            <!-- <xpath expr="//th[@name='th_description']" position="before">
-                <th name="th_sml_pos">Pos.</th>
-            </xpath>
-
-            <xpath expr="//td[@name='account_invoice_line_name']" position="before">
-                <td>
-                    <t t-if="line.mrx_pos_number != 0">
-                        <span t-field="line.mrx_pos_number"/><span>.</span>
-                    </t>
-                </td>
-            </xpath> -->
 
         </template>
 

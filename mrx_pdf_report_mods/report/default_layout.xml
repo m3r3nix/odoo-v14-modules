@@ -10,12 +10,15 @@
                         <div class="col-6 text-right mb4">
                             <h4 class="mt0" t-field="company.report_header"/> <!-- Settings -> Configure Document Layout -> Company Tagline -->
                             <div name="company_address" class="float-right mb4" style="font-size: 10pt">
-                                <strong t-field="company.partner_id.name"/>
-                                <span class="company_address" t-field="company.partner_id" t-options='{"widget": "contact", "fields": ["address"], "no_marker": True}'/>
-                                <ul class="list-inline" style="padding-bottom: 0px; margin-bottom: 0px">
-                                    <li t-if="company.company_registry" class="company_address"><span t-field="company.company_registry"/></li>
-                                    <li t-if="company.mrx_local_tax_id" class="company_address">Tax ID: <span t-field="company.mrx_local_tax_id"/></li>
-                                    <li t-if="company.vat" class="company_address"><t t-esc="company.country_id.vat_label or 'VAT ID'"/>: <span t-field="company.vat"/></li>
+                                <ul class="list-unstyled" style="padding-bottom: 0px; margin-bottom: 0px">
+                                    <li t-if="company.partner_id.name"><strong t-field="company.partner_id.name"/></li>
+                                    <li t-if="company.partner_id.street"><i class="fa fa-map-marker" role="img" aria-label="Location Pin" title="Location Pin"/><span class="pl-1" t-field="company.partner_id.street"/></li>
+                                    <li t-if="company.partner_id.street2"><span t-field="company.partner_id.street2"/></li>
+                                    <li t-if="company.partner_id.zip and company.partner_id.city"><span t-field="company.partner_id.zip"/><span class="pl-1" t-field="company.partner_id.city"/></li>
+                                    <li t-if="company.partner_id.country_id"><span t-field="company.partner_id.country_id.name"/></li>
+                                    <li t-if="company.company_registry"><span t-field="company.company_registry"/></li>
+                                    <li t-if="company.mrx_local_tax_id">Tax ID: <span t-field="company.mrx_local_tax_id"/></li>
+                                    <li t-if="company.vat"><t t-esc="company.country_id.vat_label or 'VAT ID'"/>: <span t-field="company.vat"/></li>
                                 </ul>
                             </div>
                         </div>
@@ -37,9 +40,9 @@
                     </ul>
                     <ul class="list-inline" style="border-top: none; padding-top: 0px">
                         <li t-if="company.phone" class="list-inline-item"><i class="fa fa-phone" role="img" aria-label="Phone" title="Phone"/> <span class="o_force_ltr" t-field="company.phone"/></li>
-                        <li t-if="company.email" class="list-inline-item"><i class="fa fa-at" role="img" aria-label="Email" title="Email"/> <span t-field="company.email"/></li>
+                        <li t-if="company.email" class="list-inline-item"><i class="fa fa-envelope" role="img" aria-label="Email" title="Email"/> <span t-field="company.email"/></li>
                         <li t-if="company.website" class="list-inline-item"><i class="fa fa-globe" role="img" aria-label="Website" title="Website"/> <span t-field="company.website"/></li>
-                        <li t-if="company.vat" class="list-inline-item"><i class="fa fa-building-o" role="img" aria-label="Fiscal number"/><t t-esc="company.country_id.vat_label or 'VAT ID'"/>: <span t-field="company.vat"/></li>
+                        <li t-if="company.vat" class="list-inline-item"><i class="fa fa-building" role="img" aria-label="Fiscal number"/> <t t-esc="company.country_id.vat_label or 'VAT ID'"/>: <span t-field="company.vat"/></li>
                     </ul>
                     <div t-field="company.report_footer"/>
                     <div t-if="report_type == 'pdf'" class="text-muted">
