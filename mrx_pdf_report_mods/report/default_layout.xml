@@ -12,7 +12,7 @@
                             <div name="company_address" class="float-right mb4" style="font-size: 10pt">
                                 <ul class="list-unstyled" style="padding-bottom: 0px; margin-bottom: 0px">
                                     <li t-if="company.partner_id.name"><strong t-field="company.partner_id.name"/></li>
-                                    <li t-if="company.partner_id.street"><i class="fa fa-map-marker" role="img" aria-label="Location Pin" title="Location Pin"/><span class="pl-1" t-field="company.partner_id.street"/></li>
+                                    <li t-if="company.partner_id.street"><i class="fa fa-map-marker" role="img" aria-label="Location Pin" title="Location Pin"/><span class="pl-2" t-field="company.partner_id.street"/></li>
                                     <li t-if="company.partner_id.street2"><span t-field="company.partner_id.street2"/></li>
                                     <li t-if="company.partner_id.zip and company.partner_id.city"><span t-field="company.partner_id.zip"/><span class="pl-1" t-field="company.partner_id.city"/></li>
                                     <li t-if="company.partner_id.country_id"><span t-field="company.partner_id.country_id.name"/></li>
