@@ -2,7 +2,7 @@
     <data>
         <template id="mrx_external_layout_mixed">
             <div t-attf-class="header o_company_#{company.id}_layout" t-att-style="report_header_style">
-                <div class="o_boxed_header">
+                <div class="o_boxed_header" style="border-bottom: none">
                     <div class="row mb8">
                         <div class="col-6">
                             <img t-if="company.logo" t-att-src="image_data_uri(company.logo)" alt="Logo"/>
@@ -32,7 +32,7 @@
             </div>
 
             <div t-attf-class="o_company_#{company.id}_layout footer o_background_footer">
-                <div class="text-center" style="font-size: 10pt">
+                <div class="text-center" style="font-size: 8pt">
                     <ul class="list-inline" style="border-bottom: none; padding-bottom: 0px">
                         <li t-if="company.bank_journal_ids.bank_id.name" class="list-inline-item"><i class="fa fa-university" role="img" aria-label="Bank" title="Bank"/> <span t-field="company.bank_journal_ids.bank_id.name"/></li>
                         <li t-if="company.bank_journal_ids.bank_account_id.acc_number" class="list-inline-item"><t t-esc="'IBAN'"/>: <span t-field="company.bank_journal_ids.bank_account_id.acc_number"/></li>
