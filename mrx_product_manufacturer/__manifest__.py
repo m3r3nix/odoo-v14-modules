@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 {
-    'name': "Product manufacturer",
+    'name': "Product Manufacturer",
 
     'summary': "Add manufacturer field to product",
 

@@ -67,5 +67,11 @@
         <menuitem id="mrx_product_manufacturer_sale_menuitem" name="Manufacturers"
                   parent="sale.menu_sale_config" action="mrx_product_manufacturer_menu_action" sequence="3"/>
 
+        <template id="mrx_report_invoice_document_manufacturer" inherit_id="account.report_invoice_document">
+            <xpath expr="//td[@name='account_invoice_line_name']/span" position="before">
+                <strong><span t-field="line.product_id.mrx_product_manufacturer" style="margin-right: 5px"/></strong>
+            </xpath>
+        </template>
+
     </data>
 </odoo>
