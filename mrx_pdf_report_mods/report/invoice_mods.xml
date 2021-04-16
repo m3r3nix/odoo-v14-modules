@@ -56,17 +56,17 @@
                             <p class="m-0" t-field="o.partner_id.ref"/>
                         </div>
                         <div class="col-auto mw-100 mb-2" t-if="o.ref" name="reference">
-                            <strong>Reference:</strong>
+                            <strong>Customer Reference:</strong>
                             <p class="m-0" t-field="o.ref"/>
                         </div>
                     </div>
 
                     <t t-set="display_discount" t-value="any(l.discount for l in o.invoice_line_ids)"/>
 
-                    <table class="table table-sm o_main_table mb-0" name="invoice_line_table">
+                    <table class="table table-sm o_main_table border-bottom" name="invoice_line_table" style="margin-bottom: -1px">
                         <thead style="display: table-header-group">
                             <tr>
-                                <th name="th_description" class="text-left"><span>Description</span></th>
+                                <th name="th_description" class="text-left" style="width: 65%"><span>Description</span></th>
                                 <th name="th_quantity" class="text-right"><span>Quantity</span></th>
                                 <th name="th_priceunit" t-attf-class="text-right {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}"><span>Unit Price</span></th>
                                 <th name="th_price_unit" t-if="display_discount" t-attf-class="text-right {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}">
@@ -92,20 +92,20 @@
                                         <td name="account_invoice_line_name">
                                             <span t-field="line.name" t-options="{'widget': 'text'}"/>
                                             <div name="mrx_intrastat_fields" class="container">
-                                                <div class="row bg-dark">
-                                                    <div class="bg-primary w-25 text-nowrap">
+                                                <div class="row">
+                                                    <div class="w-25 text-nowrap">
                                                         <span t-if="line.product_id.intrastat_id.code">Commodity Code: </span>
                                                         <span t-field="line.product_id.intrastat_id.code"/>
                                                     </div>
-                                                    <div class="bg-success w-25 text-center">
+                                                    <div class="w-25 text-right">
                                                         <span t-if="line.product_id.intrastat_origin_country_code">Country of Origin: </span>
                                                         <span t-field="line.product_id.intrastat_origin_country_code"/>
                                                     </div>
-                                                    <div class="bg-danger w-25 text-center">
+                                                    <div class="w-25 text-center">
                                                         <span t-if="line.product_id.weight">Weight: </span>
                                                         <span t-field="line.product_id.weight"/><span t-if="line.product_id.weight">kg</span>
                                                     </div>
-                                                    <div class="bg-warning w-25 text-right text-nowrap">
+                                                    <div class="w-25 text-right text-nowrap">
                                                         <span t-if="line.product_id.weight">Delivery Note: </span>
                                                         <span t-field="line.product_id.weight"/>
                                                     </div>
