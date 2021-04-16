@@ -89,7 +89,29 @@
 
                                 <tr t-att-class="'bg-200 font-weight-bold o_line_section' if line.display_type == 'line_section' else 'font-italic o_line_note' if line.display_type == 'line_note' else ''">
                                     <t t-if="not line.display_type" name="account_invoice_line_accountable">
-                                        <td name="account_invoice_line_name"><span t-field="line.name" t-options="{'widget': 'text'}"/></td>
+                                        <td name="account_invoice_line_name">
+                                            <span t-field="line.name" t-options="{'widget': 'text'}"/>
+                                            <div name="mrx_intrastat_fields" class="container">
+                                                <div class="row bg-dark">
+                                                    <div class="bg-primary w-25 text-nowrap">
+                                                        <span t-if="line.product_id.intrastat_id.code">Commodity Code: </span>
+                                                        <span t-field="line.product_id.intrastat_id.code"/>
+                                                    </div>
+                                                    <div class="bg-success w-25 text-center">
+                                                        <span t-if="line.product_id.intrastat_origin_country_code">Country of Origin: </span>
+                                                        <span t-field="line.product_id.intrastat_origin_country_code"/>
+                                                    </div>
+                                                    <div class="bg-danger w-25 text-center">
+                                                        <span t-if="line.product_id.weight">Weight: </span>
+                                                        <span t-field="line.product_id.weight"/><span t-if="line.product_id.weight">kg</span>
+                                                    </div>
+                                                    <div class="bg-warning w-25 text-right text-nowrap">
+                                                        <span t-if="line.product_id.weight">Delivery Note: </span>
+                                                        <span t-field="line.product_id.weight"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </td>
                                         <td class="text-right">
                                             <span t-field="line.quantity"/>
                                             <span t-field="line.product_uom_id" groups="uom.group_uom"/>
