@@ -73,5 +73,17 @@
             </xpath>
         </template>
 
+        <template id="mrx_report_purchaseorder_document_manufacturer" inherit_id="purchase.report_purchaseorder_document">
+            <xpath expr="//td[@id='product']/span" position="before">
+                <strong><span t-field="line.product_id.mrx_product_manufacturer" style="margin-right: 5px"/></strong>
+            </xpath>
+        </template>
+
+        <template id="mrx_report_saleorder_document_manufacturer" inherit_id="sale.report_saleorder_document">
+            <xpath expr="//td[@name='td_name']/span" position="before">
+                <strong><span t-field="line.product_id.mrx_product_manufacturer" style="margin-right: 5px"/></strong>
+            </xpath>
+        </template>
+
     </data>
 </odoo>
