@@ -27,7 +27,7 @@
                         </div>
                     </t>
                 </div>
-                <div class="page" style="font-size: 10pt">
+                <div class="page" style="font-size: 9pt">
                     <h3 class="text-right" style="margin-top: -10px">
                         <span t-if="o.move_type == 'out_invoice' and o.state == 'posted'">Invoice</span>
                         <span t-if="o.move_type == 'out_invoice' and o.state == 'draft'">Draft Invoice</span>
@@ -79,7 +79,7 @@
                                 </th>
                             </tr>
                         </thead>
-                        <tbody class="invoice_tbody" style="font-size: 9pt">
+                        <tbody class="invoice_tbody">
                             <t t-set="current_subtotal" t-value="0"/>
                             <t t-set="lines" t-value="o.invoice_line_ids.sorted(key=lambda l: (-l.sequence, l.date, l.move_name, -l.id), reverse=True)"/>
 
@@ -93,19 +93,21 @@
                                             <span t-field="line.name" t-options="{'widget': 'text'}"/>
                                             <div name="mrx_intrastat_fields" class="container">
                                                 <div class="row">
-                                                    <div class="w-25 text-nowrap">
+                                                    <div class="text-nowrap" style="width: 28%">
                                                         <span t-if="line.product_id.intrastat_id.code">Commodity Code: </span>
                                                         <span t-field="line.product_id.intrastat_id.code"/>
                                                     </div>
-                                                    <div class="w-25 text-right">
+                                                    <div class="text-center" style="width: 28%">
                                                         <span t-if="line.product_id.intrastat_origin_country_code">Country of Origin: </span>
                                                         <span t-field="line.product_id.intrastat_origin_country_code"/>
                                                     </div>
-                                                    <div class="w-25 text-center">
-                                                        <span t-if="line.product_id.weight">Weight: </span>
-                                                        <span t-field="line.product_id.weight"/><span t-if="line.product_id.weight">kg</span>
+                                                    <div class="text-center" style="width: 16%">
+                                                        <div t-if="line.product_id.weight">
+                                                            <span>Weight: </span>
+                                                            <span t-field="line.product_id.weight"/><span>kg</span>
+                                                        </div>
                                                     </div>
-                                                    <div class="w-25 text-right text-nowrap">
+                                                    <div class="text-right text-nowrap" style="width: 28%">
                                                         <span t-if="line.product_id.weight">Delivery Note: </span>
                                                         <span t-field="line.product_id.weight"/>
                                                     </div>
