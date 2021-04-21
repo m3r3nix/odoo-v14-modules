@@ -32,17 +32,17 @@
             </div>
 
             <div t-attf-class="o_company_#{company.id}_layout footer o_background_footer">
-                <div class="text-center" style="font-size: 8pt">
-                    <ul class="list-inline" style="border-bottom: none; padding-bottom: 0px">
-                        <li t-if="company.bank_journal_ids.bank_id.name" class="list-inline-item"><i class="fa fa-university" role="img" aria-label="Bank" title="Bank"/> <span t-field="company.bank_journal_ids.bank_id.name"/></li>
-                        <li t-if="company.bank_journal_ids.bank_account_id.acc_number" class="list-inline-item"><t t-esc="'IBAN'"/>: <span t-field="company.bank_journal_ids.bank_account_id.acc_number"/></li>
-                        <li t-if="company.bank_journal_ids.bank_id.bic" class="list-inline-item"><t t-esc="'BIC/SWIFT'"/>: <span t-field="company.bank_journal_ids.bank_id.bic"/></li>
+                <div class="text-center" style="font-size: 9pt">
+                    <ul class="list-inline" style="border-top: 1px solid gray; border-bottom: none; padding-bottom: 0px">
+                        <li t-if="company.bank_journal_ids.bank_id.name" class="list-inline-item" style="color: #555555"><i class="fa fa-university" role="img" aria-label="Bank" title="Bank"/> <span t-field="company.bank_journal_ids.bank_id.name"/></li>
+                        <li t-if="company.bank_journal_ids.bank_account_id.acc_number" class="list-inline-item" style="color: #555555"><t t-esc="'IBAN'"/>: <span t-field="company.bank_journal_ids.bank_account_id.acc_number"/></li>
+                        <li t-if="company.bank_journal_ids.bank_id.bic" class="list-inline-item" style="color: #555555"><t t-esc="'BIC/SWIFT'"/>: <span t-field="company.bank_journal_ids.bank_id.bic"/></li>
                     </ul>
-                    <ul class="list-inline" style="border-top: none; padding-top: 0px">
-                        <li t-if="company.phone" class="list-inline-item"><i class="fa fa-phone" role="img" aria-label="Phone" title="Phone"/> <span class="o_force_ltr" t-field="company.phone"/></li>
-                        <li t-if="company.email" class="list-inline-item"><i class="fa fa-envelope" role="img" aria-label="Email" title="Email"/> <span t-field="company.email"/></li>
-                        <li t-if="company.website" class="list-inline-item"><i class="fa fa-globe" role="img" aria-label="Website" title="Website"/> <span t-field="company.website"/></li>
-                        <li t-if="company.vat" class="list-inline-item"><i class="fa fa-building" role="img" aria-label="Fiscal number"/> <t t-esc="company.country_id.vat_label or 'VAT ID'"/>: <span t-field="company.vat"/></li>
+                    <ul class="list-inline" style="border-bottom: 1px solid gray; border-top: none; padding-top: 0px">
+                        <li t-if="company.phone" class="list-inline-item" style="color: #555555"><i class="fa fa-phone" role="img" aria-label="Phone" title="Phone"/> <span class="o_force_ltr" t-field="company.phone"/></li>
+                        <li t-if="company.email" class="list-inline-item" style="color: #555555"><i class="fa fa-envelope" role="img" aria-label="Email" title="Email"/> <span t-field="company.email"/></li>
+                        <li t-if="company.website" class="list-inline-item" style="color: #555555"><i class="fa fa-globe" role="img" aria-label="Website" title="Website"/> <span t-field="company.website"/></li>
+                        <li t-if="company.vat" class="list-inline-item" style="color: #555555"><i class="fa fa-building" role="img" aria-label="Fiscal number"/> <t t-esc="company.country_id.vat_label or 'VAT ID'"/>: <span t-field="company.vat"/></li>
                     </ul>
                     <div t-field="company.report_footer"/>
                     <div t-if="report_type == 'pdf'" class="text-muted">
