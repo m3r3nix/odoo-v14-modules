@@ -28,7 +28,7 @@
                     </t>
                 </div>
                 <div class="page" style="font-size: 9pt">
-                    <h3 class="text-right" style="margin-top: -10px">
+                    <h3 class="text-right mb-4" style="margin-top: -20px">
                         <span t-if="o.move_type == 'out_invoice' and o.state == 'posted'">Invoice</span>
                         <span t-if="o.move_type == 'out_invoice' and o.state == 'draft'">Draft Invoice</span>
                         <span t-if="o.move_type == 'out_invoice' and o.state == 'cancel'">Cancelled Invoice</span>

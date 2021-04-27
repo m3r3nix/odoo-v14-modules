@@ -25,7 +25,7 @@
                     </t>
 
                     <div class="page" style="font-size: 9pt">
-                        <h3 class="text-right" style="margin-top: -10px">
+                        <h3 class="text-right mb-4" style="margin-top: -10px">
                             <span t-if="o.picking_type_code == 'incoming'">Receipt </span>
                             <span t-if="o.picking_type_code == 'outgoing'">Delivery Note </span>
                             <span t-field="o.name"/>
