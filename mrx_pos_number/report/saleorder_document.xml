@@ -3,11 +3,11 @@
 <odoo>
     <template id="mrx_report_saleorder_document_pos_number" inherit_id="sale.report_saleorder_document">
         <xpath expr="//th[@name='th_description']" position="before">
-            <th name="th_pos"><strong>Pos.</strong></th>
+            <th name="th_pos" style="width: 20px">Pos.</th>
         </xpath>
         <xpath expr="//td[@name='td_name']" position="before">
             <td name="td_pos">
-                <span t-field="line.mrx_pos_number"/>
+                <span t-field="line.mrx_pos_number"/><span>.</span>
             </td>
         </xpath>
     </template>
