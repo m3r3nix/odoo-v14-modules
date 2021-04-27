@@ -31,15 +31,15 @@
                             <span t-field="o.name"/>
                         </h3>
                         <div class="row mt32 mb32">
-                            <div t-if="o.sudo().sale_id.client_order_ref" class="col-auto" name="div_customer_reference">
+                            <div t-if="o.sudo().sale_id.client_order_ref" class="col-auto mb-2" name="div_customer_reference">
                                 <strong>Customer Reference:</strong>
                                 <p t-field="o.sudo().sale_id.client_order_ref"/>
                             </div>
-                            <div t-if="o.origin" class="col-auto" name="div_origin">
+                            <div t-if="o.origin" class="col-auto mb-2" name="div_origin">
                                 <strong>Order:</strong>
                                 <p t-field="o.origin"/>
                             </div>
-                            <div t-if="o.state" class="col-auto" name="div_sched_date">
+                            <div t-if="o.state" class="col-auto mb-2" name="div_sched_date">
                                 <strong>Shipping Date:</strong>
                                 <t t-if="o.state == 'done'">
                                     <p t-field="o.date_done" t-options="{'widget': 'date'}"/>
@@ -49,7 +49,7 @@
                             </t>
                             </div>
                         </div>
-                        <table class="table table-sm" t-if="o.state!='done'" name="stock_move_table">
+                        <table class="table table-sm o_main_table border-bottom" t-if="o.state!='done'" name="stock_move_table">
                             <thead>
                                 <tr>
                                     <th name="th_sm_product">Product</th>
@@ -72,7 +72,7 @@
                                 </tr>
                             </tbody>
                         </table>
-                        <table class="table table-sm mt48" t-if="o.move_line_ids and o.state=='done'" name="stock_move_line_table">
+                        <table class="table table-sm mt48 o_main_table border-bottom" t-if="o.move_line_ids and o.state=='done'" name="stock_move_line_table">
                             <t t-set="has_serial_number" t-value="False"/>
                             <t t-set="has_serial_number" t-value="o.move_line_ids.mapped('lot_id')" groups="stock.group_lot_on_delivery_slip"/>
                             <thead>
