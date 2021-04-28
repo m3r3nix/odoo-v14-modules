@@ -19,7 +19,7 @@
 			</field>
 		</record>
 
-        <template id="mrx_report_purchaseorder_document_discont" inherit_id="purchase.report_purchaseorder_document">
+        <template id="mrx_report_purchaseorder_document_discount" inherit_id="purchase.report_purchaseorder_document">
             <xpath expr="//th[@name='th_price_unit']" position="after">
                 <th name="th_discount" class="text-right">Disc.%</th>
             </xpath>

@@ -10,10 +10,11 @@
         # "mrx_pricing_unit" does not implemented into accounting app yet, instead it gets already calculated value of "price_unit"
         # 'views/account_invoice.xml',
         'views/base__res_partner.xml',
+        'views/portal_view.xml',
         'views/product__product_views.xml',
-        'views/vendordiscount.xml',
         'views/purchase__purchase_views.xml',
         'views/sale__sale_views.xml',
+        'views/vendordiscount.xml',
     ],
     'depends': [
         'base',
