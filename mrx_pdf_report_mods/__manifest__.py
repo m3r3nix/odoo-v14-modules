@@ -33,6 +33,7 @@
         'report/default_layout.xml',
         'report/delivery_note_mods.xml',
         'report/invoice_mods.xml',
+        'report/purchaseorder_mods.xml',
         'report/so_proforma_mods.xml',
     ],
 }
