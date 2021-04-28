@@ -19,5 +19,17 @@
 			</field>
 		</record>
 
+        <template id="mrx_report_purchaseorder_document_discont" inherit_id="purchase.report_purchaseorder_document">
+            <xpath expr="//th[@name='th_price_unit']" position="after">
+                <th name="th_discount" class="text-right">Disc.%</th>
+            </xpath>
+
+            <xpath expr="//table[1]/tbody[1]/t[2]/tr[1]/t[1]/td[4]" position="after">
+                <td name="td_discount" class="text-right">
+                    <span t-field="line.mrx_discount" t-options="{'widget': 'integer'}"/>%
+                </td>
+            </xpath>
+        </template>
+
 	</data>
 </odoo>
