@@ -1,0 +1,55 @@
+<odoo>
+    <data>
+        <template id="mrx_external_layout_mixed">
+            <div t-attf-class="header o_company_#{company.id}_layout" t-att-style="report_header_style">
+                <div class="o_boxed_header" style="border-bottom: none">
+                    <div class="row mb8">
+                        <div class="col-6">
+                            <img t-if="company.logo" t-att-src="image_data_uri(company.logo)" alt="Logo"/>
+                        </div>
+                        <div class="col-6 text-right mb4">
+                            <h4 class="mt0" t-field="company.report_header"/> <!-- Settings -> Configure Document Layout -> Company Tagline -->
+                            <div name="company_address" class="float-right mb4" style="font-size: 10pt">
+                                <ul class="list-unstyled" style="padding-bottom: 0px; margin-bottom: 0px">
+                                    <li t-if="company.partner_id.name"><strong t-field="company.partner_id.name"/></li>
+                                    <li t-if="company.partner_id.street"><i class="fa fa-map-marker" role="img" aria-label="Location Pin" title="Location Pin"/><span class="pl-2" t-field="company.partner_id.street"/></li>
+                                    <li t-if="company.partner_id.street2"><span t-field="company.partner_id.street2"/></li>
+                                    <li t-if="company.partner_id.zip and company.partner_id.city"><span t-field="company.partner_id.zip"/><span class="pl-1" t-field="company.partner_id.city"/></li>
+                                    <li t-if="company.partner_id.country_id"><span t-field="company.partner_id.country_id.name"/></li>
+                                    <li t-if="company.company_registry"><span t-field="company.company_registry"/></li>
+                                    <li t-if="company.mrx_local_tax_id">Tax ID: <span t-field="company.mrx_local_tax_id"/></li>
+                                    <li t-if="company.vat"><t t-esc="company.country_id.vat_label or 'VAT ID'"/>: <span t-field="company.vat"/></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div t-attf-class="o_company_#{company.id}_layout article o_report_layout_background" t-att-data-oe-model="o and o._name" t-att-data-oe-id="o and o.id" t-att-data-oe-lang="o and o.env.context.get('lang')" style="background-image: none !important">
+                <t t-call="web.address_layout"/>
+                <t t-raw="0"/>
+            </div>
+
+            <div t-attf-class="o_company_#{company.id}_layout footer o_background_footer">
+                <div class="text-center" style="font-size: 9pt">
+                    <ul class="list-inline" style="border-top: 1px solid gray; border-bottom: none; padding-bottom: 0px">
+                        <li t-if="company.bank_journal_ids.bank_id.name" class="list-inline-item" style="color: #555555"><i class="fa fa-university" role="img" aria-label="Bank" title="Bank"/> <span t-field="company.bank_journal_ids.bank_id.name"/></li>
+                        <li t-if="company.bank_journal_ids.bank_account_id.acc_number" class="list-inline-item" style="color: #555555"><t t-esc="'IBAN'"/>: <span t-field="company.bank_journal_ids.bank_account_id.acc_number"/></li>
+                        <li t-if="company.bank_journal_ids.bank_id.bic" class="list-inline-item" style="color: #555555"><t t-esc="'BIC/SWIFT'"/>: <span t-field="company.bank_journal_ids.bank_id.bic"/></li>
+                    </ul>
+                    <ul class="list-inline" style="border-bottom: 1px solid gray; border-top: none; padding-top: 0px">
+                        <li t-if="company.phone" class="list-inline-item" style="color: #555555"><i class="fa fa-phone" role="img" aria-label="Phone" title="Phone"/> <span class="o_force_ltr" t-field="company.phone"/></li>
+                        <li t-if="company.email" class="list-inline-item" style="color: #555555"><i class="fa fa-envelope" role="img" aria-label="Email" title="Email"/> <span t-field="company.email"/></li>
+                        <li t-if="company.website" class="list-inline-item" style="color: #555555"><i class="fa fa-globe" role="img" aria-label="Website" title="Website"/> <span t-field="company.website"/></li>
+                        <li t-if="company.vat" class="list-inline-item" style="color: #555555"><i class="fa fa-building" role="img" aria-label="Fiscal number"/> <t t-esc="company.country_id.vat_label or 'VAT ID'"/>: <span t-field="company.vat"/></li>
+                    </ul>
+                    <div t-field="company.report_footer"/>
+                    <div t-if="report_type == 'pdf'" class="text-muted">
+                        Page: <span class="page"/> of <span class="topage"/>
+                    </div>
+                </div>
+            </div>
+        </template>
+    </data>
+</odoo>

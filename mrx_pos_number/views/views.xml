@@ -1,0 +1,58 @@
+<odoo>
+    <data>
+
+        <!-- Inherited from ../addons/sale/views/sale_views.xml -->
+        <record id="mrx_view_order_form_pos_number" model="ir.ui.view">
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="name">mrx.sale.order.form.pos.number</field>
+            <field name="model">sale.order</field>
+            <field name="priority" eval="516"/>
+            <field name="arch" type="xml">
+                <xpath expr="//notebook/page/field[@name='order_line']/tree/field[@name='sequence']" position="after">
+                    <field name="mrx_pos_number" optional="show"/>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- Inherited from ../addons/purchase/views/purchase_views.xml -->
+        <record id="mrx_purchase_order_form_pos_number" model="ir.ui.view">
+            <field name="inherit_id" ref="purchase.purchase_order_form"/>
+            <field name="name">mrx.purchase.order.form.pos.number</field>
+            <field name="model">purchase.order</field>
+            <field name="priority" eval="516"/>
+            <field name="arch" type="xml">
+                <xpath expr="//notebook/page/field[@name='order_line']/tree/field[@name='sequence']" position="after">
+                    <field name="mrx_pos_number" optional="show"/>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- Inherited from ../addons/stock/views/stock_picking_views.xml -->
+        <record id="mrx_view_picking_form_pos_number" model="ir.ui.view">
+            <field name="inherit_id" ref="stock.view_picking_form"/>
+            <field name="name">mrx.view.picking.form.pos.number</field>
+            <field name="model">stock.picking</field>
+            <field name="priority" eval="516"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='move_ids_without_package']/tree/field[@name='product_id']" position="before">
+                    <field name="mrx_pos_number_delivery" attrs="{'column_invisible': [('parent.picking_type_code', '!=', 'outgoing')]}" optional="show"/>
+                    <field name="mrx_pos_number_receipt" attrs="{'column_invisible': [('parent.picking_type_code', '!=', 'incoming')]}" optional="show"/>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- Inherited from ../addons/account/views/account_move_views.xml -->
+        <record id="mrx_view_move_form_pos_number" model="ir.ui.view">
+            <field name="inherit_id" ref="account.view_move_form"/>
+            <field name="name">mrx.account.move.form.pos.number</field>
+            <field name="model">account.move</field>
+            <field name="priority" eval="516"/>
+            <field name="arch" type="xml">
+                <xpath expr="//notebook/page/field[@name='invoice_line_ids']/tree/field[@name='sequence']" position="after">
+                    <field name="mrx_pos_number" optional="show"/>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>

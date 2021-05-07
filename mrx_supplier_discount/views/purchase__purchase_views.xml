@@ -1,0 +1,35 @@
+<odoo>
+	<data>
+
+        <!-- Inherited PO form view form ../addons/purchase/views/purchase_views.xml -->
+		<record id="mrx_purchase_order_form" model="ir.ui.view">
+			<field name="inherit_id" ref="purchase.purchase_order_form" />
+			<field name="model">purchase.order</field>
+			<field name="name">mrx.purchase.order.form</field>
+            <field name="priority" eval="512"/>
+			<field name="arch" type="xml">
+                <!-- xpath is necessary, because the tree has no name attribute, therefore one can't call it -->
+                <xpath expr="//notebook/page/field[@name='order_line']/tree/field[@name='name']" position="attributes">
+                        <attribute name="optional">hide</attribute>
+                </xpath>
+                <field name="price_unit" position="after">
+                    <field name="mrx_pricing_unit" optional="show"/>
+                    <field name="mrx_discount" optional="show"/>
+                </field>
+			</field>
+		</record>
+
+        <template id="mrx_report_purchaseorder_document_discount" inherit_id="purchase.report_purchaseorder_document">
+            <xpath expr="//th[@name='th_price_unit']" position="after">
+                <th name="th_discount" class="text-right">Disc.%</th>
+            </xpath>
+
+            <xpath expr="//table[1]/tbody[1]/t[2]/tr[1]/t[1]/td[4]" position="after">
+                <td name="td_discount" class="text-right">
+                    <span t-field="line.mrx_discount" t-options="{'widget': 'integer'}"/>%
+                </td>
+            </xpath>
+        </template>
+
+	</data>
+</odoo>

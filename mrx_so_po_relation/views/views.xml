@@ -1,0 +1,46 @@
+<odoo>
+    <data>
+
+        <!-- Inherited from ..addons/sale/views/sale_views.xml -->
+        <record id="mrx_view_order_form_so_po" model="ir.ui.view">
+            <field name="inherit_id" ref="sale.view_order_form" />
+            <field name="name">mrx.sale.order.form.so.po</field>
+            <field name="model">sale.order</field>
+            <field name="priority">515</field>
+            <field name="arch" type="xml">
+                <page name="other_information" position="after">
+                    <page name="mrx_so_po_rel" string="Purchase Orders">
+                        <field name="mrx_po_ids"/>
+                        <br/>
+                        <group string="Vendor Bills" invisible="True">
+                            <field name="mrx_po_bill_ids" nolabel="1"/>
+                        </group>
+                    </page>
+                </page>
+            </field>
+        </record>
+
+        <!-- Inherited from ../addons/purchase/views/purchase_views.xml -->
+        <record id="mrx_purchase_order_form_so_po" model="ir.ui.view">
+            <field name="inherit_id" ref="purchase.purchase_order_form" />
+            <field name="name">mrx.purchase.order.form.so.po</field>
+            <field name="model">purchase.order</field>
+            <field name="priority">515</field>
+            <field name="arch" type="xml">
+                <page name="purchase_delivery_invoice" position="attributes">
+                    <attribute name="string">Other Info</attribute>
+                </page>
+                <page name="purchase_delivery_invoice" position="after">
+                    <page name="mrx_so_po_rel" string="Sales Orders">
+                        <field name="mrx_so_ids"/>
+                        <br/>
+                        <group string="Sales Bills" invisible="True">
+                            <field name="mrx_so_bill_ids" nolabel="1"/>
+                        </group>
+                    </page>
+                </page>
+            </field>
+        </record>
+
+    </data>
+</odoo>

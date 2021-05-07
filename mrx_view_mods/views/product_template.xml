@@ -1,0 +1,97 @@
+<odoo>
+    <data>
+
+        <!-- Inherited from ../addons/product/views/product_views.xml -->
+        <record id="mrx_product_template_form_view_mods" model="ir.ui.view">
+            <field name="inherit_id" ref="product.product_template_form_view" />
+            <field name="name">mrx.product.template.common.form.view.mods</field>
+            <field name="model">product.template</field>
+            <field name="priority" eval="513"/>
+            <field name="arch" type="xml">
+                <group name="group_general" position="after">
+                    <group name="intrastat" position="move" />
+                </group>
+                <field name="intrastat_origin_country_id" position="after">
+                    <field name="intrastat_origin_country_code" />
+                </field>
+                <field name="categ_id" position="attributes">
+                    <attribute name="options">{'no_create':true}</attribute>
+                </field>
+                <group name="group_standard_price" position="after">
+                    <group name="operations" position="move" />
+                    <group name="group_lots_and_weight" position="move" />
+                    <group name="description" position="move" />
+                </group>
+            </field>
+        </record>
+
+        <!-- Inherited from ../addons/product/views/product_template_views.xml -->
+        <record id="mrx_product_template_tree_view_mods" model="ir.ui.view">
+            <field name="inherit_id" ref="product.product_template_tree_view" />
+            <field name="name">mrx.product.template.product.tree.view.mods</field>
+            <field name="model">product.template</field>
+            <field name="priority" eval="513"/>
+            <field name="arch" type="xml">
+                <field name="barcode" position="attributes">
+                    <attribute name="string">Barcode / EAN</attribute>
+                </field>
+                <field name="default_code" position="attributes">
+                    <attribute name="string">Article Number</attribute>
+                </field>
+                <field name="default_code" position="after">
+                    <field name="name" position="move" />
+                </field>
+            </field>
+        </record>
+
+        <!-- Inherited from ../addons/product/views/product_template_views.xml -->
+        <record id="mrx_product_template_only_form_view" model="ir.ui.view">
+            <field name="inherit_id" ref="product.product_template_only_form_view"/>
+            <field name="name">mrx.product.template.product.form.view.mods</field>
+            <field name="model">product.template</field>
+            <field name="priority" eval="513"/>
+            <field name="arch" type="xml">
+                <field name="barcode" position="attributes">
+                    <attribute name="string">Barcode / EAN</attribute>
+                </field>
+                <field name="default_code" position="attributes">
+                    <attribute name="string">Article Number</attribute>
+                </field>
+                <field name="default_code" position="after">
+                    <field name="categ_id" position="move" />
+                </field>
+            </field>
+        </record>
+
+        <!-- Inherited from ../addons/product/views/product_views.xml -->
+        <record id="mrx_product_normal_form_view" model="ir.ui.view">
+            <field name="inherit_id" ref="product.product_normal_form_view"/>
+            <field name="name">mrx.product.product.normal.form.view.mods</field>
+            <field name="model">product.product</field>
+            <field name="priority" eval="513"/>
+            <field name="arch" type="xml">
+                <field name="barcode" position="attributes">
+                    <attribute name="string">Barcode / EAN</attribute>
+                </field>
+                <field name="default_code" position="attributes">
+                    <attribute name="string">Article Number</attribute>
+                </field>
+                <field name="categ_id" position="after">
+                    <field name="barcode" position="move" />
+                </field>
+            </field>
+        </record>
+
+        <!-- Override default view type from ../addons/sale/views/sale_views.xml -->
+        <record id="sale.product_template_action" model="ir.actions.act_window">
+            <field name="view_mode">tree,kanban,form,activity</field>
+            <field name="view_id" ref="product.product_template_tree_view"/>
+        </record>
+
+        <!-- Override default view type from ../addons/purchase/views/purchase_views.xml -->
+        <record id="purchase.product_normal_action_puchased" model="ir.actions.act_window">
+            <field name="view_mode">tree,kanban,form,activity</field>
+        </record>
+
+    </data>
+</odoo>

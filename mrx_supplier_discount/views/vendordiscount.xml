@@ -1,0 +1,54 @@
+<odoo>
+    <data>
+
+        <!-- Creates Vendor Discount model default form view -->
+        <record id="mrx_vendordiscount_form_view" model="ir.ui.view">
+            <field name="name">mrx.vendordiscount.form</field>
+            <field name="model">mrx.product.vendordiscount</field>
+            <field name="arch" type="xml">
+                <form string="Vendor Discount">
+                    <sheet>
+                        <group>
+                            <field name="partner_id" class="oe_inline" options="{'no_create':true}"/>
+                            <field name="manufacturer_id" class="oe_inline" options="{'no_create':true, 'no_open':true}"/>
+                            <field name="name" class="oe_inline"/>
+                            <label for="discount"/>
+                            <div>
+                                <field name="discount" class="oe_inline"/>
+                                <span> %</span>
+                            </div>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Creates Vendor Discount model default tree view -->
+        <record id="mrx_vendordiscount_tree_view" model="ir.ui.view">
+            <field name="name">mrx.vendordiscount.tree.view</field>
+            <field name="model">mrx.product.vendordiscount</field>
+            <field name="arch" type="xml">
+                <tree string="Vendor Discount" editable="bottom" multi_edit="true" duplicate="false">
+                    <field name="partner_id" invisible="context.get('default_partner_id')" options="{'no_create':true}"/>
+                    <field name="manufacturer_id" options="{'no_create':true, 'no_open':true}"/>
+                    <field name="name"/>
+                    <field name="discount"/>
+                    <field name="id" optional="hide"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Creates new menu item and action for Vendor Discout in Purchase App -->
+        <record id="mrx_vendordiscount_menu_action" model="ir.actions.act_window">
+            <field name="name">Vendor Discount</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">mrx.product.vendordiscount</field>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="mrx_vendordiscount_tree_view"/>
+        </record>
+
+        <menuitem id="vendor_discount_menu" name="Vendor Discount"
+                  parent="purchase.menu_purchase_config" action="mrx_vendordiscount_menu_action" sequence="2"/>
+
+    </data>
+</odoo>

@@ -1,0 +1,89 @@
+<odoo>
+    <data>
+
+        <!-- Inherited from ..addons/product/views/product_views.xml -->
+        <record id="mrx_product_template_common_form_view_manufacturer" model="ir.ui.view">
+            <field name="inherit_id" ref="product.product_template_form_view"/>
+            <field name="name">mrx.product.template.common.form.view.manufacturer</field>
+            <field name="model">product.template</field>
+            <field name="priority" eval="512"/>
+            <field name="arch" type="xml">
+                <field name="type" position="after">
+                    <field name="mrx_product_manufacturer" options="{'no_create':true, 'no_open':true}"/>
+                </field>
+            </field>
+        </record>
+
+        <!-- Inherited from ..addons/product/views/product_template_views.xml -->
+        <record id="mrx_product_template_tree_view_manufacturer" model="ir.ui.view">
+            <field name="inherit_id" ref="product.product_template_tree_view"/>
+            <field name="name">mrx.product.template.product.tree.view.manufacturer</field>
+            <field name="model">product.template</field>
+            <field name="priority" eval="512"/>
+            <field name="arch" type="xml">
+                <field name="sequence" position="after">
+                    <field name="mrx_product_manufacturer" optional="show"/>
+                </field>
+            </field>
+        </record>
+
+        <!-- Inherited from ..addons/product/views/product_views.xml -->
+        <record id="mrx_product_template_search_view_manufacturer" model="ir.ui.view">
+            <field name="inherit_id" ref="product.product_template_search_view"/>
+            <field name="name">mrx.product.template.search.view.manufacturer</field>
+            <field name="model">product.template</field>
+            <field name="priority" eval="512"/>
+            <field name="arch" type="xml">
+                <field name="categ_id" position="after">
+                    <field name="mrx_product_manufacturer"/>
+                </field>
+            </field>
+        </record>
+
+        <!-- Create Manufacturer model default tree view -->
+        <record id="mrx_product_manufacturer_tree_view" model="ir.ui.view">
+            <field name="name">mrx.product.manufacturer.tree.view</field>
+            <field name="model">mrx.product.manufacturer</field>
+            <field name="arch" type="xml">
+                <tree string="Manufacturers" editable="bottom" multi_edit="false" duplicate="false">
+                    <field name="name"/>
+                    <field name="id" optional="hide"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Create menu items and actions for Manufacturers menuitem-->
+        <record id="mrx_product_manufacturer_menu_action" model="ir.actions.act_window">
+            <field name="name">Manufacturers</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">mrx.product.manufacturer</field>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="mrx_product_manufacturer_tree_view"/>
+        </record>
+
+        <menuitem id="mrx_product_manufacturer_purchase_menuitem" name="Manufacturers"
+                  parent="purchase.menu_purchase_config" action="mrx_product_manufacturer_menu_action" sequence="4"/>
+
+        <menuitem id="mrx_product_manufacturer_sale_menuitem" name="Manufacturers"
+                  parent="sale.menu_sale_config" action="mrx_product_manufacturer_menu_action" sequence="3"/>
+
+        <template id="mrx_report_invoice_document_manufacturer" inherit_id="account.report_invoice_document">
+            <xpath expr="//td[@name='account_invoice_line_name']/span" position="before">
+                <strong><span t-field="line.product_id.mrx_product_manufacturer" style="margin-right: 5px"/></strong>
+            </xpath>
+        </template>
+
+        <template id="mrx_report_purchaseorder_document_manufacturer" inherit_id="purchase.report_purchaseorder_document">
+            <xpath expr="//td[@id='product']/span" position="before">
+                <strong><span t-field="line.product_id.mrx_product_manufacturer" style="margin-right: 5px"/></strong>
+            </xpath>
+        </template>
+
+        <template id="mrx_report_saleorder_document_manufacturer" inherit_id="sale.report_saleorder_document">
+            <xpath expr="//td[@name='td_name']/span" position="before">
+                <strong><span t-field="line.product_id.mrx_product_manufacturer" style="margin-right: 5px"/></strong>
+            </xpath>
+        </template>
+
+    </data>
+</odoo>
