@@ -25,7 +25,7 @@ Displays purchase orders and purchase invoices related to the sales order. [More
 Calculates profit for a sales order based on incoming and outgoing invoices related to that specific order. It adds a "Profit" field to the sales order list view.
 
 ### 7. mrx_supplier_discount
-Implements a vendor/supplier discount system based on product categories.
+Implements a vendor/supplier discount system based on product categories. [More info](/mrx_supplier_discount/README.md)
 
 ### 8. mrx_view_mods
-Some useful modifications for my own needs which helps productivity... [More info](/mrx_view_mods/README.md)
+Some useful modification for my own needs which helps productivity... [More info](/mrx_view_mods/README.md)
