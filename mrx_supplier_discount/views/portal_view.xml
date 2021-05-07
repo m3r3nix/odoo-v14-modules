@@ -5,6 +5,7 @@
         <template id="mrx_portal_my_purchase_order_discount" inherit_id="purchase.portal_my_purchase_order">
             <xpath expr="//h3" position="after">
                 <t t-set="display_discount" t-value="True in [line.mrx_discount > 0 for line in order.order_line]"/>
+                <t t-set="display_pricing_unit" t-value="True in [line.mrx_pricing_unit > 1 for line in order.order_line]"/>
             </xpath>
 
             <xpath expr="//table[1]/thead" position="replace">
@@ -12,7 +13,8 @@
                     <tr>
                         <th class="text-left">Products</th>
                         <th class="text-right">Quantity</th>
-                        <th t-attf-class="text-right {{ 'd-none d-sm-table-cell' if report_type == 'html' else '' }}">Unit Price</th>
+                        <th t-attf-class="text-right {{ 'd-none d-sm-table-cell' if report_type == 'html' else '' }}">Price</th>
+                        <th t-if="display_pricing_unit" class="text-right">Pricing Unit</th>
                         <th t-if="display_discount" t-attf-class="text-right {{ 'd-none d-sm-table-cell' if report_type == 'html' else '' }}">
                             <span>Disc.%</span>
                         </th>
@@ -56,6 +58,10 @@
                                     <div t-if="line.mrx_discount">
                                         <t t-esc="(1-line.mrx_discount / 100.0) * line.price_unit" t-options='{"widget": "float", "decimal_precision": "Product Price"}'/>
                                     </div>
+                                </td>
+                                <td t-if="display_pricing_unit" id="pricing_unit" class="text-right">
+                                    <span t-field="line.mrx_pricing_unit"/>
+                                    <span t-field="line.product_uom"/>
                                 </td>
                                 <td t-if="display_discount" t-attf-class="text-right {{ 'd-none d-sm-table-cell' if report_type == 'html' else '' }}">
                                     <strong t-if="line.mrx_discount &gt; 0" class="text-info">
