@@ -16,16 +16,16 @@ Gives a nice layout for your documents such as:
 Sets position number for all order lines. Helps maintainability if you have many lines on an order or invoice. [More info](/mrx_pos_number/README.md)
 
 ### 4. mrx_product_manufacturer
-Adds manufacturer table to the database and a manufacturer dropdown field to the product template. [More info](/mrx_manufacturer/README.md)
+Adds manufacturer table to the database and a manufacturer dropdown field to the product template. [More info](/mrx_product_manufacturer/README.md)
 
 ### 5. mrx_so_po_relation
-Displays purchase orders and purchase invoices related to the sales order
+Displays purchase orders and purchase invoices related to the sales order. [More info](/mrx_so_po_relation/README.md)
 
 ### 6. mrx_so_profit
-Calculates profit for a sales order based on incoming invoices
+Calculates profit for a sales order based on incoming and outgoing invoices related to that specific order. It adds a "Profit" field to the sales order list view.
 
 ### 7. mrx_supplier_discount
-Implements a vendor/supplier discount system based on product categories
+Implements a vendor/supplier discount system based on product categories.
 
 ### 8. mrx_view_mods
-Some useful modifications for my own needs. Hiding/Displaying fields in different modules, and so on...
+Some useful modifications for my own needs which helps productivity... [More info](/mrx_view_mods/README.md)
