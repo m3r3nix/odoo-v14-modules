@@ -14,3 +14,17 @@ Main features:
 * Add Pricing Unit, Discount % fields to purchase order form view.
 * Add Pricing Unit field to sale order form view.
 * Add Discount % Smart button to Contact/Partner form. Here can be set discount for price groups given by the partner.
+
+![Discount Smart Button on Vendor's profile](static/description/vendor.png)
+
+
+By clicking the Discount Smart Button above you can set discounts by manufacturer and price group for the given vendor.
+![Create discount for the current Vendor](static/description/vendor_discount.png)
+
+
+There are 3 discount types, that can be set by purchase:
+  - Net Price (Vendor does not provide information about list price(MSRP) or discount, therefore we have only the given net price)
+  - Price Group (Discount will be set by the price group where this product belongs to)
+  - Product Only (Lets say a product belongs to a specific price group, but we buy frequently a large amount of this product, therefore the vendor gives us a special discount for this product alone)
+
+![Set purchase discount on product](static/description/purchase.png)

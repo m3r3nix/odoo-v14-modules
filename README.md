@@ -1,5 +1,5 @@
 # Custom modules for Odoo ERP v14
-## Sort list of these modules and their purpose.
+## A sort list about these modules and their purpose.
 
 ### 1. mrx_delivery_note_on_invoice
 Display reference number of delivery note related to the invoice. [More info](/mrx_delivery_note_on_invoice/README.md)
