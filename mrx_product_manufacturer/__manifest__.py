@@ -19,6 +19,8 @@
     'depends': [
         'base',
         'product',
+        'purchase',
+        'sale_management',
     ],
 
     # always loaded
