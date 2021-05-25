@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+    <data>
+
+        <template id="mrx_frontend_layout" inherit_id="web.frontend_layout">
+            <xpath expr="//t[@t-call='web.brand_promotion']" position="replace"/>
+        </template>
+
+    </data>
+</odoo>
