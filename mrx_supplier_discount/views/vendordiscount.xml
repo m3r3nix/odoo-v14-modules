@@ -31,7 +31,7 @@
                 <tree string="Vendor Discount" editable="bottom" multi_edit="true" duplicate="false">
                     <field name="partner_id" invisible="context.get('default_partner_id')" options="{'no_create':true}"/>
                     <field name="manufacturer_id" options="{'no_create':true, 'no_open':true}"/>
-                    <field name="name"/>
+                    <field name="name" domain="[('manufacturer_id', '=', manufacturer_id)]"/>
                     <field name="discount"/>
                     <field name="id" optional="hide"/>
                 </tree>

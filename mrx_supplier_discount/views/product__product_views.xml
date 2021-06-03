@@ -13,6 +13,9 @@
                     <field name="mrx_packaging_unit"/>
                     <field name="mrx_moq"/>
                 </div>
+                <field name="mrx_product_manufacturer" position="after">
+                    <field name="mrx_pricegroup" domain="[('manufacturer_id', '=', mrx_product_manufacturer)]"/>
+                </field>
             </field>
         </record>
 
@@ -94,11 +97,12 @@
                     <field name="min_qty" string="MOQ" optional="show"/>
                 </field>
                 <field name="product_tmpl_id" position="after">
-                    <field name="mrx_product_manufacturer" optional="show" options="{'no_create':true, 'no_open':true}"/>
+                    <field name="mrx_product_manufacturer" optional="hide" options="{'no_create':true, 'no_open':true}"/>
                     <field name="mrx_price_group"
                         optional="show"
                         domain="[('partner_id', '=', name), ('manufacturer_id', '=', mrx_product_manufacturer)]"
-                        options="{'no_create':true, 'no_open':true}"/>
+                        options="{'no_create':true, 'no_open':true}"
+                        class="text-center"/>
                     <field name="mrx_discount_type" optional="show"/>
                     <field name="mrx_packaging_unit" optional="show"/>
                 </field>
