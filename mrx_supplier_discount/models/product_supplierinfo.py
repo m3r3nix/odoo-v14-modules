@@ -60,8 +60,7 @@ class SupplierInfo(models.Model):
     # Set vendor discount for the given price group
     def get_price_group_discount(self, line):
         if line.name and line.mrx_product_manufacturer and line.mrx_price_group and line.mrx_discount_type == 'price_group':
-            discount_id = self.env['mrx.product.vendordiscount']._search([('partner_id', '=', line.name.id), ('manufacturer_id', '=', line.mrx_product_manufacturer.id), ('name', '=', line.mrx_price_group.name)], limit=1)
-            return self.env['mrx.product.vendordiscount'].browse(discount_id).discount
+            return line.mrx_price_group.discount
         else:
             return 0.0
 
@@ -70,7 +69,7 @@ class SupplierInfo(models.Model):
         return line.mrx_discount
 
     # Decide how to compute product discount: Net Price / Price Group / Product Only
-    @api.depends('mrx_discount_type', 'mrx_price_group')
+    @api.depends('mrx_discount_type', 'mrx_price_group', 'mrx_price_group.discount')
     def _compute_discount(self):
         for line in self:
             method_name = 'get_' + str(line.mrx_discount_type) + '_discount'
@@ -82,3 +81,11 @@ class SupplierInfo(models.Model):
     def _compute_purchase_price(self):
         for line in self:
             line.mrx_computed_purchase_price = (line.price / line.mrx_pricing_unit) * (1 - (line.mrx_discount or 0.0) / 100)
+
+    @api.onchange('product_tmpl_id')
+    def _copy_product_data(self):
+        if self.product_tmpl_id:
+            self.mrx_packaging_unit = self.product_tmpl_id.mrx_packaging_unit
+            self.mrx_pricing_unit = self.product_tmpl_id.mrx_pricing_unit
+            self.price = self.product_tmpl_id.list_price
+            self.min_qty = self.product_tmpl_id.mrx_moq
