@@ -9,7 +9,7 @@
             <field name="priority" eval="512"/>
             <field name="arch" type="xml">
                 <field name="type" position="after">
-                    <field name="mrx_product_manufacturer" options="{'no_create':true, 'no_open':true}"/>
+                    <field name="mrx_product_manufacturer" options="{'no_create':true}"/>
                 </field>
             </field>
         </record>
@@ -45,7 +45,7 @@
             <field name="name">mrx.product.manufacturer.tree.view</field>
             <field name="model">mrx.product.manufacturer</field>
             <field name="arch" type="xml">
-                <tree string="Manufacturers" editable="bottom" multi_edit="false" duplicate="false">
+                <tree string="Manufacturers" multi_edit="false" duplicate="false">
                     <field name="name"/>
                     <field name="id" optional="hide"/>
                 </tree>
@@ -57,7 +57,7 @@
             <field name="name">Manufacturers</field>
             <field name="type">ir.actions.act_window</field>
             <field name="res_model">mrx.product.manufacturer</field>
-            <field name="view_mode">tree</field>
+            <field name="view_mode">tree,form</field>
             <field name="view_id" ref="mrx_product_manufacturer_tree_view"/>
         </record>
 
