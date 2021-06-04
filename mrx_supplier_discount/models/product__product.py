@@ -13,6 +13,13 @@ class ProductTemplate(models.Model):
     mrx_packaging_unit = fields.Integer(string='Packaging Unit', default=1, required=True, store=True, help="How many pieces in one package?")
     mrx_moq = fields.Integer(string='MOQ', default=1, required=True, store=True, help="Minimum order quantity")
 
+    @api.onchange('mrx_pricegroup')
+    def _fill_category_if_same_as_price_group(self):
+        if self.mrx_pricegroup:
+            category_id = self.env['product.category'].search([('parent_id.name', '=', self.mrx_product_manufacturer.name), ('name', '=', self.mrx_pricegroup.name)], limit=1)
+            if category_id:
+                self.categ_id = category_id
+
 
 class ProductProduct(models.Model):
     _inherit = "product.product"
