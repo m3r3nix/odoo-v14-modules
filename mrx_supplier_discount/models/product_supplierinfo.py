@@ -83,9 +83,14 @@ class SupplierInfo(models.Model):
             line.mrx_computed_purchase_price = (line.price / line.mrx_pricing_unit) * (1 - (line.mrx_discount or 0.0) / 100)
 
     @api.onchange('product_tmpl_id')
-    def _copy_product_data(self):
+    def _copy_product_values(self):
         if self.product_tmpl_id:
             self.mrx_packaging_unit = self.product_tmpl_id.mrx_packaging_unit
             self.mrx_pricing_unit = self.product_tmpl_id.mrx_pricing_unit
             self.price = self.product_tmpl_id.list_price
             self.min_qty = self.product_tmpl_id.mrx_moq
+
+    @api.onchange('name')
+    def _copy_price_group_value(self):
+        if self.product_tmpl_id and self.name:
+            self.mrx_price_group = self.env['mrx.product.vendordiscount'].search([('partner_id', '=', self.name.id), ('manufacturer_id', '=', self.mrx_product_manufacturer.id), ('name', '=', self.product_tmpl_id.mrx_pricegroup.name)], limit=1)
