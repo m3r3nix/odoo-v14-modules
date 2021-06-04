@@ -13,8 +13,37 @@
                     <field name="mrx_packaging_unit"/>
                     <field name="mrx_moq"/>
                 </div>
-                <field name="mrx_product_manufacturer" position="after">
-                    <field name="mrx_pricegroup" domain="[('manufacturer_id', '=', mrx_product_manufacturer)]"/>
+            </field>
+        </record>
+
+        <!-- Inherited from ../addons/product/views/product_template_views.xml -->
+        <record id="mrx_product_template_only_form_view_pricegroup" model="ir.ui.view">
+            <field name="inherit_id" ref="product.product_template_only_form_view"/>
+            <field name="name">mrx.product.template.product.form.view.pricegroup</field>
+            <field name="model">product.template</field>
+            <field name="priority" eval="514"/>
+            <field name="arch" type="xml">
+                <field name="default_code" position="after">
+                    <field name="mrx_pricegroup"
+                        domain="[('manufacturer_id', '=', mrx_product_manufacturer)]"
+                        options="{'no_create':true}"
+                    />
+                </field>
+            </field>
+        </record>
+
+        <!-- Inherited from ../addons/product/views/product_views.xml -->
+        <record id="mrx_product_normal_form_view_pricegroup" model="ir.ui.view">
+            <field name="inherit_id" ref="product.product_normal_form_view"/>
+            <field name="name">mrx.product.product.normal.form.view.pricegroup</field>
+            <field name="model">product.product</field>
+            <field name="priority" eval="514"/>
+            <field name="arch" type="xml">
+                <field name="categ_id" position="before">
+                    <field name="mrx_pricegroup"
+                        domain="[('manufacturer_id', '=', mrx_product_manufacturer)]"
+                        options="{'no_create':true}"
+                    />
                 </field>
             </field>
         </record>
@@ -94,7 +123,7 @@
                     <attribute name="optional">hide</attribute>
                 </field>
                 <field name="min_qty" position="replace">
-                    <field name="min_qty" string="MOQ" optional="show"/>
+                    <field name="min_qty" string="MOQ" optional="hide"/>
                 </field>
                 <field name="product_tmpl_id" position="after">
                     <field name="mrx_product_manufacturer" optional="hide" options="{'no_create':true, 'no_open':true}"/>
@@ -104,12 +133,15 @@
                         options="{'no_create':true, 'no_open':true}"
                         class="text-center"/>
                     <field name="mrx_discount_type" optional="show"/>
-                    <field name="mrx_packaging_unit" optional="show"/>
+                    <field name="mrx_packaging_unit" optional="hide"/>
                 </field>
                 <field name="price" position="after">
                     <field name="mrx_pricing_unit" optional="show"/>
                     <field name="mrx_discount" attrs="{'readonly': [('mrx_discount_type', '!=', 'product_only')]}" optional="show"/>
                     <field name="mrx_computed_purchase_price" attrs="{'readonly': True}" optional="show"/>
+                </field>
+                <field name="delay" position="attributes">
+                    <attribute name="optional">hide</attribute>
                 </field>
                 <field name="delay" position="after">
                     <field name="date_start" position="move"/>
