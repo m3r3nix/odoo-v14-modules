@@ -28,17 +28,17 @@
             <field name="name">mrx.vendordiscount.tree.view</field>
             <field name="model">mrx.product.vendordiscount</field>
             <field name="arch" type="xml">
-                <tree string="Vendor Discount" editable="bottom" multi_edit="true" duplicate="false">
+                <tree string="Vendor Discount" editable="bottom" duplicate="false">
                     <field name="partner_id" invisible="context.get('default_partner_id')" options="{'no_create':true}"/>
-                    <field name="manufacturer_id" options="{'no_create':true, 'no_open':true}"/>
-                    <field name="name" domain="[('manufacturer_id', '=', manufacturer_id)]"/>
+                    <field name="manufacturer_id" options="{'no_create':true}"/>
+                    <field name="name" options="{'no_create':true, 'no_open':true}"/>
                     <field name="discount"/>
                     <field name="id" optional="hide"/>
                 </tree>
             </field>
         </record>
 
-        <!-- Creates new menu item and action for Vendor Discout in Purchase App -->
+        <!-- Creates new menu item and action for Vendor Discouts -->
         <record id="mrx_vendordiscount_menu_action" model="ir.actions.act_window">
             <field name="name">Vendor Discount</field>
             <field name="type">ir.actions.act_window</field>
@@ -47,8 +47,30 @@
             <field name="view_id" ref="mrx_vendordiscount_tree_view"/>
         </record>
 
-        <menuitem id="vendor_discount_menu" name="Vendor Discount"
-                  parent="purchase.menu_purchase_config" action="mrx_vendordiscount_menu_action" sequence="2"/>
+        <menuitem id="mrx_vendor_discounts_menuitem_in_sales" name="Vendor Discounts"
+                parent="mrx_product_manufacturer.mrx_menu_manufacturer_in_sales_config"
+                action="mrx_vendordiscount_menu_action" sequence="2"/>
+
+        <menuitem id="mrx_vendor_discounts_menuitem_in_purchase" name="Vendor Discounts"
+                parent="mrx_product_manufacturer.mrx_menu_manufacturer_in_purchase_config"
+                action="mrx_vendordiscount_menu_action" sequence="2"/>
+
+        <!-- Creates new menu item and action for Price Groups -->
+        <record id="mrx_manufacturer_pricegroup_menu_action" model="ir.actions.act_window">
+            <field name="name">Import Price Groups</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">mrx.manufacturer.pricegroup</field>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="mrx_manufacturer_pricegroup_tree_view"/>
+        </record>
+
+        <menuitem id="mrx_manufacturer_pricegroups_menuitem_in_sales" name="Import Price Groups"
+                parent="mrx_product_manufacturer.mrx_menu_manufacturer_in_sales_config"
+                action="mrx_manufacturer_pricegroup_menu_action" sequence="3"/>
+
+        <menuitem id="mrx_manufacturer_pricegroups_menuitem_in_purchase" name="Import Price Groups"
+                parent="mrx_product_manufacturer.mrx_menu_manufacturer_in_purchase_config"
+                action="mrx_manufacturer_pricegroup_menu_action" sequence="3"/>
 
     </data>
 </odoo>
