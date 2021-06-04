@@ -61,12 +61,19 @@
             <field name="view_id" ref="mrx_product_manufacturer_tree_view"/>
         </record>
 
-        <menuitem id="mrx_product_manufacturer_purchase_menuitem" name="Manufacturers"
-                  parent="purchase.menu_purchase_config" action="mrx_product_manufacturer_menu_action" sequence="4"/>
+        <menuitem id="mrx_menu_manufacturer_in_sales_config" name="Manufacturers"
+                parent="sale.menu_sale_config" sequence="50"/>
 
-        <menuitem id="mrx_product_manufacturer_sale_menuitem" name="Manufacturers"
-                  parent="sale.menu_sale_config" action="mrx_product_manufacturer_menu_action" sequence="3"/>
+        <menuitem id="mrx_menu_manufacturer_in_purchase_config" name="Manufacturers"
+                parent="purchase.menu_purchase_config" sequence="50"/>
 
+        <menuitem id="mrx_product_manufacturer_menuitem_in_sales" name="Manufacturers"
+                parent="mrx_menu_manufacturer_in_sales_config" action="mrx_product_manufacturer_menu_action" sequence="1"/>
+
+        <menuitem id="mrx_product_manufacturer_menuitem_in_purchase" name="Manufacturers"
+                parent="mrx_menu_manufacturer_in_purchase_config" action="mrx_product_manufacturer_menu_action" sequence="1"/>
+
+        <!-- Display Manufacturer on pdf documents -->
         <template id="mrx_report_invoice_document_manufacturer" inherit_id="account.report_invoice_document">
             <xpath expr="//td[@name='account_invoice_line_name']/span" position="before">
                 <strong><span t-field="line.product_id.mrx_product_manufacturer" style="margin-right: 5px"/></strong>
