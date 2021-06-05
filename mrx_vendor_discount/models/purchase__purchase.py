@@ -21,20 +21,20 @@ class PurchaseOrderLine(models.Model):
     mrx_discount = fields.Float(string='Discount (%)', default=0.0, digits='Discount', help="Discount percentage given by the supplier from the list price", store=True)
     mrx_pricing_unit = fields.Integer(string='Pricing Unit', default=1, help="How many units to get for the given list price", store=True)
 
-    # Override function from: ../addons/purchase/models/purchase.py
+    # Override original function from: ../addons/purchase/models/purchase.py
     # "mrx_pricing_unit" and "mrx_discount" has been added to the api.depends line
     @api.depends('product_qty', 'price_unit', 'taxes_id', 'mrx_discount', 'mrx_pricing_unit')
     def _compute_amount(self):
         super()._compute_amount()
 
-    # Override function from: ../addons/purchase/models/purchase.py
+    # Override original function from: ../addons/purchase/models/purchase.py
     # Update "price_unit" value in the returned dictionary
     def _prepare_compute_all_values(self):
         res = super()._prepare_compute_all_values()
         res['price_unit'] = (self.price_unit / (self.mrx_pricing_unit or 1)) * (1 - (self.mrx_discount or 0.0) / 100.0)
         return res
 
-    # Override function from: ../addons/purchase/models/purchase.py
+    # Override original function from: ../addons/purchase/models/purchase.py
     # Set "mrx_discount" and "mrx_pricing_unit" from supplierinfo when "product_id" changes
     @api.onchange('product_id')
     def onchange_product_id(self):
@@ -43,7 +43,7 @@ class PurchaseOrderLine(models.Model):
             return
         self._compute_discount_by_seller()
 
-    # Override function from: ../addons/purchase/models/purchase.py
+    # Override original function from: ../addons/purchase/models/purchase.py
     # See 2nd comment inside...
     @api.onchange('product_qty', 'product_uom')
     def _onchange_quantity(self):
@@ -78,7 +78,7 @@ class PurchaseOrderLine(models.Model):
             self.price_unit = price_unit
             return
 
-        # Following 3 lines have been added extra. Import list price from supplierinfo only when product_id changes
+        # The following 3 lines have been added extra. Inherit list price from supplierinfo, only if "product_id" changes
         if self.price_unit:
             price_unit = self.price_unit
         else:
@@ -92,7 +92,7 @@ class PurchaseOrderLine(models.Model):
 
         self.price_unit = price_unit
 
-    # Override function from: ../addons/purchase/models/purchase.py
+    # Override original function from: ../addons/purchase/models/purchase.py
     # "price_unit" has been updated and "discount" has been added to the returned dictionary
     def _prepare_account_move_line(self, move=False):
         res = super()._prepare_account_move_line(move=False)
@@ -102,14 +102,14 @@ class PurchaseOrderLine(models.Model):
         })
         return res
 
-    # Override function from: ../addons/purchase/models/purchase.py
-    # Override original function in order to set value of discount and pricing unit fields on automatically generated PO.
+    # Override original function from: ../addons/purchase/models/purchase.py
+    # Override original function in order to set the values of discount and pricing unit fields on automatically generated PO.
     # "mrx_discount" and "mrx_pricing_unit" has been added to the returned dictionary
     @api.model
     def _prepare_purchase_order_line(self, product_id, product_qty, product_uom, company_id, supplier, po):
         res = super()._prepare_purchase_order_line(product_id, product_qty, product_uom, company_id, supplier, po)
 
-        # This section has been copied from original function in order to set seller
+        # This section has been copied from the original function in order to set seller
         partner = supplier.name
         uom_po_qty = product_uom._compute_quantity(product_qty, product_id.uom_po_id)
         seller = product_id.with_company(company_id)._select_seller(

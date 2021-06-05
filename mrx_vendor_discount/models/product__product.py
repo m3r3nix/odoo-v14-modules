@@ -1,8 +1,50 @@
 # -*- coding: utf-8 -*-
-# 1 : imports of python lib
 
-# 2 : imports of odoo
 from odoo import api, fields, models
+from odoo.tools import float_compare
+
+
+class ProductProduct(models.Model):
+    _inherit = "product.product"
+
+    ### Select vendor by cheapest purchase price in MTO
+    # Override function from: ../addons/product/models/product.py
+    # Only content of last bracket has been modified. Recordset sorted by "min_qty" and "mrx_computed_purchase_price"
+    def _prepare_sellers(self, params=False):
+        # This search is made to avoid retrieving seller_ids from the cache.
+        return self.env['product.supplierinfo'].search([('product_tmpl_id', '=', self.product_tmpl_id.id),
+                                                        ('name.active', '=', True)]).sorted(lambda s: (-s.min_qty, s.mrx_computed_purchase_price))
+
+    # Override function from: ../addons/product/models/product.py
+    # Only last line has been modified. Returned recordset sorted by "mrx_computed_purchase_price" instead of "price"
+    def _select_seller(self, partner_id=False, quantity=0.0, date=None, uom_id=False, params=False):
+        self.ensure_one()
+        if date is None:
+            date = fields.Date.context_today(self)
+        precision = self.env['decimal.precision'].precision_get('Product Unit of Measure')
+
+        res = self.env['product.supplierinfo']
+        sellers = self._prepare_sellers(params)
+        sellers = sellers.filtered(lambda s: not s.company_id or s.company_id.id == self.env.company.id)
+        for seller in sellers:
+            # Set quantity in UoM of seller
+            quantity_uom_seller = quantity
+            if quantity_uom_seller and uom_id and uom_id != seller.product_uom:
+                quantity_uom_seller = uom_id._compute_quantity(quantity_uom_seller, seller.product_uom)
+
+            if seller.date_start and seller.date_start > date:
+                continue
+            if seller.date_end and seller.date_end < date:
+                continue
+            if partner_id and seller.name not in [partner_id, partner_id.parent_id]:
+                continue
+            if float_compare(quantity_uom_seller, seller.min_qty, precision_digits=precision) == -1:
+                continue
+            if seller.product_id and seller.product_id != self:
+                continue
+            if not res or res.name == seller.name:
+                res |= seller
+        return res.sorted('mrx_computed_purchase_price')[:1]
 
 
 class SupplierInfo(models.Model):
@@ -14,7 +56,7 @@ class SupplierInfo(models.Model):
         readonly=True,
     )
     mrx_price_group = fields.Many2one(
-        'mrx.product.vendordiscount',
+        'mrx.vendor.discount',
         string='Price Group',
         store=True,
     )
@@ -57,14 +99,14 @@ class SupplierInfo(models.Model):
     def get_net_price_discount(self, line):
         return 0.0
 
-    # Set vendor discount for the given price group
+    # If "price_group" is used, then get vendor's discount for the given price group
     def get_price_group_discount(self, line):
         if line.name and line.mrx_product_manufacturer and line.mrx_price_group and line.mrx_discount_type == 'price_group':
             return line.mrx_price_group.discount
         else:
             return 0.0
 
-    # If "product_only" is used, then set discount to the typed amount by the user
+    # If "product_only" is used, then set discount to the typed in amount by the user
     def get_product_only_discount(self, line):
         return line.mrx_discount
 
@@ -93,4 +135,4 @@ class SupplierInfo(models.Model):
     @api.onchange('name')
     def _copy_price_group_value(self):
         if self.product_tmpl_id and self.name:
-            self.mrx_price_group = self.env['mrx.product.vendordiscount'].search([('partner_id', '=', self.name.id), ('manufacturer_id', '=', self.mrx_product_manufacturer.id), ('name', '=', self.product_tmpl_id.mrx_pricegroup.name)], limit=1)
+            self.mrx_price_group = self.env['mrx.vendor.discount'].search([('partner_id', '=', self.name.id), ('manufacturer_id', '=', self.mrx_product_manufacturer.id), ('name', '=', self.product_tmpl_id.mrx_price_group.name)], limit=1)
