@@ -1,5 +1,6 @@
 <odoo>
     <data>
+
         <record id="mrx_view_company_form_local_tax_id" model="ir.ui.view">
             <field name="name">mrx.res.company.form.local.tax.id</field>
             <field name="model">res.company</field>
@@ -10,5 +11,6 @@
                 </xpath>
             </field>
         </record>
+
     </data>
 </odoo>
