@@ -2,6 +2,7 @@
 
 <odoo>
     <data>
+
         <template id="sale.report_saleorder_document">
             <t t-call="web.external_layout">
                 <t t-set="doc" t-value="doc.with_context(lang=doc.partner_id.lang)"/>
@@ -223,5 +224,6 @@
                 </div>
             </t>
         </template>
+
     </data>
 </odoo>

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 {
-    'name': "PDF Report custom mods",
+    'name': "PDF Report Custom Mods",
 
     'summary': """
         This module contains my custom modifications for PDF reports""",
