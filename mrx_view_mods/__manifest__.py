@@ -25,8 +25,8 @@
     ],
 
     'data': [
-        'views/product_template.xml',
-        'views/sale_order.xml',
-        'views/webclient_templates.xml',
+        'views/product__product_views.xml',
+        'views/sale__sale_views.xml',
+        'views/web__webclient_templates.xml',
     ],
 }
