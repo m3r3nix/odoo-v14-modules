@@ -6,7 +6,7 @@
             <field name="name">mrx.manufacturer.pricegroup.form.view</field>
             <field name="model">mrx.manufacturer.pricegroup</field>
             <field name="arch" type="xml">
-                <form string="Vendor Discount">
+                <form string="Vendor Discounts">
                     <sheet>
                         <group>
                             <field name="manufacturer_id" class="oe_inline" options="{'no_create':true, 'no_open':true}" readonly="True"/>
@@ -29,7 +29,7 @@
             <field name="name">mrx.manufacturer.pricegroup.tree.view</field>
             <field name="model">mrx.manufacturer.pricegroup</field>
             <field name="arch" type="xml">
-                <tree string="Price Group" editable="bottom" duplicate="false">
+                <tree string="Price Groups" editable="bottom" duplicate="false">
                     <field name="manufacturer_id" options="{'no_create':true, 'no_open':true}" optional="hide"/>
                     <field name="name"/>
                     <field name="id" optional="hide"/>
@@ -39,10 +39,10 @@
 
         <!-- Creates Manufacturer Price Group model default search view -->
         <record id="mrx_manufacturer_pricegroup_search_view" model="ir.ui.view">
-            <field name="name">mrx.manufacturer.pricegroup.serach.view</field>
+            <field name="name">mrx.manufacturer.pricegroup.search.view</field>
             <field name="model">mrx.manufacturer.pricegroup</field>
             <field name="arch" type="xml">
-                <search>
+                <search string="Price Groups">
                     <field name="name"/>
                     <field name="manufacturer_id"/>
                 </search>
@@ -54,7 +54,7 @@
             <field name="name">mrx.vendordiscount.form</field>
             <field name="model">mrx.product.vendordiscount</field>
             <field name="arch" type="xml">
-                <form string="Vendor Discount">
+                <form string="Vendor Discounts">
                     <sheet>
                         <group>
                             <field name="partner_id" class="oe_inline" options="{'no_create':true}"/>
@@ -76,13 +76,26 @@
             <field name="name">mrx.vendordiscount.tree.view</field>
             <field name="model">mrx.product.vendordiscount</field>
             <field name="arch" type="xml">
-                <tree string="Vendor Discount" editable="bottom" duplicate="false">
+                <tree string="Vendor Discounts" editable="bottom" duplicate="false">
                     <field name="partner_id" invisible="context.get('default_partner_id')" options="{'no_create':true}"/>
                     <field name="manufacturer_id" options="{'no_create':true}"/>
                     <field name="name" options="{'no_create':true, 'no_open':true}"/>
                     <field name="discount"/>
                     <field name="id" optional="hide"/>
                 </tree>
+            </field>
+        </record>
+
+        <!-- Creates Vendor Discount model default search view -->
+        <record id="mrx_vendordiscount_search_view" model="ir.ui.view">
+            <field name="name">mrx.vendordiscount.search.view</field>
+            <field name="model">mrx.product.vendordiscount</field>
+            <field name="arch" type="xml">
+                <search string="Vendor Discounts">
+                    <field name="manufacturer_id"/>
+                    <field name="partner_id"/>
+                    <field name="name"/>
+                </search>
             </field>
         </record>
 
