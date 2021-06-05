@@ -52,7 +52,7 @@
             </field>
         </record>
 
-        <!-- Create menu items and actions for Manufacturers menuitem-->
+        <!-- Create menu items and action for Manufacturer model -->
         <record id="mrx_product_manufacturer_menu_action" model="ir.actions.act_window">
             <field name="name">Manufacturers</field>
             <field name="type">ir.actions.act_window</field>
