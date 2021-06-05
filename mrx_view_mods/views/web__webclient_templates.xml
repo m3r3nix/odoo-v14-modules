@@ -3,6 +3,7 @@
 <odoo>
     <data>
 
+        <!-- Inherited from ../addons/web/views/webclient_templates.xml -->
         <template id="mrx_frontend_layout" inherit_id="web.frontend_layout">
             <xpath expr="//t[@t-call='web.brand_promotion']" position="replace"/>
         </template>
