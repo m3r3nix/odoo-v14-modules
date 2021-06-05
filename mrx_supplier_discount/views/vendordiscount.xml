@@ -37,6 +37,18 @@
             </field>
         </record>
 
+        <!-- Creates Manufacturer Price Group model default search view -->
+        <record id="mrx_manufacturer_pricegroup_search_view" model="ir.ui.view">
+            <field name="name">mrx.manufacturer.pricegroup.serach.view</field>
+            <field name="model">mrx.manufacturer.pricegroup</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="name"/>
+                    <field name="manufacturer_id"/>
+                </search>
+            </field>
+        </record>
+
         <!-- Creates Vendor Discount model default form view -->
         <record id="mrx_vendordiscount_form_view" model="ir.ui.view">
             <field name="name">mrx.vendordiscount.form</field>
