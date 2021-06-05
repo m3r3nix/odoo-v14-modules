@@ -17,14 +17,14 @@
         </record>
 
         <!-- Inherited from ../addons/product/views/product_template_views.xml -->
-        <record id="mrx_product_template_only_form_view_pricegroup" model="ir.ui.view">
+        <record id="mrx_product_template_only_form_view_price_group" model="ir.ui.view">
             <field name="inherit_id" ref="product.product_template_only_form_view"/>
-            <field name="name">mrx.product.template.product.form.view.pricegroup</field>
+            <field name="name">mrx.product.template.product.form.view.price.group</field>
             <field name="model">product.template</field>
             <field name="priority" eval="514"/>
             <field name="arch" type="xml">
                 <field name="default_code" position="after">
-                    <field name="mrx_pricegroup"
+                    <field name="mrx_price_group"
                         domain="[('manufacturer_id', '=', mrx_product_manufacturer)]"
                         options="{'no_create':true}"
                     />
@@ -33,14 +33,14 @@
         </record>
 
         <!-- Inherited from ../addons/product/views/product_views.xml -->
-        <record id="mrx_product_normal_form_view_pricegroup" model="ir.ui.view">
+        <record id="mrx_product_normal_form_view_price_group" model="ir.ui.view">
             <field name="inherit_id" ref="product.product_normal_form_view"/>
-            <field name="name">mrx.product.product.normal.form.view.pricegroup</field>
+            <field name="name">mrx.product.product.normal.form.view.price.group</field>
             <field name="model">product.product</field>
             <field name="priority" eval="514"/>
             <field name="arch" type="xml">
                 <field name="categ_id" position="before">
-                    <field name="mrx_pricegroup"
+                    <field name="mrx_price_group"
                         domain="[('manufacturer_id', '=', mrx_product_manufacturer)]"
                         options="{'no_create':true}"
                     />

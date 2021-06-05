@@ -1,7 +1,7 @@
 # About this module
 
-This app provides possiblity to record information about supplier discount for a given product or product group. 
-Given Discounts are automaticaly filled on Purchase Orders if the selected vendor provide any discount for the given product.
+This app provides possiblity to record information about vendor discount for a given product or product group. 
+Given discounts are automaticaly filled on Purchase Orders if the selected vendor provide any discount for the given product.
 Discount is propagated to the vendor bill as well.
 
 Main features:
