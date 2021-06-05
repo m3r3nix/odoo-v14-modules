@@ -11,9 +11,7 @@ class ProductProduct(models.Model):
     # Override function from: ../addons/product/models/product.py
     # Only content of last bracket has been modified. Recordset sorted by "min_qty" and "mrx_computed_purchase_price"
     def _prepare_sellers(self, params=False):
-        # This search is made to avoid retrieving seller_ids from the cache.
-        return self.env['product.supplierinfo'].search([('product_tmpl_id', '=', self.product_tmpl_id.id),
-                                                        ('name.active', '=', True)]).sorted(lambda s: (-s.min_qty, s.mrx_computed_purchase_price))
+        return self.seller_ids.filtered(lambda s: s.name.active).sorted(lambda s: (-s.min_qty, s.mrx_computed_purchase_price))
 
     # Override function from: ../addons/product/models/product.py
     # Only last line has been modified. Returned recordset sorted by "mrx_computed_purchase_price" instead of "price"
