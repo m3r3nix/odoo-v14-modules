@@ -17,41 +17,5 @@
             </field>
         </record>
 
-        <!-- Creates Manufacturer Price Group model default form view -->
-        <record id="mrx_manufacturer_pricegroup_form_view" model="ir.ui.view">
-            <field name="name">mrx.manufacturer.pricegroup.form.view</field>
-            <field name="model">mrx.manufacturer.pricegroup</field>
-            <field name="arch" type="xml">
-                <form string="Vendor Discount">
-                    <sheet>
-                        <group>
-                            <field name="manufacturer_id" class="oe_inline" options="{'no_create':true, 'no_open':true}" readonly="True"/>
-                            <field name="name" class="oe_inline" options="{'no_create':true, 'no_open':true}" readonly="True"/>
-                            <field name="partner_ids">
-                                <tree string="Discounts" editable="bottom" duplicate="false">
-                                    <field name="partner_id"/>
-                                    <field name="discount"/>
-                                    <field name="id" optional="hide"/>
-                                </tree>
-                            </field>
-                        </group>
-                    </sheet>
-                </form>
-            </field>
-        </record>
-
-        <!-- Creates Manufacturer Price Group model default tree view -->
-        <record id="mrx_manufacturer_pricegroup_tree_view" model="ir.ui.view">
-            <field name="name">mrx.manufacturer.pricegroup.tree.view</field>
-            <field name="model">mrx.manufacturer.pricegroup</field>
-            <field name="arch" type="xml">
-                <tree string="Price Group" editable="bottom" duplicate="false">
-                    <field name="manufacturer_id" options="{'no_create':true, 'no_open':true}" optional="hide"/>
-                    <field name="name"/>
-                    <field name="id" optional="hide"/>
-                </tree>
-            </field>
-        </record>
-
     </data>
 </odoo>
