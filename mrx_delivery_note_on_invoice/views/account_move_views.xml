@@ -1,7 +1,7 @@
 <odoo>
     <data>
         
-        <!-- Inherited invoice form view -->
+        <!-- Inherited from ..addons/account/views/account_move_views.xml -->
         <record id="mrx_view_move_form" model="ir.ui.view">
             <field name="inherit_id" ref="account.view_move_form" />
             <field name="name">mrx.account.move.form</field>

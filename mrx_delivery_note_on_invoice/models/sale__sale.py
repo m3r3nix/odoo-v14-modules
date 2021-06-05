@@ -1,12 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from odoo import api, fields, models
-
-
-class AccountMoveLine(models.Model):
-    _inherit = 'account.move.line'
-
-    mrx_delivery_note_reference = fields.Char(string='Delivery Note', store=True)
+from odoo import fields, models
 
 
 class SaleOrderLine(models.Model):
