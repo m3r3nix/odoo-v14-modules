@@ -17,7 +17,7 @@ class PurchaseOrder(models.Model):
 class PurchaseOrderLine(models.Model):
     _inherit = 'purchase.order.line'
 
-    # Add some extra fields to the model
+    # Add some extra field to the model
     mrx_discount = fields.Float(string='Discount (%)', default=0.0, digits='Discount', help="Discount percentage given by the supplier from the list price", store=True)
     mrx_pricing_unit = fields.Integer(string='Pricing Unit', default=1, help="How many units to get for the given list price", store=True)
 
@@ -63,7 +63,7 @@ class PurchaseOrderLine(models.Model):
         # If not seller, use the standard price. It needs a proper currency conversion.
         if not seller:
             price_unit = self.env['account.tax']._fix_tax_included_price_company(
-                self.product_id.standard_price,
+                self.product_id.uom_id._compute_price(self.product_id.standard_price, self.product_id.uom_po_id),
                 self.product_id.supplier_taxes_id,
                 self.taxes_id,
                 self.company_id,
@@ -75,10 +75,14 @@ class PurchaseOrderLine(models.Model):
                     self.order_id.company_id,
                     self.date_order or fields.Date.today(),
                 )
+
+            if self.product_uom:
+                price_unit = self.product_id.uom_id._compute_price(price_unit, self.product_uom)
+
             self.price_unit = price_unit
             return
 
-        # The following 3 lines have been added extra. Inherit list price from supplierinfo, only if "product_id" changes
+        # The following 3 lines have been added extra. Get list price from supplierinfo, only if "product_id" changes
         if self.price_unit:
             price_unit = self.price_unit
         else:
@@ -103,7 +107,7 @@ class PurchaseOrderLine(models.Model):
         return res
 
     # Override original function from: ../addons/purchase/models/purchase.py
-    # Override original function in order to set the values of discount and pricing unit fields on automatically generated PO.
+    # Override in order to set the values of discount and pricing unit fields on automatically generated PO.
     # "mrx_discount" and "mrx_pricing_unit" has been added to the returned dictionary
     @api.model
     def _prepare_purchase_order_line(self, product_id, product_qty, product_uom, company_id, supplier, po):
@@ -112,6 +116,8 @@ class PurchaseOrderLine(models.Model):
         # This section has been copied from the original function in order to set seller
         partner = supplier.name
         uom_po_qty = product_uom._compute_quantity(product_qty, product_id.uom_po_id)
+        # _select_seller is used if the supplier have different price depending
+        # the quantities ordered.
         seller = product_id.with_company(company_id)._select_seller(
             partner_id=partner,
             quantity=uom_po_qty,
