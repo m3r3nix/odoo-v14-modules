@@ -18,3 +18,26 @@ class ProductTemplate(models.Model):
             category_id = self.env['product.category'].search([('parent_id.name', '=', self.mrx_product_manufacturer.name), ('name', '=', self.mrx_price_group.name)], limit=1)
             if category_id:
                 self.categ_id = category_id
+
+    @api.depends('seller_ids')
+    def _copy_best_purchase_price_to_cost(self):
+        for line in self:
+            if line.seller_ids:
+                sellers = line.seller_ids.filtered(lambda s: s.name.active).sorted(lambda s: (s.mrx_computed_purchase_price))
+                date = fields.Date.context_today(self)
+                res = self.env['product.supplierinfo']
+
+                for seller in sellers:
+                    if seller.date_start and seller.date_start > date:
+                        continue
+                    if seller.date_end and seller.date_end < date:
+                        continue
+                    if not res or res.name == seller.name:    
+                        res |= seller
+
+                seller = res.sorted('mrx_computed_purchase_price')[:1]
+
+                line.standard_price = seller.mrx_computed_purchase_price
+
+                if len(line.product_variant_ids) == 1:
+                    line.product_variant_ids.standard_price = seller.mrx_computed_purchase_price
