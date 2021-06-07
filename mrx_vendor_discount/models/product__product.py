@@ -117,10 +117,11 @@ class SupplierInfo(models.Model):
             line.mrx_discount = method(line)
 
     # Compute purchase price based on the above specified criteria
-    @api.depends('price', 'mrx_discount', 'mrx_pricing_unit')
+    @api.depends('price', 'mrx_discount', 'mrx_pricing_unit', 'date_start', 'date_end')
     def _compute_purchase_price(self):
         for line in self:
             line.mrx_computed_purchase_price = (line.price / line.mrx_pricing_unit) * (1 - (line.mrx_discount or 0.0) / 100)
+            line.product_tmpl_id._copy_best_purchase_price_to_cost()
 
     @api.onchange('product_tmpl_id')
     def _copy_product_values(self):
