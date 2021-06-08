@@ -9,12 +9,13 @@
                 <form string="Vendor Discounts">
                     <sheet>
                         <group>
-                            <field name="manufacturer_id" class="oe_inline" options="{'no_create':true, 'no_open':true}" readonly="True"/>
-                            <field name="name" class="oe_inline" options="{'no_create':true, 'no_open':true}" readonly="True"/>
-                            <field name="partner_ids">
+                            <field name="manufacturer_id" options="{'no_create':true, 'no_open':true}" readonly="True"/>
+                            <field name="name" options="{'no_create':true, 'no_open':true}" readonly="True"/>
+                            <field name="discount_ids" context="{'default_manufacturer_id': manufacturer_id}">
                                 <tree string="Discounts" editable="bottom" duplicate="false">
                                     <field name="partner_id"/>
                                     <field name="discount"/>
+                                    <field name="manufacturer_id" invisible="1"/>
                                     <field name="id" optional="hide"/>
                                 </tree>
                             </field>

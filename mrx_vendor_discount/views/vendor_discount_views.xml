@@ -3,7 +3,7 @@
 
         <!-- Creates Vendor Discount model default form view -->
         <record id="mrx_vendor_discount_form_view" model="ir.ui.view">
-            <field name="name">mrx.vendor.discount.form</field>
+            <field name="name">mrx.vendor.discount.form.view</field>
             <field name="model">mrx.vendor.discount</field>
             <field name="arch" type="xml">
                 <form string="Vendor Discounts">
@@ -11,7 +11,10 @@
                         <group>
                             <field name="partner_id" class="oe_inline" options="{'no_create':true}"/>
                             <field name="manufacturer_id" class="oe_inline" options="{'no_create':true, 'no_open':true}"/>
-                            <field name="name" class="oe_inline"/>
+                            <field name="price_group_id" class="oe_inline"
+                                domain="[('manufacturer_id', '=', manufacturer_id)]"
+                                attrs="{'readonly': [('manufacturer_id', '=', False)]}"
+                            />
                             <label for="discount"/>
                             <div>
                                 <field name="discount" class="oe_inline"/>
@@ -31,7 +34,11 @@
                 <tree string="Vendor Discounts" editable="bottom" duplicate="false">
                     <field name="partner_id" invisible="context.get('default_partner_id')" options="{'no_create':true}"/>
                     <field name="manufacturer_id" options="{'no_create':true}"/>
-                    <field name="name" options="{'no_create':true, 'no_open':true}"/>
+                    <field name="price_group_id"
+                        domain="[('manufacturer_id', '=', manufacturer_id)]"
+                        attrs="{'readonly': [('manufacturer_id', '=', False)]}"
+                        options="{'no_create':true, 'no_open':true}"
+                    />
                     <field name="discount"/>
                     <field name="id" optional="hide"/>
                 </tree>
@@ -46,7 +53,7 @@
                 <search string="Vendor Discounts">
                     <field name="manufacturer_id"/>
                     <field name="partner_id"/>
-                    <field name="name"/>
+                    <field name="price_group_id"/>
                 </search>
             </field>
         </record>
