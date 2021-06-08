@@ -9,9 +9,9 @@ class PriceGroup(models.Model):
     _description = 'Price Groups by Manufacturer'
     _order = 'manufacturer_id, name'
 
-    manufacturer_id = fields.Many2one('mrx.product.manufacturer', string='Manufacturer', required=True)
     name = fields.Char(string='Price Group', index=True, required=True, help="Name of the product price group or discount group")
-    partner_ids = fields.One2many('mrx.vendor.discount', 'name', string="Vendors")
+    manufacturer_id = fields.Many2one('mrx.product.manufacturer', string='Manufacturer', required=True)
+    discount_ids = fields.One2many('mrx.vendor.discount', 'price_group_id', string="Vendors")
 
     _sql_constraints = [('pricegroup_uniq', 'UNIQUE(manufacturer_id, name)', 'This type of price group already exists!')]
 
