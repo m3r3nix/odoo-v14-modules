@@ -134,4 +134,4 @@ class SupplierInfo(models.Model):
     @api.onchange('name')
     def _copy_price_group_value(self):
         if self.product_tmpl_id and self.name:
-            self.mrx_price_group = self.env['mrx.vendor.discount'].search([('partner_id', '=', self.name.id), ('manufacturer_id', '=', self.mrx_product_manufacturer.id), ('name', '=', self.product_tmpl_id.mrx_price_group.name)], limit=1)
+            self.mrx_price_group = self.env['mrx.vendor.discount'].search([('partner_id', '=', self.name.id), ('manufacturer_id', '=', self.mrx_product_manufacturer.id), ('price_group_id', '=', self.product_tmpl_id.mrx_price_group.id)], limit=1)
