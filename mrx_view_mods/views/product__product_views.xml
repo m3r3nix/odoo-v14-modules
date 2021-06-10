@@ -93,5 +93,10 @@
             <field name="view_mode">tree,kanban,form,activity</field>
         </record>
 
+        <!-- Disable HS Code field on product -->
+        <record id="delivery.product_template_hs_code" model="ir.ui.view">
+            <field name="active" eval="False"/>
+        </record>
+
     </data>
 </odoo>
