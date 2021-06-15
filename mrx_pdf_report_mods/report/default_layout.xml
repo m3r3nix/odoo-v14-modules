@@ -17,7 +17,7 @@
                                     <li t-if="company.partner_id.street2"><span t-field="company.partner_id.street2"/></li>
                                     <li t-if="company.partner_id.zip and company.partner_id.city"><span t-field="company.partner_id.zip"/><span class="pl-1" t-field="company.partner_id.city"/></li>
                                     <li t-if="company.partner_id.country_id"><span t-field="company.partner_id.country_id.name"/></li>
-                                    <li t-if="company.company_registry"><span t-field="company.company_registry"/></li>
+                                    <li t-if="company.company_registry"><span t-field="company.company_registry" class="text-nowrap"/></li>
                                     <li t-if="company.mrx_local_tax_id">Tax ID: <span t-field="company.mrx_local_tax_id"/></li>
                                     <li t-if="company.vat"><t t-esc="company.country_id.vat_label or 'VAT ID'"/>: <span t-field="company.vat"/></li>
                                 </ul>
