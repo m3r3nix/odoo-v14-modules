@@ -45,7 +45,7 @@ class StockMoveLine(models.Model):
                                                    'product': move_line.product_id}
             else:
                 aggregated_move_lines[line_key]['qty_done'] += move_line.qty_done
-                aggregated_move_lines[line_key]['pos'] = str(aggregated_move_lines[line_key]['pos']) + "," + str(move_line.mrx_pos_number_delivery) + "."
+                aggregated_move_lines[line_key]['pos'] = str(aggregated_move_lines[line_key]['pos']) + "," + str(move_line.move_id.mrx_pos_number_delivery) + "."
         sorted_tuples = sorted(aggregated_move_lines.items(), key=lambda x: x[1]['pos'])
         res = {k: v for k, v in sorted_tuples} # Convert back to dictionary
         return res
