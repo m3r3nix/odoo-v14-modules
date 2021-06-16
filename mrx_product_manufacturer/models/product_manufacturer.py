@@ -9,7 +9,7 @@ class ProductManufacturer(models.Model):
     _description = 'List of Manufacturers'
     _order = 'name'
 
-    name = fields.Char(required=True, store=True, copy=True)
+    name = fields.Char(required=True, store=True, copy=True, index=True)
 
     _sql_constraints = [('unique_name', 'unique(name)', 'Manufacturer already exists!')]
 

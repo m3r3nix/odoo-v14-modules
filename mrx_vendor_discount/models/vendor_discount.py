@@ -12,7 +12,7 @@ class VendorDiscount(models.Model):
 
     partner_id = fields.Many2one('res.partner', string='Vendor', ondelete='cascade', required=True)
     manufacturer_id = fields.Many2one('mrx.product.manufacturer', string='Manufacturer', required=True)
-    price_group_id = fields.Many2one('mrx.manufacturer.price.group', string='Price Group', required=True)
+    price_group_id = fields.Many2one('mrx.manufacturer.price.group', string='Price Group', required=True, index=True)
     discount = fields.Float(string='Discount %', default=0.0, digits='Discount', required=True, help="Discount percent given by this vendor")
 
     _sql_constraints = [

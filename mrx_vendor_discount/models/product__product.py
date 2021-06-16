@@ -57,6 +57,7 @@ class SupplierInfo(models.Model):
         'mrx.vendor.discount',
         string='Price Group',
         store=True,
+        index=True,
     )
     mrx_discount_type = fields.Selection(
         selection=[('net_price','Net Price'),('price_group','Price Group'),('product_only','Product Only')],

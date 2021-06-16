@@ -7,7 +7,7 @@ class ProductTemplate(models.Model):
     _inherit = "product.template"
 
     # Add some extra fields to the model
-    mrx_price_group = fields.Many2one('mrx.manufacturer.price.group', string='Price Group', store=True, help="Price group or product group provided by the manufacture")
+    mrx_price_group = fields.Many2one('mrx.manufacturer.price.group', string='Price Group', store=True, index=True, help="Price group or product group provided by the manufacture")
     mrx_pricing_unit = fields.Integer(string='Pricing Unit', default=1, required=True, store=True, help="How many items to get for this price? 1/10/100/1000")
     mrx_packaging_unit = fields.Integer(string='Packaging Unit', default=1, required=True, store=True, help="How many pieces in one package?")
     mrx_moq = fields.Integer(string='MOQ', default=1, required=True, store=True, help="Minimum order quantity")
