@@ -26,6 +26,7 @@
     ],
 
     'data': [
+        'views/account__account_move_views.xml',
         'views/product__product_views.xml',
         'views/sale__sale_views.xml',
         'views/web__webclient_templates.xml',

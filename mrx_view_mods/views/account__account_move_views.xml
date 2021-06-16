@@ -1,0 +1,31 @@
+<odoo>
+  <data>
+
+        <!-- Inherited from ../addons/account/views/account_move_views.xml -->
+        <record id="mrx_view_move_form_pos_number" model="ir.ui.view">
+            <field name="inherit_id" ref="account.view_move_form"/>
+            <field name="name">mrx.account.move.form.pos.number</field>
+            <field name="model">account.move</field>
+            <field name="priority" eval="513"/>
+            <field name="arch" type="xml">
+                <xpath expr="//notebook/page/field[@name='invoice_line_ids']/tree/field[@name='name']" position="attributes">
+                        <attribute name="optional">hide</attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- Inherited from ../addons/account_intrastat/views/account_move_views.xml -->
+        <record id="mrx_invoice_form_inherit_account_intrastat" model="ir.ui.view">
+            <field name="inherit_id" ref="account_intrastat.invoice_form_inherit_account_intrastat"/>
+            <field name="name">mrx.account.move.form.inherit.account.intrastat.hide</field>
+            <field name="model">account.move</field>
+            <field name="priority" eval="513"/>
+            <field name="arch" type="xml">
+                <field name="intrastat_transaction_id" position="attributes">
+                        <attribute name="optional">hide</attribute>
+                </field>
+            </field>
+        </record>        
+
+  </data>
+</odoo>
