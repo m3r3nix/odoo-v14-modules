@@ -140,9 +140,6 @@
                     <field name="mrx_discount" attrs="{'readonly': [('mrx_discount_type', '!=', 'product_only')]}" optional="show"/>
                     <field name="mrx_computed_purchase_price" attrs="{'readonly': True}" optional="show"/>
                 </field>
-                <field name="delay" position="attributes">
-                    <attribute name="optional">hide</attribute>
-                </field>
                 <field name="delay" position="after">
                     <field name="date_start" position="move"/>
                     <field name="date_end" position="move"/>
@@ -152,6 +149,18 @@
                 </field>
                 <field name="date_end" position="attributes">
                     <attribute name="optional">show</attribute>
+                </field>
+            </field>
+        </record>
+
+        <record id="mrx_product_supplierinfo_tree_view2" model="ir.ui.view">
+            <field name="inherit_id" ref="purchase.product_supplierinfo_tree_view2"/>
+            <field name="model">product.supplierinfo</field>
+            <field name="name">mrx.product.supplierinfo.tree.view2</field>
+            <field name="priority" eval="512"/>
+            <field name="arch" type="xml">
+                <field name="delay" position="attributes">
+                    <attribute name="optional">hide</attribute>
                 </field>
             </field>
         </record>
