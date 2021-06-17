@@ -136,3 +136,9 @@ class SupplierInfo(models.Model):
     def _copy_price_group_value(self):
         if self.product_tmpl_id and self.name:
             self.mrx_price_group = self.env['mrx.vendor.discount'].search([('partner_id', '=', self.name.id), ('manufacturer_id', '=', self.mrx_product_manufacturer.id), ('price_group_id', '=', self.product_tmpl_id.mrx_price_group.id)], limit=1)
+
+
+class ProductCategory(models.Model):
+    _inherit = "product.category"
+
+    _sql_constraints = [('product_category_uniq', 'UNIQUE(parent_id, name)', 'This type of product category already exists!')]
