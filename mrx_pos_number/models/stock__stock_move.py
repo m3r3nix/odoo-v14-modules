@@ -17,6 +17,7 @@ class StockMoveLine(models.Model):
     ## Override original function from: ../addons/stock/models/stock_move_line.py
     # 1. 'pos' has been added to the dictionary
     # 2. last 3 lines have been added to the end
+    # 3. 'line_key' generation line has been extended with pos number at the end
     def _get_aggregated_product_quantities(self, **kwargs):
         """ Returns a dictionary of products (key = id+name+description+uom) and corresponding values of interest.
 
@@ -34,7 +35,7 @@ class StockMoveLine(models.Model):
             if description == name or description == move_line.product_id.name:
                 description = False
             uom = move_line.product_uom_id
-            line_key = str(move_line.product_id.id) + "_" + name + (description or "") + "uom " + str(uom.id)
+            line_key = str(move_line.product_id.id) + "_" + name + (description or "") + "uom " + str(uom.id) + " " + str(move_line.move_id.mrx_pos_number_delivery) + "."
 
             if line_key not in aggregated_move_lines:
                 aggregated_move_lines[line_key] = {'pos': str(move_line.move_id.mrx_pos_number_delivery) + ".",
