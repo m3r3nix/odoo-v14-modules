@@ -122,7 +122,7 @@ class SupplierInfo(models.Model):
     def _compute_purchase_price(self):
         for line in self:
             line.mrx_computed_purchase_price = (line.price / line.mrx_pricing_unit) * (1 - (line.mrx_discount or 0.0) / 100)
-            line.product_tmpl_id._copy_best_purchase_price_to_cost()
+            # line.product_tmpl_id._copy_best_purchase_price_to_cost()
 
     @api.onchange('product_tmpl_id')
     def _copy_product_values(self):
