@@ -12,8 +12,15 @@ class ProductTemplate(models.Model):
     mrx_packaging_unit = fields.Integer(string='Packaging Unit', default=1, required=True, store=True, help="How many pieces in one package?")
     mrx_moq = fields.Integer(string='MOQ', default=1, required=True, store=True, help="Minimum order quantity")
 
+    @api.onchange('mrx_product_manufacturer')
+    def _autofill_category_if_manufacturer_exists(self):
+        if self.mrx_product_manufacturer and self.categ_id.id == 1:
+            category_id = self.env['product.category'].search([('name', '=', self.mrx_product_manufacturer.name)], limit=1)
+            if category_id:
+                self.categ_id = category_id
+
     @api.onchange('mrx_price_group')
-    def _fill_category_if_same_as_price_group(self):
+    def _autofill_category_if_price_group_exists(self):
         if self.mrx_price_group:
             category_id = self.env['product.category'].search([('parent_id.name', '=', self.mrx_product_manufacturer.name), ('name', '=', self.mrx_price_group.name)], limit=1)
             if category_id:
