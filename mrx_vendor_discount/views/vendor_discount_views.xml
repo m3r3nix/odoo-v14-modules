@@ -33,7 +33,7 @@
             <field name="arch" type="xml">
                 <tree string="Vendor Discounts" editable="bottom" duplicate="false">
                     <field name="partner_id" invisible="context.get('default_partner_id')" options="{'no_create':true}"/>
-                    <field name="manufacturer_id" options="{'no_create':true}"/>
+                    <field name="manufacturer_id" options="{'no_create':true}" attrs="{'readonly': [('partner_id', '=', False)]}"/>
                     <field name="price_group_id"
                         domain="[('manufacturer_id', '=', manufacturer_id)]"
                         attrs="{'readonly': [('manufacturer_id', '=', False)]}"

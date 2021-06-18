@@ -1,6 +1,24 @@
 <odoo>
     <data>
 
+        <!-- Add price groups tree to manufacturer form view -->
+        <record id="mrx_product_manufacturer_form_view_price_group" model="ir.ui.view">
+            <field name="inherit_id" ref="mrx_product_manufacturer.mrx_product_manufacturer_form_view" />
+            <field name="name">mrx.product.manufacturer.form.view.price.group</field>
+            <field name="model">mrx.product.manufacturer</field>
+            <field name="arch" type="xml">
+                <field name="name" position="after">
+                    <field name="price_group_ids" context="{'default_manufacturer_id': id}">
+                        <tree string="Price Groups" editable="bottom" duplicate="false">
+                            <field name="name"/>
+                            <field name="manufacturer_id" invisible="1"/>
+                            <field name="id" optional="hide"/>
+                        </tree>
+                    </field>
+                </field>
+            </field>
+        </record>
+
         <!-- Creates Manufacturer Price Group model default form view -->
         <record id="mrx_manufacturer_price_group_form_view" model="ir.ui.view">
             <field name="name">mrx.manufacturer.price.group.form.view</field>
