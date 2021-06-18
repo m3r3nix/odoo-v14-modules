@@ -14,6 +14,9 @@
                 <field name="intrastat_origin_country_id" position="after">
                     <field name="intrastat_origin_country_code" />
                 </field>
+                <field name="categ_id" position="attributes">
+                    <attribute name="options">{'no_quick_create': True}</attribute>
+                </field>
                 <group name="group_standard_price" position="after">
                     <group name="operations" position="move" />
                     <group name="group_lots_and_weight" position="move" />
