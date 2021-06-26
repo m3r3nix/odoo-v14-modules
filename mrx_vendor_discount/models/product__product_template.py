@@ -14,7 +14,7 @@ class ProductTemplate(models.Model):
 
     @api.onchange('mrx_product_manufacturer')
     def _autofill_category_if_manufacturer_exists(self):
-        if self.mrx_product_manufacturer and self.categ_id.id == 1:
+        if self.mrx_product_manufacturer and (not self.categ_id or self.categ_id.id == 1):
             category_id = self.env['product.category'].search([('name', '=', self.mrx_product_manufacturer.name)], limit=1)
             if category_id:
                 self.categ_id = category_id
