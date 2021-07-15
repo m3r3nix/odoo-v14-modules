@@ -99,7 +99,7 @@ class PurchaseOrderLine(models.Model):
     # Override original function from: ../addons/purchase/models/purchase.py
     # "price_unit" has been updated and "discount" has been added to the returned dictionary
     def _prepare_account_move_line(self, move=False):
-        res = super()._prepare_account_move_line(move=False)
+        res = super()._prepare_account_move_line(move)
         res.update({
             'price_unit': self.price_unit / self.mrx_pricing_unit,
             'discount': self.mrx_discount,
