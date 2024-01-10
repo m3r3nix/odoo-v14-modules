@@ -28,6 +28,6 @@
     'description': '',  # Leave description empty to display the README file
     'installable': True,
     'summary': 'Vendor discount information for products. Implemented into Partner, Products, Purchase and Accounting apps',
-    'version': '14.0.1.1',
+    'version': '17.0.1.1',
     'website': '',
 }

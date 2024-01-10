@@ -1,4 +1,4 @@
-# Custom modules for Odoo ERP v14
+# Custom modules for Odoo ERP v17
 ## A sort list about these modules and their purpose.
 
 ### 1. mrx_delivery_note_on_invoice

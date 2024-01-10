@@ -11,7 +11,7 @@ class AccountMoveLine(models.Model):
 
     mrx_pricing_unit = fields.Integer(string='Pricing Unit', default=1, help="How many units to get for the given list price", store=True)
 
-    # v14 Override function from ../addons/account/models/account_move.py
+    # v17 Override function from ../addons/account/models/account_move.py
     # Implementation of "mrx_pricing_unit" should be started in this function
     @api.model
     def _get_price_total_and_subtotal_model(self, price_unit, quantity, discount, currency, product, partner, taxes, move_type):
